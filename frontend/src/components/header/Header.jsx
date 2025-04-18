@@ -9,9 +9,13 @@ import { Descope } from "@descope/react-sdk";
 import { useState } from "react";
 
 const Header = () => {
+    const navigate = useNavigate();
+
+    const home = () => {
+        navigate("/");
+    };
     const [showAuth, setShowAuth] = useState(false);
     const [flowId, setFlowId] = useState("sign-up-or-in"); // default flow
-    const navigate = useNavigate();
 
     const handleLogin = () => {
         //setFlowId("sign-in");
@@ -28,7 +32,10 @@ const Header = () => {
         <>
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="/" style={{ color: "gold" }}>
+                    <Navbar.Brand
+                        onClick={home}
+                        style={{ color: "gold", cursor: "pointer" }}
+                    >
                         <FontAwesomeIcon icon={faVideoCamera} /> CineScope
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
