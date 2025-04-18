@@ -5,27 +5,31 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Descope } from "@descope/react-sdk";
+import { Descope, getSessionToken } from "@descope/react-sdk";
 import { useState } from "react";
+import { useCallback } from "react";
+import { useDescope, useSession, useUser } from "@descope/react-sdk";
 
 const Header = () => {
     const navigate = useNavigate();
+    const { isAuthenticated, isSessionLoading } = useSession();
+    const { user, isUserLoading } = useUser();
+    const { logout } = useDescope();
+
+    const handleLogout = () => {
+        logout(); // Ends session and resets state
+    };
 
     const home = () => {
         navigate("/");
     };
-    const [showAuth, setShowAuth] = useState(false);
-    const [flowId, setFlowId] = useState("sign-up-or-in"); // default flow
+    const [showSignUpButtons, setShowSignUpButtons] = useState(false);
 
     const handleLogin = () => {
-        //setFlowId("sign-in");
-        //setShowAuth(true);
         navigate("/login");
     };
 
     const handleRegister = () => {
-        //setFlowId("sign-up"); // or use a different flow like "sign-up-only" if configured
-        //setShowAuth(true);
         navigate("/register");
     };
     return (
@@ -52,41 +56,40 @@ const Header = () => {
                                 Watch List
                             </NavLink>
                         </Nav>
-                        <Button
-                            variant="outline-info"
-                            className="me-2"
-                            onClick={handleLogin}
-                        >
-                            Login
-                        </Button>
-                        <Button variant="outline-info" onClick={handleRegister}>
-                            Register
-                        </Button>
+                        <>
+                            {isAuthenticated ? (
+                                <>
+                                    <span className="fs-6 px-3 py-2 me-3">
+                                        Hello {user?.name || "User"}!
+                                    </span>
+                                    <Button
+                                        variant="outline-info"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button
+                                        variant="outline-info"
+                                        className="me-2"
+                                        onClick={handleLogin}
+                                    >
+                                        Login
+                                    </Button>
+                                    <Button
+                                        variant="outline-info"
+                                        onClick={handleRegister}
+                                    >
+                                        Register
+                                    </Button>
+                                </>
+                            )}
+                        </>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {showAuth && (
-                <div
-                    style={{
-                        position: "absolute",
-                        top: "80px",
-                        right: "20px",
-                        zIndex: 1000,
-                    }}
-                >
-                    <Descope
-                        flowId={flowId}
-                        onSuccess={(e) => {
-                            console.log("Logged in:", e.detail.user);
-                            setShowAuth(false);
-                        }}
-                        onError={(e) => {
-                            console.error("Auth error", e);
-                            setShowAuth(false);
-                        }}
-                    />
-                </div>
-            )}
         </>
     );
 };
