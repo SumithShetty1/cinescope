@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
+import HighRatedMovies from './components/highRated/HighRatedMovies';
 import GenreMovies from './components/genre/GenreMovies';
 import Trailer from './components/trailer/Trailer';
 import Reviews from './components/reviews/Reviews';
@@ -56,11 +57,12 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home movies={movies} />} ></Route>
+          <Route path="/" element={<Home movies={movies} />} />
+          <Route path="/top-rated" element={<HighRatedMovies />} />
           <Route path="/genre/:genreName" element={<GenreMovies />} />
-          <Route path="/Trailer/:ytTrailerId" element={<Trailer />}></Route>
-          <Route path="/Reviews/:movieId" element={<Reviews getMovieData={getMovieData} movie={movie} reviews={reviews} setReviews={setReviews} />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
+          <Route path="/Reviews/:movieId" element={<Reviews getMovieData={getMovieData} movie={movie} reviews={reviews} setReviews={setReviews} />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </div>

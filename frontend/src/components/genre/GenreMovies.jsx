@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './GenreMovies.css';
 import { useParams } from 'react-router-dom';
 import api from '../../api/axiosConfig';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const GenreMovies = () => {
     const { genreName } = useParams();
@@ -38,7 +38,7 @@ const GenreMovies = () => {
             <div className="movie-grid">
                 {genreMovies.map((movie) => (
                     <div
-                        key={movie.imdbId} className="movie-card"
+                        key={movie.imdbId} className="genre-movie-poster"
                         onClick={() => reviews(movie.imdbId)}
                         style={{ cursor: 'pointer' }}
                     >
