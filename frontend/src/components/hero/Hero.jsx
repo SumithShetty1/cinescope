@@ -31,7 +31,10 @@ const Hero = ({ movies }) => {
                         <div className='movie-card-container'>
                             <div className="movie-card" style={{ "--img": `url(${movie.backdrops[0]})` }}>
                                 <div className="movie-detail">
-                                    <div className="movie-poster">
+                                    <div className="movie-poster"
+                                        onClick={() => reviews(movie.imdbId)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
                                         <img src={movie.poster} alt="" />
                                     </div>
                                     <div className="movie-title">

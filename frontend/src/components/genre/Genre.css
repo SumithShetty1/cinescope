@@ -1,0 +1,50 @@
+.genre-section {
+    padding: 3rem 1rem 3rem;
+    margin-top: 2rem;
+    background-color: #111;
+    color: white;
+}
+
+.genre-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.genre-button {
+    background-color: #222;
+    border: 1px solid gold;
+    color: gold;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre-button:hover {
+    background-color: gold;
+    color: black;
+    border-color: white;
+    box-shadow: 0 0 10px gold;
+}
+
+@media only screen and (max-width: 600px) {
+    .genre-title {
+        font-size: 1.2rem;
+    }
+
+    .genre-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
