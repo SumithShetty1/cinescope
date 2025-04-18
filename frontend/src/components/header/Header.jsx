@@ -5,13 +5,19 @@ import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const navigate = useNavigate();
+
+    const home =() => {
+        navigate('/');
+    }
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="/" style={{ "color": 'gold' }}>
+                <Navbar.Brand onClick={home} style={{ "color": 'gold', "cursor": 'pointer' }}>
                     <FontAwesomeIcon icon={faVideoCamera} /> CineScope
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
