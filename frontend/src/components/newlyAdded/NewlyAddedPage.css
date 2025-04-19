@@ -1,10 +1,10 @@
-.genre-page-section {
+.newly-added-page-section {
     padding: 0 1rem 1rem;
     background-color: #111;
     min-height: 100vh;
 }
 
-.genre-page-header {
+.newly-added-page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +13,7 @@
     border-bottom: 1px solid #333;
 }
 
-.genre-page-title {
+.newly-added-page-title {
     margin: 1rem;
     color: white;
 }
@@ -25,14 +25,14 @@
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
 
-.genre-page-movie-poster {
+.newly-added-page-movie-poster {
     width: 100%;
     height: 100%;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.genre-page-movie-poster img {
+.newly-added-page-movie-poster img {
     width: 100%;
     border-radius: 10px;
     border: 2px solid gold;
@@ -40,12 +40,12 @@
     object-fit: cover;
 }
 
-.genre-page-movie-poster:hover {
+.newly-added-page-movie-poster:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
 }
 
-.genre-page-movie-title {
+.newly-added-page-movie-title {
     color: white;
     margin-top: 0.5rem;
     text-align: center;
@@ -55,13 +55,13 @@
     text-overflow: ellipsis;
 }
 
-.genre-page-search-container {
+.newly-added-page-search-container {
     position: relative;
     width: 280px;
     margin-right: 1rem;
 }
 
-.genre-page-search-icon {
+.newly-added-page-search-icon {
     position: absolute;
     left: 12px;
     top: 50%;
@@ -69,7 +69,7 @@
     color: #777;
 }
 
-.genre-page-search-input {
+.newly-added-page-search-input {
     width: 100%;
     padding: 0.6rem 1rem 0.6rem 2.2rem;
     border-radius: 20px;
@@ -81,13 +81,13 @@
     transition: all 0.3s ease;
 }
 
-.genre-page-search-input:focus {
+.newly-added-page-search-input:focus {
     outline: none;
     border-color: gold;
     box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
-.genre-page-no-results {
+.newly-added-page-no-results {
     grid-column: 1 / -1;
     text-align: center;
     color: #777;
@@ -97,14 +97,14 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .genre-page-header {
+    .newly-added-page-header {
         flex-direction: column;
         align-items: stretch;
         gap: 1rem;
         padding: 1rem 0;
     }
     
-    .genre-page-search-container {
+    .newly-added-page-search-container {
         width: 100%;
         margin: 0 1rem;
     }
@@ -121,7 +121,7 @@
         gap: 1rem;
     }
     
-    .genre-page-title {
+    .newly-added-page-title {
         font-size: 1.5rem;
         margin: 0.5rem;
     }

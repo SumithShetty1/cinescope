@@ -1,25 +1,127 @@
+.high-rated-page-section {
+    padding: 0 1rem 1rem;
+    background-color: #111;
+    min-height: 100vh;
+}
+
+.high-rated-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+}
+
+.high-rated-page-title {
+    margin: 1rem;
+}
+
 .movie-grid {
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 2rem;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
 
-.high-rated-movie-poster {
-    background-repeat: no-repeat;
+.high-rated-page-movie-poster {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), var(--img);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.high-rated-movie-poster img {
+.high-rated-page-movie-poster img {
     width: 100%;
     border-radius: 10px;
     border: 2px solid gold;
+    aspect-ratio: 2/3;
+    object-fit: cover;
 }
 
-.high-rated-movie-poster:hover {
+.high-rated-page-movie-poster:hover {
     transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
 }
-  
+
+.high-rated-page-movie-title {
+    color: white;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.high-rated-page-search-container {
+    position: relative;
+    width: 280px;
+    margin-right: 1rem;
+}
+
+.high-rated-page-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.high-rated-page-search-input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.2rem;
+    border-radius: 20px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.high-rated-page-search-input:focus {
+    outline: none;
+    border-color: gold;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.high-rated-page-no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #777;
+    padding: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .high-rated-page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+    
+    .high-rated-page-search-container {
+        width: 100%;
+        margin: 0 1rem;
+    }
+    
+    .movie-grid {
+        padding: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+    
+    .high-rated-page-title {
+        font-size: 1.5rem;
+        margin: 0.5rem;
+    }
+}

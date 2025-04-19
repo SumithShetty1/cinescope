@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import './WatchListPage.css';
+import './NewlyAddedPage.css';
 import api from '../../api/axiosConfig';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-const WatchListPage = () => {
-    const [watchlistMovies, setWatchlistMovies] = useState([]);
+const NewlyAddedPage = () => {
+    const [newlyAddedMovies, setNewlyAddedMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchWatchlistMovies = async () => {
+        const fetchNewlyAddedMovies = async () => {
             try {
                 const response = await api.get("/api/v1/movies");
-                const filtered = response.data;
-                setWatchlistMovies(filtered);
-                setFilteredMovies(filtered);
+                const sorted = response.data.sort((a, b) =>
+                    new Date(b.createdAt) - new Date(a.createdAt)
+                );
+                setNewlyAddedMovies(sorted);
+                setFilteredMovies(sorted);
             } catch (error) {
-                console.error("Error fetching watchlist movies:", error);
+                console.error("Error fetching newly added movies:", error);
             }
         };
 
-        fetchWatchlistMovies();
+        fetchNewlyAddedMovies();
     }, []);
 
     useEffect(() => {
-        const filtered = watchlistMovies.filter(movie =>
+        const filtered = newlyAddedMovies.filter(movie =>
             movie.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredMovies(filtered);
-    }, [searchTerm, watchlistMovies]);
+    }, [searchTerm, newlyAddedMovies]);
 
-    const goToReviews = (movieId) => {
+    function goToReviews(movieId) {
         navigate(`/reviews/${movieId}`);
-    };
+    }
 
     return (
-        <div className="watchlist-page-section">
-            <div className="watchlist-page-header">
-                <h2 className="watchlist-page-title">Your Watchlist</h2>
-                <div className="watchlist-page-search-container">
-                    <FontAwesomeIcon icon={faSearch} className="watchlist-page-search-icon" />
+        <div className="newly-added-page-section">
+            <div className="newly-added-page-header">
+                <h2 className="newly-added-page-title">Newly Added Movies</h2>
+                <div className="newly-added-page-search-container">
+                    <FontAwesomeIcon icon={faSearch} className="newly-added-page-search-icon" />
                     <input
                         type="text"
-                        placeholder="Search your watchlist..."
-                        className="watchlist-page-search-input"
+                        placeholder="Search newly added movies..."
+                        className="newly-added-page-search-input"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -57,15 +59,15 @@ const WatchListPage = () => {
                     filteredMovies.map((movie) => (
                         <div
                             key={movie.imdbId}
-                            className="watchlist-page-movie-poster"
+                            className="newly-added-page-movie-poster"
                             onClick={() => goToReviews(movie.imdbId)}
                         >
                             <img src={movie.poster} alt={movie.title} />
-                            <p className="watchlist-page-movie-title">{movie.title}</p>
+                            <p className="newly-added-page-movie-title">{movie.title}</p>
                         </div>
                     ))
                 ) : (
-                    <div className="watchlist-page-no-results">
+                    <div className="newly-added-page-no-results">
                         No movies found matching your search
                     </div>
                 )}
@@ -74,4 +76,4 @@ const WatchListPage = () => {
     );
 };
 
-export default WatchListPage;
+export default NewlyAddedPage;

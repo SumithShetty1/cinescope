@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVideoCamera, faHouse, faBookmark, faShieldAlt } from "@fortawesome/free-solid-svg-icons";
+import { faVideoCamera, faHouse, faBookmark, faEdit, faUser } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -56,16 +56,17 @@ const Header = () => {
                                 <FontAwesomeIcon icon={faBookmark} className="me-1" />
                                 Watch List
                             </NavLink>
-                            <NavLink className="nav-link" to="/admin">
-                                <FontAwesomeIcon icon={faShieldAlt} className="me-1" />
-                                Admin
+                            <NavLink className="nav-link" to="/manage">
+                                <FontAwesomeIcon icon={faEdit} className="me-1" />
+                                Manage Movies
                             </NavLink>
                         </Nav>
                         <>
                             {isAuthenticated ? (
                                 <>
                                     <span className="fs-6 px-3 py-2 me-3">
-                                        Hello {user?.name || "User"}!
+                                        <FontAwesomeIcon icon={faUser} className="px-2 me-1" />
+                                        {user?.name || "User"}
                                     </span>
                                     <Button
                                         variant="outline-info"

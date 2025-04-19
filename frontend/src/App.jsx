@@ -7,7 +7,7 @@ import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
-import GenreMovies from "./components/genre/GenrePage";
+import GenrePage from "./components/genre/GenrePage";
 import Trailer from "./components/trailer/Trailer";
 import Reviews from "./components/reviews/Reviews";
 import NotFound from "./components/notFound/NotFound";
@@ -15,6 +15,8 @@ import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
 import HighRatedMovies from "./components/highRated/HighRatedPage";
 import WatchListPage from "./components/watchList/WatchListPage";
+import NewlyAddedPage from "./components/newlyAdded/NewlyAddedPage";
+import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
 
 function App() {
     const [movies, setMovies] = useState();
@@ -56,9 +58,11 @@ function App() {
                     <Route path="/" element={<Home movies={movies} />}></Route>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/manage" element={<ManageMoviesPage />} />
                     <Route path="/top-rated" element={<HighRatedMovies />} />
+                    <Route path="/newly-added" element={<NewlyAddedPage />} />
                     <Route path="/watchlist" element={<WatchListPage />} />
-                    <Route path="/genre/:genreName" element={<GenreMovies />} />
+                    <Route path="/genre/:genreName" element={<GenrePage />} />
                     <Route path="/trailer/:ytTrailerId" element={<Trailer />} />
                     <Route
                         path="/reviews/:movieId"

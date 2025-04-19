@@ -1,11 +1,11 @@
-.high-rated-section {
+.newly-added-section {
     padding: 0 1rem 1rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
     background-color: #111;
     color: white;
 }
 
-.high-rated-header {
+.newly-added-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +13,7 @@
     margin-bottom: 0.5rem;
 }
 
-.high-rated-header h2 {
+.newly-added-header h2 {
     font-weight: bold;
     text-align: center;
 }
@@ -31,26 +31,26 @@
     color: white;
 }
 
-.high-rated-movies {
+.newly-added-movies {
     display: grid;
     gap: 1rem;
     padding: 2rem;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
-.high-rated-movie-poster {
+.newly-added-movie-poster {
     width: 100%;
     height: 100%;
     transition: transform 0.3s;
     cursor: pointer;
 }
 
-.high-rated-movie-poster img {
+.newly-added-movie-poster img {
     width: 100%;
     border-radius: 10px;
     border: 2px solid gold;
 }
 
-.high-rated-movie-poster:hover {
+.newly-added-movie-poster img:hover {
     transform: scale(1.05);
 }
