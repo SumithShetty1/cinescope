@@ -1,13 +1,15 @@
 import Hero from '../hero/Hero';
 import HighRated from '../highRated/HighRated';
 import Genre from '../genre/Genre';
+import WatchList from '../watchList/WatchList';
 
-const Home = ({movies}) => {
+const Home = ({ movies }) => {
   return (
     <>
-      <Hero movies = {movies} />
+      <Hero movies={movies} />
       <HighRated movies={movies} />
-      <Genre/>
+      <WatchList movies={movies} />
+      <Genre />
     </>
   )
 }

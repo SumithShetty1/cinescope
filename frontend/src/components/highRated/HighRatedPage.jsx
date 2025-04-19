@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './HighRatedMovies.css';
+import './HighRatedPage.css';
 import api from '../../api/axiosConfig';
 import { useNavigate } from "react-router-dom";
 
@@ -23,11 +23,11 @@ const HighRatedMovies = () => {
     }, []);
 
     function goToReviews(movieId) {
-        navigate(`/Reviews/${movieId}`);
+        navigate(`/reviews/${movieId}`);
     }
 
     return (
-        <div>
+        <div className="high-rated-section">
             <h2 style={{ color: 'white', margin: '2rem 1rem' }}>
                 Top Rated Movies
             </h2>

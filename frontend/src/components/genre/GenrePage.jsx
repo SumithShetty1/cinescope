@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './GenreMovies.css';
+import './GenrePage.css';
 import { useParams } from 'react-router-dom';
 import api from '../../api/axiosConfig';
 import { useNavigate } from "react-router-dom";
@@ -27,11 +27,11 @@ const GenreMovies = () => {
     const navigate = useNavigate();
 
     function reviews(movieId) {
-        navigate(`/Reviews/${movieId}`);
+        navigate(`/reviews/${movieId}`);
     }
 
     return (
-        <div>
+        <div className='genre-section'>
             <h2 style={{ color: 'white', margin: '2rem' }}>
                 {genreName} Movies
             </h2>

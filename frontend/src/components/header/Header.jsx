@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVideoCamera } from "@fortawesome/free-solid-svg-icons";
+import { faVideoCamera, faHouse, faBookmark, faShieldAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Descope, getSessionToken } from "@descope/react-sdk";
 import { useState } from "react";
 import { useCallback } from "react";
-import { useDescope, useSession, useUser } from "@descope/react-sdk";
+import { Descope, getSessionToken, useDescope, useSession, useUser } from "@descope/react-sdk";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -34,7 +33,7 @@ const Header = () => {
     };
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
                 <Container fluid>
                     <Navbar.Brand
                         onClick={home}
@@ -50,10 +49,16 @@ const Header = () => {
                             navbarScroll
                         >
                             <NavLink className="nav-link" to="/">
+                                <FontAwesomeIcon icon={faHouse} className="me-1" />
                                 Home
                             </NavLink>
-                            <NavLink className="nav-link" to="/watchList">
+                            <NavLink className="nav-link" to="/watchlist">
+                                <FontAwesomeIcon icon={faBookmark} className="me-1" />
                                 Watch List
+                            </NavLink>
+                            <NavLink className="nav-link" to="/admin">
+                                <FontAwesomeIcon icon={faShieldAlt} className="me-1" />
+                                Admin
                             </NavLink>
                         </Nav>
                         <>

@@ -7,13 +7,14 @@ import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
-import GenreMovies from "./components/genre/GenreMovies";
+import GenreMovies from "./components/genre/GenrePage";
 import Trailer from "./components/trailer/Trailer";
 import Reviews from "./components/reviews/Reviews";
 import NotFound from "./components/notFound/NotFound";
-import LoginPage from "./components/Auth/LoginPage";
-import RegisterPage from "./components/Auth/RegisterPage";
-import HighRatedMovies from "./components/highRated/HighRatedMovies";
+import LoginPage from "./components/auth/LoginPage";
+import RegisterPage from "./components/auth/RegisterPage";
+import HighRatedMovies from "./components/highRated/HighRatedPage";
+import WatchListPage from "./components/watchList/WatchListPage";
 
 function App() {
     const [movies, setMovies] = useState();
@@ -53,13 +54,14 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={<Home movies={movies} />}></Route>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/top-rated" element={<HighRatedMovies />} />
+                    <Route path="/watchlist" element={<WatchListPage />} />
                     <Route path="/genre/:genreName" element={<GenreMovies />} />
+                    <Route path="/trailer/:ytTrailerId" element={<Trailer />} />
                     <Route
-                        path="/Trailer/:ytTrailerId"
-                        element={<Trailer />}
-                    ></Route>
-                    <Route
-                        path="/Reviews/:movieId"
+                        path="/reviews/:movieId"
                         element={
                             <Reviews
                                 getMovieData={getMovieData}
@@ -68,10 +70,8 @@ function App() {
                                 setReviews={setReviews}
                             />
                         }
-                    ></Route>
-                    <Route path="*" element={<NotFound />}></Route>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
+                    />
+                    <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>
         </div>

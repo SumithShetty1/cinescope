@@ -67,9 +67,9 @@
 			<version>4.0.0</version>
 		</dependency>
 		<dependency>
-			<artifactId>java-sdk</artifactId>
 			<groupId>com.descope</groupId>
-			<version>1.0.25</version>
+			<artifactId>java-sdk</artifactId>
+			<version>1.0.38</version>
 		</dependency>
 	</dependencies>
 

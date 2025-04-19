@@ -1,3 +1,7 @@
+.genre-section {
+    padding: 0 1rem 1rem;
+}
+
 .movie-grid {
     display: grid;
     gap: 1rem;

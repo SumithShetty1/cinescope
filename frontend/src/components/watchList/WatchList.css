@@ -1,11 +1,11 @@
-.high-rated-section {
+.watchlist-section {
     padding: 0 1rem 1rem;
     margin-top: 2rem;
     background-color: #111;
     color: white;
 }
 
-.high-rated-header {
+.watchlist-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +13,7 @@
     margin-bottom: 0.5rem;
 }
 
-.high-rated-header h2 {
+.watchlist-header h2 {
     font-weight: bold;
     text-align: center;
 }
@@ -31,26 +31,26 @@
     color: white;
 }
 
-.high-rated-movies {
+.watchlist-movies {
     display: grid;
     gap: 1rem;
     padding: 2rem;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
-.high-rated-movie-poster {
+.watchlist-movie-poster {
     width: 100%;
     height: 100%;
     transition: transform 0.3s;
     cursor: pointer;
 }
 
-.high-rated-movie-poster img {
+.watchlist-movie-poster img {
     width: 100%;
     border-radius: 10px;
     border: 2px solid gold;
 }
 
-.high-rated-movie-poster:hover {
+.watchlist-movie-poster img:hover {
     transform: scale(1.05);
 }
