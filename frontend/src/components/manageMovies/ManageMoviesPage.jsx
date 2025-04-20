@@ -16,7 +16,12 @@ const ManageMoviesPage = () => {
         trailerLink: '',
         genres: [''],
         poster: '',
-        backdrops: ['']
+        backdrops: [''],
+        description: '',
+        duration: '',
+        directors: [''],
+        writers: [''],
+        stars: ['']
     });
     const [isEditing, setIsEditing] = useState(false);
 
@@ -76,7 +81,12 @@ const ManageMoviesPage = () => {
                 trailerLink: '',
                 genres: [''],
                 poster: '',
-                backdrops: ['']
+                backdrops: [''],
+                description: '',
+                duration: '',
+                directors: [''],
+                writers: [''],
+                stars: ['']
             });
             setIsEditing(false);
             fetchMovies();
@@ -86,8 +96,17 @@ const ManageMoviesPage = () => {
     };
 
     const handleEdit = (movie) => {
-        setFormData({ ...movie });
+        setFormData({ 
+            ...movie,
+            directors: movie.directors || [''],
+            writers: movie.writers || [''],
+            stars: movie.stars || ['']
+        });
         setIsEditing(true);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     const handleDelete = async (id) => {
@@ -113,58 +132,82 @@ const ManageMoviesPage = () => {
                             
                             <div className="manage-form-group">
                                 <label className="manage-label">IMDB ID</label>
-                                <input 
+                                <input
                                     className="manage-input"
-                                    name="imdbId" 
-                                    value={formData.imdbId} 
-                                    onChange={handleInputChange} 
+                                    name="imdbId"
+                                    value={formData.imdbId}
+                                    onChange={handleInputChange}
                                     disabled={isEditing}
-                                    required 
+                                    required
                                 />
                             </div>
 
                             <div className="manage-form-group">
                                 <label className="manage-label">Title</label>
-                                <input 
+                                <input
                                     className="manage-input"
-                                    name="title" 
-                                    value={formData.title} 
-                                    onChange={handleInputChange} 
-                                    required 
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            
+                            <div className="manage-form-group">
+                                <label className="manage-label">Description</label>
+                                <textarea
+                                    className="manage-input"
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleInputChange}
+                                    rows="4"
+                                    required
                                 />
                             </div>
 
                             <div className="manage-form-group">
+                                <label className="manage-label">Duration</label>
+                                <input
+                                    className="manage-input"
+                                    name="duration"
+                                    value={formData.duration}
+                                    onChange={handleInputChange}
+                                    placeholder="e.g., 2h 15m"
+                                    required
+                                />
+                            </div>
+                            
+                            <div className="manage-form-group">
                                 <label className="manage-label">Release Date</label>
-                                <input 
+                                <input
                                     className="manage-input"
                                     type="date"
-                                    name="releaseDate" 
-                                    value={formData.releaseDate} 
-                                    onChange={handleInputChange} 
-                                    required 
+                                    name="releaseDate"
+                                    value={formData.releaseDate}
+                                    onChange={handleInputChange}
+                                    required
                                 />
                             </div>
 
                             <div className="manage-form-group">
                                 <label className="manage-label">Trailer Link</label>
-                                <input 
+                                <input
                                     className="manage-input"
-                                    name="trailerLink" 
-                                    value={formData.trailerLink} 
-                                    onChange={handleInputChange} 
-                                    required 
+                                    name="trailerLink"
+                                    value={formData.trailerLink}
+                                    onChange={handleInputChange}
+                                    required
                                 />
                             </div>
 
                             <div className="manage-form-group">
                                 <label className="manage-label">Poster URL</label>
-                                <input 
+                                <input
                                     className="manage-input"
-                                    name="poster" 
-                                    value={formData.poster} 
-                                    onChange={handleInputChange} 
-                                    required 
+                                    name="poster"
+                                    value={formData.poster}
+                                    onChange={handleInputChange}
+                                    required
                                 />
                             </div>
                         </div>
@@ -180,8 +223,8 @@ const ManageMoviesPage = () => {
                                         onChange={(e) => handleArrayChange(index, e.target.value, 'genres')}
                                         placeholder="Genre"
                                     />
-                                    <Button 
-                                        variant="outline-danger" 
+                                    <Button
+                                        variant="outline-danger"
                                         size="sm"
                                         onClick={() => removeArrayField(index, 'genres')}
                                         className="manage-array-button"
@@ -190,13 +233,100 @@ const ManageMoviesPage = () => {
                                     </Button>
                                 </div>
                             ))}
-                            <Button 
-                                variant="outline-info" 
+                            <Button
+                                variant="outline-info"
                                 onClick={() => addArrayField('genres')}
                                 className="manage-add-button"
                             >
                                 <FontAwesomeIcon icon={faPlus} className="manage-icon" />
                                 Add Genre
+                            </Button>
+
+                            <h3 className="manage-section-title" style={{marginTop: '2rem'}}>Directors</h3>
+                            {formData.directors.map((director, index) => (
+                                <div className="manage-array-group" key={index}>
+                                    <input
+                                        className="manage-array-input"
+                                        type="text"
+                                        value={director}
+                                        onChange={(e) => handleArrayChange(index, e.target.value, 'directors')}
+                                        placeholder="Director name"
+                                    />
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        onClick={() => removeArrayField(index, 'directors')}
+                                        className="manage-array-button"
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                </div>
+                            ))}
+                            <Button
+                                variant="outline-info"
+                                onClick={() => addArrayField('directors')}
+                                className="manage-add-button"
+                            >
+                                <FontAwesomeIcon icon={faPlus} className="manage-icon" />
+                                Add Director
+                            </Button>
+
+                            <h3 className="manage-section-title" style={{marginTop: '2rem'}}>Writers</h3>
+                            {formData.writers.map((writer, index) => (
+                                <div className="manage-array-group" key={index}>
+                                    <input
+                                        className="manage-array-input"
+                                        type="text"
+                                        value={writer}
+                                        onChange={(e) => handleArrayChange(index, e.target.value, 'writers')}
+                                        placeholder="Writer name"
+                                    />
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        onClick={() => removeArrayField(index, 'writers')}
+                                        className="manage-array-button"
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                </div>
+                            ))}
+                            <Button
+                                variant="outline-info"
+                                onClick={() => addArrayField('writers')}
+                                className="manage-add-button"
+                            >
+                                <FontAwesomeIcon icon={faPlus} className="manage-icon" />
+                                Add Writer
+                            </Button>
+
+                            <h3 className="manage-section-title" style={{marginTop: '2rem'}}>Stars</h3>
+                            {formData.stars.map((star, index) => (
+                                <div className="manage-array-group" key={index}>
+                                    <input
+                                        className="manage-array-input"
+                                        type="text"
+                                        value={star}
+                                        onChange={(e) => handleArrayChange(index, e.target.value, 'stars')}
+                                        placeholder="Actor name"
+                                    />
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        onClick={() => removeArrayField(index, 'stars')}
+                                        className="manage-array-button"
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                </div>
+                            ))}
+                            <Button
+                                variant="outline-info"
+                                onClick={() => addArrayField('stars')}
+                                className="manage-add-button"
+                            >
+                                <FontAwesomeIcon icon={faPlus} className="manage-icon" />
+                                Add Star
                             </Button>
                         </div>
 
@@ -211,8 +341,8 @@ const ManageMoviesPage = () => {
                                         onChange={(e) => handleArrayChange(index, e.target.value, 'backdrops')}
                                         placeholder="Backdrop URL"
                                     />
-                                    <Button 
-                                        variant="outline-danger" 
+                                    <Button
+                                        variant="outline-danger"
                                         size="sm"
                                         onClick={() => removeArrayField(index, 'backdrops')}
                                         className="manage-array-button"
@@ -221,8 +351,8 @@ const ManageMoviesPage = () => {
                                     </Button>
                                 </div>
                             ))}
-                            <Button 
-                                variant="outline-info" 
+                            <Button
+                                variant="outline-info"
                                 onClick={() => addArrayField('backdrops')}
                                 className="manage-add-button"
                             >
@@ -233,8 +363,8 @@ const ManageMoviesPage = () => {
                     </div>
                     
                     <div className="manage-form-actions">
-                        <Button 
-                            variant={isEditing ? "warning" : "success"} 
+                        <Button
+                            variant={isEditing ? "warning" : "success"}
                             type="submit"
                             className="manage-submit-button"
                         >
@@ -264,9 +394,10 @@ const ManageMoviesPage = () => {
                                     <img src={movie.poster} alt={movie.title} className="manage-poster" />
                                     <div className="manage-movie-info">
                                         <h4 className="manage-movie-title">{movie.title}</h4>
+                                        <p className="manage-movie-meta">{movie.releaseDate?.split('-')[0]} • {movie.duration}</p>
                                         <div className="manage-movie-actions">
-                                            <Button 
-                                                variant="outline-warning" 
+                                            <Button
+                                                variant="outline-warning"
                                                 size="sm"
                                                 onClick={() => handleEdit(movie)}
                                                 className="manage-action-button"
@@ -274,8 +405,8 @@ const ManageMoviesPage = () => {
                                                 <FontAwesomeIcon icon={faEdit} className="manage-icon" />
                                                 Edit
                                             </Button>
-                                            <Button 
-                                                variant="outline-danger" 
+                                            <Button
+                                                variant="outline-danger"
                                                 size="sm"
                                                 onClick={() => handleDelete(movie.imdbId)}
                                                 className="manage-action-button"

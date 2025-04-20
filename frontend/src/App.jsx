@@ -9,7 +9,7 @@ import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import GenrePage from "./components/genre/GenrePage";
 import Trailer from "./components/trailer/Trailer";
-import Reviews from "./components/reviews/Reviews";
+import MovieDetails from "./components/details/MovieDetails";
 import NotFound from "./components/notFound/NotFound";
 import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
@@ -20,8 +20,6 @@ import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
 
 function App() {
     const [movies, setMovies] = useState();
-    const [movie, setMovie] = useState();
-    const [reviews, setReviews] = useState([]);
 
     const getMovies = async () => {
         try {
@@ -30,20 +28,6 @@ function App() {
             setMovies(response.data);
         } catch (err) {
             console.log(err);
-        }
-    };
-
-    const getMovieData = async (movieId) => {
-        try {
-            const response = await api.get(`/api/v1/movies/${movieId}`);
-
-            const singleMovie = response.data;
-
-            setMovie(singleMovie);
-
-            setReviews(singleMovie.reviewIds);
-        } catch (error) {
-            console.error(error);
         }
     };
 
@@ -64,17 +48,7 @@ function App() {
                     <Route path="/watchlist" element={<WatchListPage />} />
                     <Route path="/genre/:genreName" element={<GenrePage />} />
                     <Route path="/trailer/:ytTrailerId" element={<Trailer />} />
-                    <Route
-                        path="/reviews/:movieId"
-                        element={
-                            <Reviews
-                                getMovieData={getMovieData}
-                                movie={movie}
-                                reviews={reviews}
-                                setReviews={setReviews}
-                            />
-                        }
-                    />
+                    <Route path="/details/:movieId" element={<MovieDetails />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>

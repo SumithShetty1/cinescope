@@ -21,9 +21,14 @@ const HighRated = ({ movies }) => {
           <div
             key={movie.imdbId}
             className="high-rated-movie-poster"
-            onClick={() => navigate(`/reviews/${movie.imdbId}`)}
+            onClick={() => navigate(`/details/${movie.imdbId}`)}
           >
-            <img src={movie.poster} alt={movie.title} />
+            <div className="poster-container">
+              <img src={movie.poster} alt={movie.title} />
+              <div className="movie-rating">
+                {movie.rating || 'N/A'}
+              </div>
+            </div>
             <p>{movie.title}</p>
           </div>
         ))}

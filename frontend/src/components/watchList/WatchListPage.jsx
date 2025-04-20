@@ -12,6 +12,11 @@ const WatchListPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
         const fetchWatchlistMovies = async () => {
             try {
                 const response = await api.get("/api/v1/movies");
@@ -33,8 +38,8 @@ const WatchListPage = () => {
         setFilteredMovies(filtered);
     }, [searchTerm, watchlistMovies]);
 
-    const goToReviews = (movieId) => {
-        navigate(`/reviews/${movieId}`);
+    const goToDetails = (movieId) => {
+        navigate(`/details/${movieId}`);
     };
 
     return (
@@ -58,9 +63,14 @@ const WatchListPage = () => {
                         <div
                             key={movie.imdbId}
                             className="watchlist-page-movie-poster"
-                            onClick={() => goToReviews(movie.imdbId)}
+                            onClick={() => goToDetails(movie.imdbId)}
                         >
-                            <img src={movie.poster} alt={movie.title} />
+                            <div className="poster-container">
+                                <img src={movie.poster} alt={movie.title} />
+                                <div className="movie-rating">
+                                    {movie.imdbRating || movie.rating || 'N/A'}
+                                </div>
+                            </div>
                             <p className="watchlist-page-movie-title">{movie.title}</p>
                         </div>
                     ))

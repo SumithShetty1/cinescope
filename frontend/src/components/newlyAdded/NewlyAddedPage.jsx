@@ -12,6 +12,11 @@ const NewlyAddedPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
         const fetchNewlyAddedMovies = async () => {
             try {
                 const response = await api.get("/api/v1/movies");
@@ -35,8 +40,8 @@ const NewlyAddedPage = () => {
         setFilteredMovies(filtered);
     }, [searchTerm, newlyAddedMovies]);
 
-    function goToReviews(movieId) {
-        navigate(`/reviews/${movieId}`);
+    function goToDetails(movieId) {
+        navigate(`/details/${movieId}`);
     }
 
     return (
@@ -60,9 +65,14 @@ const NewlyAddedPage = () => {
                         <div
                             key={movie.imdbId}
                             className="newly-added-page-movie-poster"
-                            onClick={() => goToReviews(movie.imdbId)}
+                            onClick={() => goToDetails(movie.imdbId)}
                         >
-                            <img src={movie.poster} alt={movie.title} />
+                            <div className="poster-container">
+                                <img src={movie.poster} alt={movie.title} />
+                                <div className="movie-rating">
+                                    {movie.rating || 'N/A'}
+                                </div>
+                            </div>
                             <p className="newly-added-page-movie-title">{movie.title}</p>
                         </div>
                     ))

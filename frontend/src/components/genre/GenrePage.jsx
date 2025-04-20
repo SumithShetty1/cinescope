@@ -14,6 +14,11 @@ const GenrePage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
         const fetchGenreMovies = async () => {
             try {
                 const response = await api.get("/api/v1/movies");
@@ -37,8 +42,8 @@ const GenrePage = () => {
         setFilteredMovies(filtered);
     }, [searchTerm, genreMovies]);
 
-    function reviews(movieId) {
-        navigate(`/reviews/${movieId}`);
+    function goToDetails(movieId) {
+        navigate(`/details/${movieId}`);
     }
 
     return (
@@ -62,9 +67,14 @@ const GenrePage = () => {
                         <div
                             key={movie.imdbId}
                             className="genre-page-movie-poster"
-                            onClick={() => reviews(movie.imdbId)}
+                            onClick={() => goToDetails(movie.imdbId)}
                         >
-                            <img src={movie.poster} alt={movie.title} />
+                            <div className="poster-container">
+                                <img src={movie.poster} alt={movie.title} />
+                                <div className="movie-rating">
+                                    {movie.imdbRating || movie.rating || 'N/A'}
+                                </div>
+                            </div>
                             <p className="genre-page-movie-title">{movie.title}</p>
                         </div>
                     ))

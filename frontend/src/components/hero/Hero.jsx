@@ -10,8 +10,8 @@ const Hero = ({ movies }) => {
 
     const navigate = useNavigate();
 
-    function reviews(movieId) {
-        navigate(`/reviews/${movieId}`);
+    function details(movieId) {
+        navigate(`/details/${movieId}`);
     }
 
     const settings = {
@@ -33,14 +33,14 @@ const Hero = ({ movies }) => {
                                 <div className="movie-detail">
                                     <div
                                         className="movie-poster"
-                                        onClick={() => reviews(movie.imdbId)}
+                                        onClick={() => details(movie.imdbId)}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         <img src={movie.poster} alt="" />
                                     </div>
                                     <div
                                         className="movie-title"
-                                        onClick={() => reviews(movie.imdbId)}
+                                        onClick={() => details(movie.imdbId)}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         <h4>{movie.title}</h4>
@@ -54,7 +54,7 @@ const Hero = ({ movies }) => {
                                             </div>
                                         </Link>
                                         <div className="movie-review-button-container">
-                                            <Button variant="info" onClick={() => reviews(movie.imdbId)} >Reviews</Button>
+                                            <Button variant="info" onClick={() => details(movie.imdbId)} >Details</Button>
                                         </div>
                                     </div>
                                 </div>

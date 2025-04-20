@@ -45,12 +45,38 @@
     cursor: pointer;
 }
 
+.poster-container {
+    position: relative;
+    width: 100%;
+}
+
+.movie-rating {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: gold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
 .newly-added-movie-poster img {
     width: 100%;
     border-radius: 10px;
     border: 2px solid gold;
+    display: block;
 }
 
-.newly-added-movie-poster img:hover {
+.newly-added-movie-poster:hover {
     transform: scale(1.05);
+}
+
+.newly-added-movie-poster p {
+    margin-top: 0.5rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

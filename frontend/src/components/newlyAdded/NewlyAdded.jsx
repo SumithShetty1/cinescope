@@ -5,9 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const NewlyAdded = ({ movies }) => {
   const navigate = useNavigate();
 
-  // Optional: Sort by date if available
   const sortedMovies = [...(movies || [])].sort((a, b) =>
-    new Date(b.createdAt) - new Date(a.createdAt)
+    new Date(b.releaseDate) - new Date(a.releaseDate)
   );
 
   return (
@@ -23,9 +22,14 @@ const NewlyAdded = ({ movies }) => {
           <div
             key={movie.imdbId}
             className="newly-added-movie-poster"
-            onClick={() => navigate(`/reviews/${movie.imdbId}`)}
+            onClick={() => navigate(`/details/${movie.imdbId}`)}
           >
-            <img src={movie.poster} alt={movie.title} />
+            <div className="poster-container">
+              <img src={movie.poster} alt={movie.title} />
+              <div className="movie-rating">
+                {movie.rating || 'N/A'}
+              </div>
+            </div>
             <p>{movie.title}</p>
           </div>
         ))}

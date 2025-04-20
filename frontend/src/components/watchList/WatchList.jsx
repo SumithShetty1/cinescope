@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 const WatchList = ({ movies }) => {
   const navigate = useNavigate();
-
+  
   // Assuming 'watchlisted' is a boolean property on each movie
   // const watchListMovies = (movies || []).filter((movie) => movie.watchlisted);
-  const watchListMovies = (movies || [])
+  const watchListMovies = (movies || []);
 
   return (
     <div className="watchlist-section">
@@ -22,9 +22,14 @@ const WatchList = ({ movies }) => {
           <div
             key={movie.imdbId}
             className="watchlist-movie-poster"
-            onClick={() => navigate(`/reviews/${movie.imdbId}`)}
+            onClick={() => navigate(`/details/${movie.imdbId}`)}
           >
-            <img src={movie.poster} alt={movie.title} />
+            <div className="poster-container">
+              <img src={movie.poster} alt={movie.title} />
+              <div className="movie-rating">
+                {movie.rating || 'N/A'}
+              </div>
+            </div>
             <p>{movie.title}</p>
           </div>
         ))}

@@ -12,6 +12,11 @@ const HighRatedMovies = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
         const fetchTopRatedMovies = async () => {
             try {
                 const response = await api.get("/api/v1/movies");
@@ -33,8 +38,8 @@ const HighRatedMovies = () => {
         setFilteredMovies(filtered);
     }, [searchTerm, topRatedMovies]);
 
-    function goToReviews(movieId) {
-        navigate(`/reviews/${movieId}`);
+    function goToDetails(movieId) {
+        navigate(`/details/${movieId}`);
     }
 
     return (
@@ -58,9 +63,14 @@ const HighRatedMovies = () => {
                         <div
                             key={movie.imdbId}
                             className="high-rated-page-movie-poster"
-                            onClick={() => goToReviews(movie.imdbId)}
+                            onClick={() => goToDetails(movie.imdbId)}
                         >
-                            <img src={movie.poster} alt={movie.title} />
+                            <div className="poster-container">
+                                <img src={movie.poster} alt={movie.title} />
+                                <div className="movie-rating">
+                                    {movie.rating || 'N/A'}
+                                </div>
+                            </div>
                             <p className="high-rated-page-movie-title">{movie.title}</p>
                         </div>
                     ))

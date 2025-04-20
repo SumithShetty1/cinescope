@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.Map;
 
 @RestController
@@ -17,7 +18,15 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Map<String, String> payload) {
-        return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"), payload.get("imdbId")), HttpStatus.CREATED);
+    public ResponseEntity<Review> createReview(@RequestBody Map<String, Object> payload) {
+        String body = (String) payload.get("reviewBody");
+        String reviewer = (String) payload.get("reviewer");
+        String email = (String) payload.get("email");
+        Double rating = Double.parseDouble(payload.get("rating").toString());
+        String imdbId = (String) payload.get("imdbId");
+        Instant timestamp = Instant.parse((String) payload.get("timestamp"));
+
+        Review review = reviewService.createReview(body, reviewer, email, rating, imdbId, timestamp);
+        return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 }
