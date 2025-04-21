@@ -3,14 +3,17 @@ import HighRated from '../highRated/HighRated';
 import Genre from '../genre/Genre';
 import WatchList from '../watchList/WatchList';
 import NewlyAdded from '../newlyAdded/NewlyAdded';
+import { useSession } from "@descope/react-sdk";
 
-const Home = ({ movies }) => {
+const Home = () => {
+  const { isAuthenticated } = useSession();
+
   return (
     <>
-      <Hero movies={movies} />
-      <HighRated movies={movies} />
-      <NewlyAdded movies={movies} />
-      <WatchList movies={movies} />
+      <Hero />
+      <HighRated />
+      <NewlyAdded />
+      {isAuthenticated && <WatchList />}
       <Genre />
     </>
   )

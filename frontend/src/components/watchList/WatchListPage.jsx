@@ -4,11 +4,17 @@ import api from '../../api/axiosConfig';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useUser, useSession } from "@descope/react-sdk";
+import Button from "react-bootstrap/Button";
 
 const WatchListPage = () => {
+    const { user } = useUser();
+    const { isAuthenticated } = useSession();
     const [watchlistMovies, setWatchlistMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,20 +22,35 @@ const WatchListPage = () => {
             top: 0,
             behavior: 'smooth'
         });
-        
-        const fetchWatchlistMovies = async () => {
-            try {
-                const response = await api.get("/api/v1/movies");
-                const filtered = response.data;
-                setWatchlistMovies(filtered);
-                setFilteredMovies(filtered);
-            } catch (error) {
-                console.error("Error fetching watchlist movies:", error);
-            }
-        };
+        if (isAuthenticated && user?.email) {
+            fetchWatchlistMovies();
+        }
+    }, [isAuthenticated, user?.email]);
 
-        fetchWatchlistMovies();
-    }, []);
+    const fetchWatchlistMovies = async () => {
+        setIsLoading(true);
+        setError('');
+        try {
+            // 1. Get the user's watchlist with movie references
+            const watchlistResponse = await api.get(`/api/v1/watchlists/${user.email}`);
+            const watchlist = watchlistResponse.data;
+            
+            if (watchlist && watchlist.movies && watchlist.movies.length > 0) {
+                // 2. The @DocumentReference should have already resolved the movie documents
+                // So we can directly use the movie objects
+                setWatchlistMovies(watchlist.movies);
+                setFilteredMovies(watchlist.movies);
+            } else {
+                setWatchlistMovies([]);
+                setFilteredMovies([]);
+            }
+        } catch (error) {
+            console.error("Error fetching watchlist movies:", error);
+            setError('Failed to load watchlist');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
         const filtered = watchlistMovies.filter(movie =>
@@ -41,6 +62,50 @@ const WatchListPage = () => {
     const goToDetails = (movieId) => {
         navigate(`/details/${movieId}`);
     };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="watchlist-page-section">
+                <div className="watchlist-login-prompt">
+                    <h3>Please login to view your watchlist</h3>
+                    <Button 
+                        variant="outline-info" 
+                        onClick={() => navigate('/login')}
+                        className="watchlist-login-button"
+                    >
+                        Login
+                    </Button>
+                </div>
+            </div>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <div className="watchlist-page-section">
+                <div className="watchlist-loading">
+                    Loading your watchlist...
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="watchlist-page-section">
+                <div className="watchlist-error">
+                    {error}
+                    <Button 
+                        variant="outline-info" 
+                        onClick={fetchWatchlistMovies}
+                        className="watchlist-retry-button"
+                    >
+                        Retry
+                    </Button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="watchlist-page-section">
@@ -76,7 +141,9 @@ const WatchListPage = () => {
                     ))
                 ) : (
                     <div className="watchlist-page-no-results">
-                        No movies found matching your search
+                        {watchlistMovies.length === 0 ? 
+                            "Your watchlist is empty" : 
+                            "No movies found matching your search"}
                     </div>
                 )}
             </div>

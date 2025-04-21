@@ -7,14 +7,30 @@ const Genre = () => {
 
     const genres = [
         { id: 1, name: 'Action' },
-        { id: 2, name: 'Comedy' },
-        { id: 3, name: 'Drama' },
-        { id: 4, name: 'Sci-Fi' },
-        { id: 5, name: 'Romance' },
-        { id: 6, name: 'Horror' },
-        { id: 7, name: 'Thriller' },
-        { id: 8, name: 'Animation' }
-      ];
+        { id: 2, name: 'Adventure' },
+        { id: 3, name: 'Animation' },
+        { id: 4, name: 'Comedy' },
+        { id: 5, name: 'Crime' },
+        { id: 6, name: 'Documentary' },
+        { id: 7, name: 'Drama' },
+        { id: 8, name: 'Family' },
+        { id: 9, name: 'Fantasy' },
+        { id: 10, name: 'History' },
+        { id: 11, name: 'Horror' },
+        { id: 12, name: 'Music' },
+        { id: 13, name: 'Mystery' },
+        { id: 14, name: 'Romance' },
+        { id: 15, name: 'Science Fiction' },
+        { id: 16, name: 'TV Movie' },
+        { id: 17, name: 'Thriller' },
+        { id: 18, name: 'War' },
+        { id: 19, name: 'Western' },
+        { id: 20, name: 'Biography' },
+        { id: 21, name: 'Musical' },
+        { id: 22, name: 'Sport' },
+        { id: 23, name: 'Superhero' },
+        { id: 24, name: 'Psychological' }
+    ];
 
     return (
         <div className="genre-section">

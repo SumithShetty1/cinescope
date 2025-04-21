@@ -1,8 +1,6 @@
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import api from "./api/axiosConfig";
-import { useState, useEffect } from "react";
 import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header";
@@ -13,37 +11,23 @@ import MovieDetails from "./components/details/MovieDetails";
 import NotFound from "./components/notFound/NotFound";
 import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
-import HighRatedMovies from "./components/highRated/HighRatedPage";
+import HighRatedPage from "./components/highRated/HighRatedPage";
 import WatchListPage from "./components/watchList/WatchListPage";
 import NewlyAddedPage from "./components/newlyAdded/NewlyAddedPage";
 import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
 
 function App() {
-    const [movies, setMovies] = useState();
-
-    const getMovies = async () => {
-        try {
-            const response = await api.get("/api/v1/movies");
-
-            setMovies(response.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    useEffect(() => {
-        getMovies();
-    }, []);
+    
     return (
         <div className="App">
             <Header />
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route path="/" element={<Home movies={movies} />}></Route>
+                    <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/manage" element={<ManageMoviesPage />} />
-                    <Route path="/top-rated" element={<HighRatedMovies />} />
+                    <Route path="/top-rated" element={<HighRatedPage />} />
                     <Route path="/newly-added" element={<NewlyAddedPage />} />
                     <Route path="/watchlist" element={<WatchListPage />} />
                     <Route path="/genre/:genreName" element={<GenrePage />} />

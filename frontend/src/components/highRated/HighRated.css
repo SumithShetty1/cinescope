@@ -79,3 +79,47 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #ff6b6b;
+}
+
+.error-message button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: gold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.high-rated-movies.expanded {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: gold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.back-button:hover {
+    color: white;
+}

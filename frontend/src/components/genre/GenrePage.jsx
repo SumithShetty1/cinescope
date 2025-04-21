@@ -11,6 +11,8 @@ const GenrePage = () => {
     const [genreMovies, setGenreMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,14 +23,14 @@ const GenrePage = () => {
 
         const fetchGenreMovies = async () => {
             try {
-                const response = await api.get("/api/v1/movies");
-                const filtered = response.data.filter((movie) =>
-                    movie.genres.includes(genreName)
-                );
-                setGenreMovies(filtered);
-                setFilteredMovies(filtered);
+                const response = await api.get(`/api/v1/movies/genre/${genreName}/top-rated/0`);
+                setGenreMovies(response.data);
+                setFilteredMovies(response.data);
             } catch (error) {
                 console.error("Error fetching genre movies:", error);
+                setError(`Failed to load ${genreName} movies`);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -44,6 +46,25 @@ const GenrePage = () => {
 
     function goToDetails(movieId) {
         navigate(`/details/${movieId}`);
+    }
+
+    if (isLoading) {
+        return (
+            <div className='genre-page-section'>
+                <div className="loading-spinner">Loading {genreName} movies...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className='genre-page-section'>
+                <div className="error-message">
+                    {error}
+                    <button onClick={() => window.location.reload()}>Retry</button>
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -72,7 +93,7 @@ const GenrePage = () => {
                             <div className="poster-container">
                                 <img src={movie.poster} alt={movie.title} />
                                 <div className="movie-rating">
-                                    {movie.imdbRating || movie.rating || 'N/A'}
+                                    {movie?.rating || 'N/A'}
                                 </div>
                             </div>
                             <p className="genre-page-movie-title">{movie.title}</p>
@@ -80,7 +101,9 @@ const GenrePage = () => {
                     ))
                 ) : (
                     <div className="genre-page-no-results">
-                        No movies found matching your search
+                        {genreMovies.length === 0 ? 
+                            `No ${genreName} movies available` : 
+                            "No movies found matching your search"}
                     </div>
                 )}
             </div>

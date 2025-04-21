@@ -27,4 +27,29 @@ public class MovieController {
     public ResponseEntity<Optional<Movie>> getSingleMovies(@PathVariable String imdbId) {
         return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(imdbId), HttpStatus.OK);
     }
+
+    @GetMapping("/top-rated/{limit}")
+    public ResponseEntity<List<Movie>> getTopRatedMovies(@PathVariable(required = false) Integer limit) {
+        int actualLimit = (limit != null) ? limit : 16;
+        return new ResponseEntity<List<Movie>>(movieService.getTopRatedMovies(actualLimit), HttpStatus.OK);
+    }
+
+    @GetMapping("/new-releases/{limit}")
+    public ResponseEntity<List<Movie>> getNewReleases(@PathVariable(required = false) Integer limit) {
+        int actualLimit = (limit != null) ? limit : 16;
+        return new ResponseEntity<List<Movie>>(movieService.getNewReleases(actualLimit), HttpStatus.OK);
+    }
+
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity<List<Movie>> getMoviesByGenre(@PathVariable String genre) {
+        return ResponseEntity.ok(movieService.getMoviesByGenre(genre));
+    }
+
+    @GetMapping("/genre/{genre}/top-rated/{limit}")
+    public ResponseEntity<List<Movie>> getTopRatedMoviesByGenre(
+            @PathVariable String genre,
+            @PathVariable(required = false) Integer limit) {
+        int actualLimit = (limit != null) ? limit : 0;
+        return ResponseEntity.ok(movieService.getTopRatedMoviesByGenre(genre, actualLimit));
+    }
 }

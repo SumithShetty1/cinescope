@@ -9,6 +9,8 @@ const NewlyAddedPage = () => {
     const [newlyAddedMovies, setNewlyAddedMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,14 +21,15 @@ const NewlyAddedPage = () => {
         
         const fetchNewlyAddedMovies = async () => {
             try {
-                const response = await api.get("/api/v1/movies");
-                const sorted = response.data.sort((a, b) =>
-                    new Date(b.createdAt) - new Date(a.createdAt)
-                );
-                setNewlyAddedMovies(sorted);
-                setFilteredMovies(sorted);
+                // Fetch all movies sorted by release date (newest first)
+                const response = await api.get("/api/v1/movies/new-releases/0");
+                setNewlyAddedMovies(response.data);
+                setFilteredMovies(response.data);
             } catch (error) {
                 console.error("Error fetching newly added movies:", error);
+                setError('Failed to load newly added movies');
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -42,6 +45,25 @@ const NewlyAddedPage = () => {
 
     function goToDetails(movieId) {
         navigate(`/details/${movieId}`);
+    }
+
+    if (isLoading) {
+        return (
+            <div className="newly-added-page-section">
+                <div className="loading-spinner">Loading newly added movies...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="newly-added-page-section">
+                <div className="error-message">
+                    {error}
+                    <button onClick={() => window.location.reload()}>Retry</button>
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -70,7 +92,7 @@ const NewlyAddedPage = () => {
                             <div className="poster-container">
                                 <img src={movie.poster} alt={movie.title} />
                                 <div className="movie-rating">
-                                    {movie.rating || 'N/A'}
+                                    {movie?.rating || 'N/A'}
                                 </div>
                             </div>
                             <p className="newly-added-page-movie-title">{movie.title}</p>
@@ -78,7 +100,9 @@ const NewlyAddedPage = () => {
                     ))
                 ) : (
                     <div className="newly-added-page-no-results">
-                        No movies found matching your search
+                        {newlyAddedMovies.length === 0 ? 
+                            "No newly added movies available" : 
+                            "No movies found matching your search"}
                     </div>
                 )}
             </div>

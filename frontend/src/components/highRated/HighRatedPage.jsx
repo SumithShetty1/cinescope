@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-const HighRatedMovies = () => {
+const HighRatedPage = () => {
     const [topRatedMovies, setTopRatedMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,15 +18,18 @@ const HighRatedMovies = () => {
             top: 0,
             behavior: 'smooth'
         });
-        
+
         const fetchTopRatedMovies = async () => {
             try {
-                const response = await api.get("/api/v1/movies");
-                const filtered = response.data;
-                setTopRatedMovies(filtered);
-                setFilteredMovies(filtered);
+                const response = await api.get("/api/v1/movies/top-rated/0"); // 0 means no limit
+                const movies = response.data;
+                setTopRatedMovies(movies);
+                setFilteredMovies(movies);
             } catch (error) {
                 console.error("Error fetching top-rated movies:", error);
+                setError('Failed to load top-rated movies');
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -40,6 +45,25 @@ const HighRatedMovies = () => {
 
     function goToDetails(movieId) {
         navigate(`/details/${movieId}`);
+    }
+
+    if (isLoading) {
+        return (
+            <div className="high-rated-page-section">
+                <div className="loading-spinner">Loading top-rated movies...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="high-rated-page-section">
+                <div className="error-message">
+                    {error}
+                    <button onClick={() => window.location.reload()}>Retry</button>
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -68,7 +92,7 @@ const HighRatedMovies = () => {
                             <div className="poster-container">
                                 <img src={movie.poster} alt={movie.title} />
                                 <div className="movie-rating">
-                                    {movie.rating || 'N/A'}
+                                    {movie?.rating || 'N/A'}
                                 </div>
                             </div>
                             <p className="high-rated-page-movie-title">{movie.title}</p>
@@ -76,7 +100,9 @@ const HighRatedMovies = () => {
                     ))
                 ) : (
                     <div className="high-rated-page-no-results">
-                        No movies found matching your search
+                        {topRatedMovies.length === 0 ?
+                            "No top-rated movies available" :
+                            "No movies found matching your search"}
                     </div>
                 )}
             </div>
@@ -84,4 +110,4 @@ const HighRatedMovies = () => {
     );
 };
 
-export default HighRatedMovies;
+export default HighRatedPage;

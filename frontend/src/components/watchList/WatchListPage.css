@@ -111,6 +111,112 @@
     font-size: 1.1rem;
 }
 
+.watchlist-login-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 1rem;
+    text-align: center;
+    color: white;
+}
+
+.watchlist-login-prompt h3 {
+    margin-bottom: 1rem;
+}
+
+.watchlist-login-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    background-color: gold !important;
+    color: #111 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+}
+
+.watchlist-login-button:hover {
+    background-color: #ffd700 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Loading State Styles */
+.watchlist-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Loading Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.watchlist-loading::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    border: 4px solid rgba(255, 215, 0, 0.3);
+    border-top: 4px solid gold;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Error State Styles */
+.watchlist-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.watchlist-retry-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    background-color: gold;
+    color: #111;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.watchlist-retry-button:hover {
+    background-color: #ffd700;
+    transform: translateY(-2px);
+}
+
+/* Empty State Enhancement */
+.watchlist-page-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    color: #777;
+    font-size: 1.2rem;
+    gap: 1rem;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .watchlist-page-header {
@@ -129,6 +235,12 @@
         padding: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
+
+    .watchlist-loading,
+    .watchlist-error,
+    .watchlist-page-no-results {
+        min-height: 40vh;
+    }
 }
 
 @media (max-width: 480px) {
@@ -140,5 +252,11 @@
     .watchlist-page-title {
         font-size: 1.5rem;
         margin: 0.5rem;
+    }
+
+    .watchlist-loading,
+    .watchlist-error,
+    .watchlist-page-no-results {
+        font-size: 1rem;
     }
 }

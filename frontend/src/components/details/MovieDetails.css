@@ -92,6 +92,39 @@
     color: #aaa;
 }
 
+.watchlist-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: rgba(255, 215, 0, 0.1);
+    color: gold;
+    border: 1px solid gold;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.watchlist-button:hover:not(:disabled) {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.watchlist-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.watchlist-button.in-watchlist {
+    background-color: rgba(255, 215, 0, 0.3);
+    color: white;
+    border-color: white;
+}
+
 /* Trailer Section */
 .review-trailer-section {
     margin-bottom: 2.5rem;

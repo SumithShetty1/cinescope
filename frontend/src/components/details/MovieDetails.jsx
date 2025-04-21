@@ -3,7 +3,7 @@ import api from '../../api/axiosConfig';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEdit, faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEdit, faTrash, faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { useSession } from '@descope/react-sdk';
 import './MovieDetails.css';
 
@@ -17,6 +17,8 @@ const MovieDetails = () => {
     const [rating, setRating] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [isInWatchlist, setIsInWatchlist] = useState(false);
+    const [watchlistLoading, setWatchlistLoading] = useState(false);
 
     const getMovieData = async (id) => {
         try {
@@ -29,12 +31,46 @@ const MovieDetails = () => {
         }
     };
 
+    const checkWatchlistStatus = async () => {
+        if (!isAuthenticated) return;
+        
+        try {
+            const response = await api.get(`/api/v1/watchlists/check/${movieId}`);
+            setIsInWatchlist(response.data.isInWatchlist);
+        } catch (err) {
+            console.error("Failed to check watchlist:", err);
+        }
+    };
+
     useEffect(() => {
         getMovieData(movieId);
-    }, [movieId]);
+        checkWatchlistStatus();
+    }, [movieId, isAuthenticated]);
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
+    };
+
+    const toggleWatchlist = async () => {
+        if (!isAuthenticated) {
+            setError('Please login to manage your watchlist');
+            return;
+        }
+
+        setWatchlistLoading(true);
+        try {
+            if (isInWatchlist) {
+                await api.delete(`/api/v1/watchlist/${movieId}`);
+            } else {
+                await api.post('/api/v1/watchlist', { imdbId: movieId });
+            }
+            setIsInWatchlist(!isInWatchlist);
+        } catch (err) {
+            console.error("Watchlist operation failed:", err);
+            setError('Failed to update watchlist');
+        } finally {
+            setWatchlistLoading(false);
+        }
     };
 
     const addReview = async (e) => {
@@ -160,6 +196,19 @@ const MovieDetails = () => {
                                 ))}
                             </div>
                         </div>
+                        
+                        {/* Watchlist Button */}
+                        <button 
+                            className={`watchlist-button ${isInWatchlist ? 'in-watchlist' : ''}`}
+                            onClick={toggleWatchlist}
+                            disabled={watchlistLoading}
+                        >
+                            <FontAwesomeIcon icon={faBookmark} />
+                            <span>
+                                {watchlistLoading ? 'Processing...' : 
+                                 isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                            </span>
+                        </button>
                     </div>
                 </div>
 

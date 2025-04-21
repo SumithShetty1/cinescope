@@ -1,13 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './WatchList.css';
 import { useNavigate } from 'react-router-dom';
+import { useUser, useSession } from "@descope/react-sdk";
+import api from '../../api/axiosConfig';
 
-const WatchList = ({ movies }) => {
+const WatchList = () => {
   const navigate = useNavigate();
-  
-  // Assuming 'watchlisted' is a boolean property on each movie
-  // const watchListMovies = (movies || []).filter((movie) => movie.watchlisted);
-  const watchListMovies = (movies || []);
+  const { isAuthenticated } = useSession();
+  const { user } = useUser();
+  const [watchListMovies, setWatchListMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (isAuthenticated && user?.email) {
+      const fetchWatchlist = async () => {
+        try {
+          const response = await api.get(`/api/v1/watchlists/${user.email}`);
+
+          if (response.data?.movies?.length > 0) {
+            setWatchListMovies(response.data.movies.slice(0, 16));
+          } else {
+            setWatchListMovies([]);
+          }
+        } catch (err) {
+          console.error("Error fetching watchlist:", err);
+          setError('Failed to load watchlist');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchWatchlist();
+    } else {
+      setIsLoading(false);
+    }
+  }, [isAuthenticated, user?.email]);
+
+  if (!isAuthenticated || isLoading) {
+    return null; // Don't show section if not authenticated or loading
+  }
+
+  if (error) {
+    return (
+      <div className="watchlist-section">
+        <div className="error-message">
+          {error}
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (watchListMovies.length === 0) {
+    return null; // Don't show section if no movies in watchlist
+  }
 
   return (
     <div className="watchlist-section">
@@ -18,7 +64,7 @@ const WatchList = ({ movies }) => {
         </button>
       </div>
       <div className="watchlist-movies">
-        {watchListMovies.slice(0, 16).map((movie) => (
+        {watchListMovies.map((movie) => (
           <div
             key={movie.imdbId}
             className="watchlist-movie-poster"
@@ -27,7 +73,7 @@ const WatchList = ({ movies }) => {
             <div className="poster-container">
               <img src={movie.poster} alt={movie.title} />
               <div className="movie-rating">
-                {movie.rating || 'N/A'}
+                {movie?.rating || 'N/A'}
               </div>
             </div>
             <p>{movie.title}</p>
