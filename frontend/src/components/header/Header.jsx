@@ -61,10 +61,10 @@ const Header = () => {
                                 <FontAwesomeIcon icon={faHouse} className="me-1" />
                                 Home
                             </NavLink>
-                            <NavLink className="nav-link" to="/watchlist">
+                            {/* <NavLink className="nav-link" to="/watchlist">
                                 <FontAwesomeIcon icon={faBookmark} className="me-1" />
                                 Watch List
-                            </NavLink>
+                            </NavLink> */}
                             {userRole === 'Admin' && (
                                 <NavLink className="nav-link" to="/manage">
                                     <FontAwesomeIcon icon={faEdit} className="me-1" />

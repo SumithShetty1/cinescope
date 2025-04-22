@@ -29,7 +29,7 @@ function App() {
                     <Route path="/manage" element={<ManageMoviesPage />} />
                     <Route path="/top-rated" element={<HighRatedPage />} />
                     <Route path="/newly-added" element={<NewlyAddedPage />} />
-                    <Route path="/watchlist" element={<WatchListPage />} />
+                    {/* <Route path="/watchlist" element={<WatchListPage />} /> */}
                     <Route path="/genre/:genreName" element={<GenrePage />} />
                     <Route path="/trailer/:ytTrailerId" element={<Trailer />} />
                     <Route path="/details/:movieId" element={<MovieDetails />} />
