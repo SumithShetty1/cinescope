@@ -13,7 +13,7 @@ const Home = () => {
       <Hero />
       <HighRated />
       <NewlyAdded />
-      {/* {isAuthenticated && <WatchList />} */}
+      {isAuthenticated && <WatchList />}
       <Genre />
     </>
   )
