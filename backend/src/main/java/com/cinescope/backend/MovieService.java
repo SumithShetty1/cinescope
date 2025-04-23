@@ -43,8 +43,42 @@ public class MovieService {
         return limit > 0 ? movies.stream().limit(limit).collect(Collectors.toList()) : movies;
     }
 
-    public Movie saveMovie(Movie movie) {
-        System.out.println("Movie Saved");
-        return movie;
+    public Movie addMovie(Movie movie) {
+        movie.setRating(0.0);
+        movie.setReviewIds(List.of());
+        return movieRepository.save(movie);
+    }
+
+    public boolean deleteMovieByImdbId(String imdbId) {
+        Optional<Movie> movieOpt = movieRepository.findMovieByImdbId(imdbId);
+        if (movieOpt.isPresent()) {
+            movieRepository.delete(movieOpt.get());
+            return true;
+        }
+        return false;
+    }
+
+    public Optional<Movie> updateMovie(String imdbId, Movie updatedMovie) {
+        Optional<Movie> existingOpt = movieRepository.findMovieByImdbId(imdbId);
+
+        if (existingOpt.isPresent()) {
+            Movie existing = existingOpt.get();
+
+            existing.setTitle(updatedMovie.getTitle());
+            existing.setDescription(updatedMovie.getDescription());
+            existing.setDuration(updatedMovie.getDuration());
+            existing.setDirectors(updatedMovie.getDirectors());
+            existing.setWriters(updatedMovie.getWriters());
+            existing.setStars(updatedMovie.getStars());
+            existing.setReleaseDate(updatedMovie.getReleaseDate());
+            existing.setTrailerLink(updatedMovie.getTrailerLink());
+            existing.setPoster(updatedMovie.getPoster());
+            existing.setGenres(updatedMovie.getGenres());
+            existing.setBackdrops(updatedMovie.getBackdrops());
+
+            return Optional.of(movieRepository.save(existing));
+        }
+
+        return Optional.empty();
     }
 }

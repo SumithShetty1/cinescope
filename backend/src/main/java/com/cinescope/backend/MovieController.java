@@ -51,9 +51,25 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
-        Movie savedMovie = movieService.saveMovie(movie);
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        Movie savedMovie = movieService.addMovie(movie);
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{imdbId}")
+    public ResponseEntity<String> deleteMovie(@PathVariable String imdbId) {
+        boolean deleted = movieService.deleteMovieByImdbId(imdbId);
+        if (deleted) {
+            return ResponseEntity.ok("Movie deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found");
+        }
+    }
+
+    @PutMapping("/{imdbId}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable String imdbId, @RequestBody Movie updatedMovie) {
+        Optional<Movie> movieOpt = movieService.updateMovie(imdbId, updatedMovie);
+        return movieOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 }

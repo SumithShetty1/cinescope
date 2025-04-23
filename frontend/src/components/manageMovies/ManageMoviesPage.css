@@ -244,6 +244,34 @@
     filter: invert(1);
 }
 
+/* Toast Notification Styles */
+.toast-container-custom {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.custom-toast {
+    min-width: 250px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-toast.bg-success {
+    background-color: #28a745 !important;
+}
+
+.custom-toast.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+/* Ensure backdrop section stays below the toast */
+.manage-form-section:last-child {
+    position: relative;
+    z-index: 1;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .manage-form-columns {
