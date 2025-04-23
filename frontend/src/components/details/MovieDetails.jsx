@@ -1,23 +1,29 @@
-import { useEffect, useRef, useState } from 'react';
-import api from '../../api/axiosConfig';
-import { useParams } from 'react-router-dom';
-import ReactPlayer from 'react-player';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEdit, faTrash, faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { useSession, useUser } from '@descope/react-sdk';
-import './MovieDetails.css';
+import { useEffect, useRef, useState } from "react";
+import api from "../../api/axiosConfig";
+import { useParams } from "react-router-dom";
+import ReactPlayer from "react-player";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faUser,
+    faEdit,
+    faTrash,
+    faStar,
+    faBookmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { useSession, useUser } from "@descope/react-sdk";
+import "./MovieDetails.css";
 
 const MovieDetails = () => {
     const revText = useRef();
     const { movieId } = useParams();
     const { isAuthenticated } = useSession();
-    const {user} = useUser();
+    const { user } = useUser();
     const [movie, setMovie] = useState();
     const [reviews, setReviews] = useState([]);
     const [editingReviewId, setEditingReviewId] = useState(null);
     const [rating, setRating] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
     const [isInWatchlist, setIsInWatchlist] = useState(false);
     const [watchlistLoading, setWatchlistLoading] = useState(false);
 
@@ -28,64 +34,66 @@ const MovieDetails = () => {
             setReviews(response.data.reviewIds || []);
         } catch (err) {
             console.error("Failed to fetch movie:", err);
-            setError('Failed to load movie details');
+            setError("Failed to load movie details");
         }
     };
 
-    // const checkWatchlistStatus = async () => {
-    //     if (!isAuthenticated) return;
-        
-    //     try {
-    //         const response = await api.get(`/api/v1/watchlists/check/${movieId}`);
-    //         setIsInWatchlist(response.data.isInWatchlist);
-    //     } catch (err) {
-    //         console.error("Failed to check watchlist:", err);
-    //     }
-    // };
+    const checkWatchlistStatus = async () => {
+        if (!isAuthenticated) return;
+
+        try {
+            const response = await api.get(
+                `/api/v1/watchlists/check/${movieId}`
+            );
+            setIsInWatchlist(response.data.isInWatchlist);
+        } catch (err) {
+            console.error("Failed to check watchlist:", err);
+        }
+    };
 
     useEffect(() => {
         getMovieData(movieId);
-        // checkWatchlistStatus();
+        checkWatchlistStatus();
     }, [movieId, isAuthenticated]);
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
     };
 
-    // const toggleWatchlist = async () => {
-    //     if (!isAuthenticated) {
-    //         setError('Please login to manage your watchlist');
-    //         return;
-    //     }
+    const toggleWatchlist = async () => {
+        if (!isAuthenticated) {
+            setError("Please login to manage your watchlist");
+            return;
+        }
 
-    //     setWatchlistLoading(true);
-    //     try {
-    //         if (isInWatchlist) {
-    //             await api.delete(`/api/v1/watchlist/${movieId}`);
-    //         } else {
-    //             await api.post('/api/v1/watchlist', { imdbId: movieId });
-    //         }
-    //         setIsInWatchlist(!isInWatchlist);
-    //     } catch (err) {
-    //         console.error("Watchlist operation failed:", err);
-    //         setError('Failed to update watchlist');
-    //     } finally {
-    //         setWatchlistLoading(false);
-    //     }
-    // };
+        setWatchlistLoading(true);
+        try {
+            if (isInWatchlist) {
+                await api.delete(`/api/v1/watchlist/${movieId}`);
+            } else {
+                await api.post("/api/v1/watchlist", { imdbId: movieId });
+            }
+            setIsInWatchlist(!isInWatchlist);
+        } catch (err) {
+            console.error("Watchlist operation failed:", err);
+            setError("Failed to update watchlist");
+        } finally {
+            setWatchlistLoading(false);
+        }
+    };
 
     const addReview = async (e) => {
         e.preventDefault();
-        setError('');
+        setError("");
 
         if (!isAuthenticated) {
-            setError('Please login to submit a review');
+            setError("Please login to submit a review");
             return;
         }
 
         const reviewText = revText.current.value.trim();
         if (!reviewText || rating === 0) {
-            setError('Please provide both a review and rating');
+            setError("Please provide both a review and rating");
             return;
         }
 
@@ -96,52 +104,63 @@ const MovieDetails = () => {
                 reviewBody: reviewText,
                 imdbId: movieId,
                 rating: rating,
-                reviewer: user?.name || 'Anonymous',
-                email: user?.email || 'Anonymous',
-                timestamp: new Date().toISOString()
+                reviewer: user?.name || "Anonymous",
+                email: user?.email || "Anonymous",
+                timestamp: new Date().toISOString(),
             };
 
             if (editingReviewId) {
-                const response = await api.put(`/api/v1/reviews/${editingReviewId}`, reviewData);
-                setReviews(reviews.map(r =>
-                    r._id === editingReviewId ? {
-                        ...r,
-                        body: response.data.body,
-                        rating: response.data.rating
-                    } : r
-                ));
+                const response = await api.put(
+                    `/api/v1/reviews/${editingReviewId}`,
+                    reviewData
+                );
+                setReviews(
+                    reviews.map((r) =>
+                        r._id === editingReviewId
+                            ? {
+                                  ...r,
+                                  body: response.data.body,
+                                  rating: response.data.rating,
+                              }
+                            : r
+                    )
+                );
                 setEditingReviewId(null);
             } else {
                 const response = await api.post("/api/v1/reviews", reviewData);
-                setReviews([{
-                    _id: response.data.id,
-                    body: response.data.body,
-                    reviewer: response.data.reviewer,
-                    email: response.data.email,
-                    rating: response.data.rating,
-                    createdAt: response.data.timestamp
-                }, ...reviews]);
+                setReviews([
+                    {
+                        _id: response.data.id,
+                        body: response.data.body,
+                        reviewer: response.data.reviewer,
+                        email: response.data.email,
+                        rating: response.data.rating,
+                        createdAt: response.data.timestamp,
+                    },
+                    ...reviews,
+                ]);
             }
 
             revText.current.value = "";
             setRating(0);
         } catch (err) {
             console.error("Review submission failed:", err);
-            setError(err.response?.data?.message || 'Failed to submit review');
+            setError(err.response?.data?.message || "Failed to submit review");
         } finally {
             setIsLoading(false);
         }
     };
 
     const deleteReview = async (reviewId) => {
-        if (!window.confirm('Are you sure you want to delete this review?')) return;
+        if (!window.confirm("Are you sure you want to delete this review?"))
+            return;
 
         try {
             await api.delete(`/api/v1/reviews/${reviewId}`);
-            setReviews(reviews.filter(r => r._id !== reviewId));
+            setReviews(reviews.filter((r) => r._id !== reviewId));
         } catch (err) {
             console.error("Failed to delete review:", err);
-            setError('Failed to delete review');
+            setError("Failed to delete review");
         }
     };
 
@@ -149,7 +168,7 @@ const MovieDetails = () => {
         revText.current.value = review.body;
         setRating(review.rating);
         setEditingReviewId(review._id);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const cancelEditing = () => {
@@ -168,7 +187,7 @@ const MovieDetails = () => {
             <div className="review-movie-header">
                 <h1>{movie?.title}</h1>
                 <div className="review-movie-meta">
-                    <span>{movie?.releaseDate?.split('-')[0]}</span>
+                    <span>{movie?.releaseDate?.split("-")[0]}</span>
                     <span>•</span>
                     <span>{movie?.duration}</span>
                 </div>
@@ -178,7 +197,11 @@ const MovieDetails = () => {
             <div className="review-movie-content">
                 {/* Left Column - Poster and Rating */}
                 <div className="review-movie-poster-column">
-                    <img src={movie?.poster} alt={movie?.title} className="review-movie-poster" />
+                    <img
+                        src={movie?.poster}
+                        alt={movie?.title}
+                        className="review-movie-poster"
+                    />
 
                     <div className="rating-section">
                         <div className="rating">
@@ -192,24 +215,34 @@ const MovieDetails = () => {
                                     <FontAwesomeIcon
                                         key={star}
                                         icon={faStar}
-                                        className={`star ${star <= Math.round(movie?.rating || 0) ? 'filled' : ''}`}
+                                        className={`star ${
+                                            star <=
+                                            Math.round(movie?.rating || 0)
+                                                ? "filled"
+                                                : ""
+                                        }`}
                                     />
                                 ))}
                             </div>
                         </div>
-                        
+
                         {/* Watchlist Button */}
-                        {/* <button 
-                            className={`watchlist-button ${isInWatchlist ? 'in-watchlist' : ''}`}
+                        <button
+                            className={`watchlist-button ${
+                                isInWatchlist ? "in-watchlist" : ""
+                            }`}
                             onClick={toggleWatchlist}
                             disabled={watchlistLoading}
                         >
                             <FontAwesomeIcon icon={faBookmark} />
                             <span>
-                                {watchlistLoading ? 'Processing...' : 
-                                 isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                                {watchlistLoading
+                                    ? "Processing..."
+                                    : isInWatchlist
+                                    ? "In Watchlist"
+                                    : "Add to Watchlist"}
                             </span>
-                        </button> */}
+                        </button>
                     </div>
                 </div>
 
@@ -223,8 +256,8 @@ const MovieDetails = () => {
                                     controls={true}
                                     playing={true}
                                     url={movie.trailerLink}
-                                    width='100%'
-                                    height='450px'
+                                    width="100%"
+                                    height="450px"
                                 />
                             </div>
                         </div>
@@ -233,7 +266,9 @@ const MovieDetails = () => {
                     {/* Genres */}
                     <div className="review-genres-section">
                         {movie?.genres?.map((genre, index) => (
-                            <span key={index} className="genre-tag">{genre}</span>
+                            <span key={index} className="genre-tag">
+                                {genre}
+                            </span>
                         ))}
                     </div>
 
@@ -247,19 +282,25 @@ const MovieDetails = () => {
                         {movie?.directors?.length > 0 && (
                             <div className="crew-item">
                                 <span className="crew-role">Directors</span>
-                                <span className="crew-name">{movie.directors.join(', ')}</span>
+                                <span className="crew-name">
+                                    {movie.directors.join(", ")}
+                                </span>
                             </div>
                         )}
                         {movie?.writers?.length > 0 && (
                             <div className="crew-item">
                                 <span className="crew-role">Writers</span>
-                                <span className="crew-name">{movie.writers.join(', ')}</span>
+                                <span className="crew-name">
+                                    {movie.writers.join(", ")}
+                                </span>
                             </div>
                         )}
                         {movie?.stars?.length > 0 && (
                             <div className="crew-item">
                                 <span className="crew-role">Stars</span>
-                                <span className="crew-name">{movie.stars.join(', ')}</span>
+                                <span className="crew-name">
+                                    {movie.stars.join(", ")}
+                                </span>
                             </div>
                         )}
                     </div>
@@ -279,15 +320,25 @@ const MovieDetails = () => {
                                 <div className="review-form-rating">
                                     <span>Your Rating: </span>
                                     <div className="star-rating">
-                                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((star) => (
-                                            <FontAwesomeIcon
-                                                key={star}
-                                                icon={faStar}
-                                                className={`star ${star <= rating ? 'filled' : ''}`}
-                                                onClick={() => handleRatingChange(star)}
-                                            />
-                                        ))}
-                                        <span className="rating-display">{rating}/10</span>
+                                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
+                                            (star) => (
+                                                <FontAwesomeIcon
+                                                    key={star}
+                                                    icon={faStar}
+                                                    className={`star ${
+                                                        star <= rating
+                                                            ? "filled"
+                                                            : ""
+                                                    }`}
+                                                    onClick={() =>
+                                                        handleRatingChange(star)
+                                                    }
+                                                />
+                                            )
+                                        )}
+                                        <span className="rating-display">
+                                            {rating}/10
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="review-form-actions">
@@ -296,13 +347,11 @@ const MovieDetails = () => {
                                         className="submit-button"
                                         disabled={isLoading}
                                     >
-                                        {isLoading ? (
-                                            'Processing...'
-                                        ) : editingReviewId ? (
-                                            'Update Review'
-                                        ) : (
-                                            'Submit Review'
-                                        )}
+                                        {isLoading
+                                            ? "Processing..."
+                                            : editingReviewId
+                                            ? "Update Review"
+                                            : "Submit Review"}
                                     </button>
                                     {editingReviewId && (
                                         <button
@@ -321,7 +370,9 @@ const MovieDetails = () => {
                                 <p>Please login to leave a review</p>
                                 <button
                                     className="login-button"
-                                    onClick={() => window.location.href = '/login'}
+                                    onClick={() =>
+                                        (window.location.href = "/login")
+                                    }
                                 >
                                     Login
                                 </button>
@@ -334,36 +385,60 @@ const MovieDetails = () => {
                         <div className="reviews-list">
                             {reviews.length > 0 ? (
                                 reviews.map((review) => (
-                                    <div key={review._id} className="review-item">
+                                    <div
+                                        key={review._id}
+                                        className="review-item"
+                                    >
                                         <div className="review-header">
                                             <div className="user-info">
-                                                <FontAwesomeIcon icon={faUser} className="user-icon" />
+                                                <FontAwesomeIcon
+                                                    icon={faUser}
+                                                    className="user-icon"
+                                                />
                                                 <div>
-                                                    <span className="user-name">{review.reviewer || 'Anonymous'}</span>
+                                                    <span className="user-name">
+                                                        {review.reviewer ||
+                                                            "Anonymous"}
+                                                    </span>
                                                     <span className="review-date">
-                                                        {new Date(review.createdAt).toLocaleDateString('en-US', {
-                                                            year: 'numeric',
-                                                            month: 'long',
-                                                            day: 'numeric'
-                                                        })}
+                                                        {new Date(
+                                                            review.createdAt
+                                                        ).toLocaleDateString(
+                                                            "en-US",
+                                                            {
+                                                                year: "numeric",
+                                                                month: "long",
+                                                                day: "numeric",
+                                                            }
+                                                        )}
                                                     </span>
                                                 </div>
                                             </div>
                                             {canEditReview(review.email) && (
                                                 <div className="review-actions">
                                                     <button
-                                                        onClick={() => startEditing(review)}
+                                                        onClick={() =>
+                                                            startEditing(review)
+                                                        }
                                                         className="edit-button"
                                                         title="Edit review"
                                                     >
-                                                        <FontAwesomeIcon icon={faEdit} />
+                                                        <FontAwesomeIcon
+                                                            icon={faEdit}
+                                                        />
                                                     </button>
                                                     <button
-                                                        onClick={() => deleteReview(review._id)}
+                                                        onClick={() =>
+                                                            deleteReview(
+                                                                review._id
+                                                            )
+                                                        }
                                                         className="delete-button"
                                                         title="Delete review"
                                                     >
-                                                        <FontAwesomeIcon icon={faTrash} />
+                                                        <FontAwesomeIcon
+                                                            icon={faTrash}
+                                                        />
                                                     </button>
                                                 </div>
                                             )}
@@ -373,15 +448,26 @@ const MovieDetails = () => {
                                                 <FontAwesomeIcon
                                                     key={i}
                                                     icon={faStar}
-                                                    className={`star ${i < Math.round(review.rating) ? 'filled' : ''}`}
+                                                    className={`star ${
+                                                        i <
+                                                        Math.round(
+                                                            review.rating
+                                                        )
+                                                            ? "filled"
+                                                            : ""
+                                                    }`}
                                                 />
                                             ))}
                                         </div>
-                                        <p className="review-text">{review.body}</p>
+                                        <p className="review-text">
+                                            {review.body}
+                                        </p>
                                     </div>
                                 ))
                             ) : (
-                                <p className="no-reviews">No reviews yet. Be the first to review!</p>
+                                <p className="no-reviews">
+                                    No reviews yet. Be the first to review!
+                                </p>
                             )}
                         </div>
                     </div>

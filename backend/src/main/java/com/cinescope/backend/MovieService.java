@@ -42,4 +42,9 @@ public class MovieService {
         List<Movie> movies = movieRepository.findByGenreIgnoreCaseOrderByRatingDesc(genre);
         return limit > 0 ? movies.stream().limit(limit).collect(Collectors.toList()) : movies;
     }
+
+    public Movie saveMovie(Movie movie) {
+        System.out.println("Movie Saved");
+        return movie;
+    }
 }
