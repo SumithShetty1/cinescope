@@ -11,7 +11,7 @@ const MovieDetails = () => {
     const revText = useRef();
     const { movieId } = useParams();
     const { isAuthenticated } = useSession();
-    const {user} = useUser();
+    const { user } = useUser();
     const [movie, setMovie] = useState();
     const [reviews, setReviews] = useState([]);
     const [editingReviewId, setEditingReviewId] = useState(null);
@@ -32,47 +32,52 @@ const MovieDetails = () => {
         }
     };
 
-    // const checkWatchlistStatus = async () => {
-    //     if (!isAuthenticated) return;
-        
-    //     try {
-    //         const response = await api.get(`/api/v1/watchlists/check/${movieId}`);
-    //         setIsInWatchlist(response.data.isInWatchlist);
-    //     } catch (err) {
-    //         console.error("Failed to check watchlist:", err);
-    //     }
-    // };
+    const checkWatchlistStatus = async () => {
+        if (!isAuthenticated) return;
+
+        try {
+            const response = await api.get(`/api/v1/watchlists/check/${movieId}`);
+            setIsInWatchlist(response.data.isInWatchlist);
+        } catch (err) {
+            console.error("Failed to check watchlist:", err);
+        }
+    };
 
     useEffect(() => {
         getMovieData(movieId);
-        // checkWatchlistStatus();
+        checkWatchlistStatus();
     }, [movieId, isAuthenticated]);
 
     const handleRatingChange = (newRating) => {
-        setRating(newRating);
+        if (rating == newRating) {
+            setRating(0);
+        }
+        else {
+            setRating(newRating);
+        }
     };
 
-    // const toggleWatchlist = async () => {
-    //     if (!isAuthenticated) {
-    //         setError('Please login to manage your watchlist');
-    //         return;
-    //     }
+    const toggleWatchlist = async () => {
+        if (!isAuthenticated) {
+            setError('Please login to manage your watchlist');
+            return;
+        }
 
-    //     setWatchlistLoading(true);
-    //     try {
-    //         if (isInWatchlist) {
-    //             await api.delete(`/api/v1/watchlist/${movieId}`);
-    //         } else {
-    //             await api.post('/api/v1/watchlist', { imdbId: movieId });
-    //         }
-    //         setIsInWatchlist(!isInWatchlist);
-    //     } catch (err) {
-    //         console.error("Watchlist operation failed:", err);
-    //         setError('Failed to update watchlist');
-    //     } finally {
-    //         setWatchlistLoading(false);
-    //     }
-    // };
+        setWatchlistLoading(true);
+        try {
+            if (isInWatchlist) {
+                await api.delete(`/api/v1/watchlist/${movieId}`);
+            } else {
+                await api.post('/api/v1/watchlist', { imdbId: movieId });
+            }
+            setIsInWatchlist(!isInWatchlist);
+        } catch (err) {
+            console.error("Watchlist operation failed:", err);
+            setError('Failed to update watchlist');
+        } finally {
+            setWatchlistLoading(false);
+        }
+    };
 
     const addReview = async (e) => {
         e.preventDefault();
@@ -137,7 +142,7 @@ const MovieDetails = () => {
         if (!window.confirm('Are you sure you want to delete this review?')) return;
 
         try {
-            await api.delete(`/api/v1/reviews/${reviewId}`);
+            await api.delete(`/api/v1/reviews/movies/${movieId}/reviews/${reviewId}`);
             setReviews(reviews.filter(r => r._id !== reviewId));
         } catch (err) {
             console.error("Failed to delete review:", err);
@@ -197,19 +202,19 @@ const MovieDetails = () => {
                                 ))}
                             </div>
                         </div>
-                        
+
                         {/* Watchlist Button */}
-                        {/* <button 
+                        <button
                             className={`watchlist-button ${isInWatchlist ? 'in-watchlist' : ''}`}
                             onClick={toggleWatchlist}
                             disabled={watchlistLoading}
                         >
                             <FontAwesomeIcon icon={faBookmark} />
                             <span>
-                                {watchlistLoading ? 'Processing...' : 
-                                 isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                                {watchlistLoading ? 'Processing...' :
+                                    isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
                             </span>
-                        </button> */}
+                        </button>
                     </div>
                 </div>
 

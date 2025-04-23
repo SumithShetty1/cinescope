@@ -4,6 +4,8 @@ import api from '../../api/axiosConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit, faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
 
 const ManageMoviesPage = () => {
     const [movies, setMovies] = useState([]);
@@ -12,18 +14,26 @@ const ManageMoviesPage = () => {
     const [formData, setFormData] = useState({
         imdbId: '',
         title: '',
-        releaseDate: '',
-        trailerLink: '',
-        genres: [''],
-        poster: '',
-        backdrops: [''],
         description: '',
         duration: '',
         directors: [''],
         writers: [''],
-        stars: ['']
+        stars: [''],
+        releaseDate: '',
+        trailerLink: '',
+        genres: [''],
+        poster: '',
+        backdrops: ['']
     });
     const [isEditing, setIsEditing] = useState(false);
+    const [toast, setToast] = useState({ show: false, message: '', variant: 'success' });
+
+    const showToast = (message, variant = 'success') => {
+        setToast({ show: true, message, variant });
+        setTimeout(() => {
+            setToast({ show: false, message: '', variant });
+        }, 3000);
+    };
 
     useEffect(() => {
         fetchMovies();
@@ -68,35 +78,39 @@ const ManageMoviesPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
             if (isEditing) {
                 await api.put(`/api/v1/movies/${formData.imdbId}`, formData);
+                showToast("Movie updated successfully", "info");
             } else {
                 await api.post('/api/v1/movies', formData);
+                showToast("Movie created successfully", "success");
             }
             setFormData({
                 imdbId: '',
                 title: '',
-                releaseDate: '',
-                trailerLink: '',
-                genres: [''],
-                poster: '',
-                backdrops: [''],
                 description: '',
                 duration: '',
                 directors: [''],
                 writers: [''],
-                stars: ['']
+                stars: [''],
+                releaseDate: '',
+                trailerLink: '',
+                genres: [''],
+                poster: '',
+                backdrops: ['']
             });
             setIsEditing(false);
             fetchMovies();
         } catch (err) {
             console.error('Error saving movie:', err);
+            showToast("Something went wrong", "danger");
         }
     };
 
     const handleEdit = (movie) => {
-        setFormData({ 
+        setFormData({
             ...movie,
             directors: movie.directors || [''],
             writers: movie.writers || [''],
@@ -113,8 +127,10 @@ const ManageMoviesPage = () => {
         try {
             await api.delete(`/api/v1/movies/${id}`);
             fetchMovies();
+            showToast("Movie deleted successfully", "danger");
         } catch (err) {
             console.error('Error deleting movie:', err);
+            showToast("Failed to delete movie", "danger");
         }
     };
 
@@ -124,12 +140,35 @@ const ManageMoviesPage = () => {
                 Manage Movies
             </h2>
 
+            {/* Toast Container positioned at top-right */}
+            <ToastContainer 
+                position="top-end"
+                className="p-3 toast-container-custom"
+                style={{ 
+                    position: 'fixed',
+                    top: '20px',
+                    right: '20px',
+                    zIndex: 9999
+                }}
+            >
+                <Toast 
+                    show={toast.show} 
+                    onClose={() => setToast({...toast, show: false})}
+                    delay={3000} 
+                    autohide
+                    bg={toast.variant}
+                    className="custom-toast"
+                >
+                    <Toast.Body className="text-white">{toast.message}</Toast.Body>
+                </Toast>
+            </ToastContainer>
+
             <div className="manage-content">
                 <form onSubmit={handleSubmit} className="manage-form">
                     <div className="manage-form-columns">
                         <div className="manage-form-section">
                             <h3 className="manage-section-title">Movie Details</h3>
-                            
+
                             <div className="manage-form-group">
                                 <label className="manage-label">IMDB ID</label>
                                 <input
@@ -152,7 +191,7 @@ const ManageMoviesPage = () => {
                                     required
                                 />
                             </div>
-                            
+
                             <div className="manage-form-group">
                                 <label className="manage-label">Description</label>
                                 <textarea
@@ -176,7 +215,7 @@ const ManageMoviesPage = () => {
                                     required
                                 />
                             </div>
-                            
+
                             <div className="manage-form-group">
                                 <label className="manage-label">Release Date</label>
                                 <input
@@ -242,7 +281,7 @@ const ManageMoviesPage = () => {
                                 Add Genre
                             </Button>
 
-                            <h3 className="manage-section-title" style={{marginTop: '2rem'}}>Directors</h3>
+                            <h3 className="manage-section-title" style={{ marginTop: '2rem' }}>Directors</h3>
                             {formData.directors.map((director, index) => (
                                 <div className="manage-array-group" key={index}>
                                     <input
@@ -271,7 +310,7 @@ const ManageMoviesPage = () => {
                                 Add Director
                             </Button>
 
-                            <h3 className="manage-section-title" style={{marginTop: '2rem'}}>Writers</h3>
+                            <h3 className="manage-section-title" style={{ marginTop: '2rem' }}>Writers</h3>
                             {formData.writers.map((writer, index) => (
                                 <div className="manage-array-group" key={index}>
                                     <input
@@ -300,7 +339,7 @@ const ManageMoviesPage = () => {
                                 Add Writer
                             </Button>
 
-                            <h3 className="manage-section-title" style={{marginTop: '2rem'}}>Stars</h3>
+                            <h3 className="manage-section-title" style={{ marginTop: '2rem' }}>Stars</h3>
                             {formData.stars.map((star, index) => (
                                 <div className="manage-array-group" key={index}>
                                     <input
@@ -361,7 +400,7 @@ const ManageMoviesPage = () => {
                             </Button>
                         </div>
                     </div>
-                    
+
                     <div className="manage-form-actions">
                         <Button
                             variant={isEditing ? "warning" : "success"}
