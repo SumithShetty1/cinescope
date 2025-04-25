@@ -82,7 +82,7 @@ const ManageMoviesPage = () => {
         try {
             if (isEditing) {
                 await api.put(`/api/v1/movies/${formData.imdbId}`, formData);
-                showToast("Movie updated successfully", "info");
+                showToast("Movie updated successfully", "success");
             } else {
                 await api.post('/api/v1/movies', formData);
                 showToast("Movie created successfully", "success");
@@ -127,7 +127,7 @@ const ManageMoviesPage = () => {
         try {
             await api.delete(`/api/v1/movies/${id}`);
             fetchMovies();
-            showToast("Movie deleted successfully", "danger");
+            showToast("Movie deleted successfully", "success");
         } catch (err) {
             console.error('Error deleting movie:', err);
             showToast("Failed to delete movie", "danger");

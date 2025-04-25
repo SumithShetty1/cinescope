@@ -246,6 +246,7 @@
 
 /* Toast Notification Styles */
 .toast-container-custom {
+    font-weight: bold;
     position: fixed;
     top: 20px;
     right: 20px;
