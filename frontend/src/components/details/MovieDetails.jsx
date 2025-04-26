@@ -67,7 +67,7 @@ const MovieDetails = () => {
         } else {
             setIsInWatchlist(false); // Ensure watchlist state is reset if user logs out
         }
-    }, [movieId, isAuthenticated]);
+    }, [movieId, isAuthenticated, user?.email]);
 
     const handleRatingChange = (newRating) => {
         setRating(rating === newRating ? 0 : newRating);
