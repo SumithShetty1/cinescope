@@ -32,7 +32,7 @@ const MovieDetails = () => {
 
     const getMovieData = async (id) => {
         try {
-            const response = await api.get(`/api/v1/movies/${id}`);
+            const response = await api.get(`/movies/${id}`);
             setMovie(response.data);
             // Sort reviews by lastModifiedAt in descending order (newest first)
             const sortedReviews = [...(response.data.reviewIds || [])].sort((a, b) =>
@@ -51,7 +51,7 @@ const MovieDetails = () => {
             return;
         }
         try {
-            const response = await api.get(`/api/v1/watchlists/check/${movieId}?email=${user.email}`);
+            const response = await api.get(`/watchlist/check/${movieId}?email=${user.email}`);
             setIsInWatchlist(response.data.isInWatchlist);
         } catch (err) {
             console.error("Failed to check watchlist:", err);
@@ -81,10 +81,10 @@ const MovieDetails = () => {
         setWatchlistLoading(true);
         try {
             if (isInWatchlist) {
-                await api.delete(`/api/v1/watchlists/remove?email=${user.email}&imdbId=${movieId}`);
+                await api.delete(`/watchlist/remove?email=${user.email}&imdbId=${movieId}`);
                 showToast('Removed from watchlist', 'success');
             } else {
-                await api.post(`/api/v1/watchlists/add?email=${user.email}&imdbId=${movieId}`);
+                await api.post(`/watchlist/add?email=${user.email}&imdbId=${movieId}`);
                 setIsInWatchlist(true);
                 showToast('Added to watchlist', 'success');
             }
@@ -124,8 +124,8 @@ const MovieDetails = () => {
             };
 
             if (editingReviewUid) {
-                await api.put(`/api/v1/reviews/${editingReviewUid}`, reviewData);
-                const updatedMovie = await api.get(`/api/v1/movies/${movieId}`);
+                await api.put(`/reviews/${editingReviewUid}`, reviewData);
+                const updatedMovie = await api.get(`/movies/${movieId}`);
                 setMovie(updatedMovie.data);
                 const sortedReviews = [...(updatedMovie.data.reviewIds || [])].sort((a, b) =>
                     new Date(b.lastModifiedAt) - new Date(a.lastModifiedAt)
@@ -134,8 +134,8 @@ const MovieDetails = () => {
                 setEditingReviewUid(null);
                 showToast('Review updated successfully', 'success');
             } else {
-                await api.post("/api/v1/reviews", reviewData);
-                const updatedMovie = await api.get(`/api/v1/movies/${movieId}`);
+                await api.post("/reviews", reviewData);
+                const updatedMovie = await api.get(`/movies/${movieId}`);
                 setMovie(updatedMovie.data);
                 const sortedReviews = [...(updatedMovie.data.reviewIds || [])].sort((a, b) =>
                     new Date(b.lastModifiedAt) - new Date(a.lastModifiedAt)
@@ -156,8 +156,8 @@ const MovieDetails = () => {
 
     const deleteReview = async (reviewUid) => {
         try {
-            await api.delete(`/api/v1/reviews/reviews/${reviewUid}?imdbId=${movieId}`);
-            const updatedMovie = await api.get(`/api/v1/movies/${movieId}`);
+            await api.delete(`/reviews/${reviewUid}?imdbId=${movieId}`);
+            const updatedMovie = await api.get(`/movies/${movieId}`);
             setMovie(updatedMovie.data);
             const sortedReviews = [...(updatedMovie.data.reviewIds || [])].sort((a, b) =>
                 new Date(b.lastModifiedAt) - new Date(a.lastModifiedAt)

@@ -32,13 +32,10 @@ const WatchListPage = () => {
         setIsLoading(true);
         setError('');
         try {
-            // 1. Get the user's watchlist with movie references
-            const watchlistResponse = await api.get(`/api/v1/watchlists/${user.email}`);
+            const watchlistResponse = await api.get(`/watchlist/${user.email}`);
             const watchlist = watchlistResponse.data;
             
             if (watchlist && watchlist.movies && watchlist.movies.length > 0) {
-                // 2. The @DocumentReference should have already resolved the movie documents
-                // So we can directly use the movie objects
                 setWatchlistMovies(watchlist.movies);
                 setFilteredMovies(watchlist.movies);
                 setHasWatchlist(true);

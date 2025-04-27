@@ -21,7 +21,7 @@ const HighRatedPage = () => {
 
         const fetchTopRatedMovies = async () => {
             try {
-                const response = await api.get("/api/v1/movies/top-rated/0"); // 0 means no limit
+                const response = await api.get("/movies/top-rated/0"); // 0 means no limit
                 const movies = response.data;
                 setTopRatedMovies(movies);
                 setFilteredMovies(movies);

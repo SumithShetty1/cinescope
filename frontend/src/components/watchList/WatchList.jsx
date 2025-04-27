@@ -17,7 +17,7 @@ const WatchList = () => {
     if (isAuthenticated && user?.email) {
       const fetchWatchlist = async () => {
         try {
-          const response = await api.get(`/api/v1/watchlists/${user.email}`);
+          const response = await api.get(`/watchlist/${user.email}`);
 
           if (response.data?.movies?.length > 0) {
             setWatchListMovies(response.data.movies.slice(0, 16));

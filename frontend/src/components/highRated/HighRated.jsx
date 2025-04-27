@@ -12,7 +12,7 @@ const HighRated = () => {
   useEffect(() => {
     const fetchTopRated = async () => {
       try {
-        const response = await api.get('/api/v1/movies/top-rated/16');
+        const response = await api.get('/movies/top-rated/16');
         setTopRatedMovies(response.data);
       } catch (err) {
         console.error("Error fetching top rated movies:", err);

@@ -1,6 +1,5 @@
 package com.cinescope.backend;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +55,13 @@ public class MovieController {
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{imdbId}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable String imdbId, @RequestBody Movie updatedMovie) {
+        Optional<Movie> movieOpt = movieService.updateMovie(imdbId, updatedMovie);
+        return movieOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
     @DeleteMapping("/{imdbId}")
     public ResponseEntity<String> deleteMovie(@PathVariable String imdbId) {
         boolean deleted = movieService.deleteMovieByImdbId(imdbId);
@@ -64,12 +70,5 @@ public class MovieController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found");
         }
-    }
-
-    @PutMapping("/{imdbId}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable String imdbId, @RequestBody Movie updatedMovie) {
-        Optional<Movie> movieOpt = movieService.updateMovie(imdbId, updatedMovie);
-        return movieOpt.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

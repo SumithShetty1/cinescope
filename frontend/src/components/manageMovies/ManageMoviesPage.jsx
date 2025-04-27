@@ -48,7 +48,7 @@ const ManageMoviesPage = () => {
 
     const fetchMovies = async () => {
         try {
-            const res = await api.get('/api/v1/movies');
+            const res = await api.get('/movies');
             setMovies(res.data);
             setFilteredMovies(res.data);
         } catch (err) {
@@ -81,10 +81,10 @@ const ManageMoviesPage = () => {
 
         try {
             if (isEditing) {
-                await api.put(`/api/v1/movies/${formData.imdbId}`, formData);
+                await api.put(`/movies/${formData.imdbId}`, formData);
                 showToast("Movie updated successfully", "success");
             } else {
-                await api.post('/api/v1/movies', formData);
+                await api.post('/movies', formData);
                 showToast("Movie created successfully", "success");
             }
             setFormData({
@@ -125,7 +125,7 @@ const ManageMoviesPage = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/api/v1/movies/${id}`);
+            await api.delete(`/movies/${id}`);
             fetchMovies();
             showToast("Movie deleted successfully", "success");
         } catch (err) {

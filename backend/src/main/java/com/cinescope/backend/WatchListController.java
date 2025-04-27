@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/watchlists")
+@RequestMapping("/api/v1/watchlist")
 public class WatchListController {
     @Autowired
     private WatchListService watchListService;

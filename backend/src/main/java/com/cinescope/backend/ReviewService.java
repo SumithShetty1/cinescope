@@ -34,6 +34,28 @@ public class ReviewService {
         return review;
     }
 
+    public Review updateReview(String reviewUid, String newBody, double newRating, Instant newLastModifiedAt, String imdbId) {
+        Optional<Review> optionalReview = reviewRepository.findByReviewUid(reviewUid);
+
+        if (optionalReview.isPresent()) {
+            Review review = optionalReview.get();
+
+            // Update the review fields
+            review.setBody(newBody);
+            review.setRating(newRating);
+            review.setLastModifiedAt(newLastModifiedAt);
+
+            // Save the updated review
+            Review updatedReview = reviewRepository.save(review);
+
+            updateMovieRating(imdbId);
+
+            return updatedReview;
+        }
+
+        return null;
+    }
+
     public boolean deleteReview(String reviewUid, String imdbId) {
         Optional<Review> optionalReview = reviewRepository.findByReviewUid(reviewUid);
 
@@ -59,28 +81,6 @@ public class ReviewService {
         }
 
         return false;
-    }
-
-    public Review updateReview(String reviewUid, String newBody, double newRating, Instant newLastModifiedAt, String imdbId) {
-        Optional<Review> optionalReview = reviewRepository.findByReviewUid(reviewUid);
-
-        if (optionalReview.isPresent()) {
-            Review review = optionalReview.get();
-
-            // Update the review fields
-            review.setBody(newBody);
-            review.setRating(newRating);
-            review.setLastModifiedAt(newLastModifiedAt);
-
-            // Save the updated review
-            Review updatedReview = reviewRepository.save(review);
-
-            updateMovieRating(imdbId);
-
-            return updatedReview;
-        }
-
-        return null;
     }
 
     private void updateMovieRating(String imdbId) {

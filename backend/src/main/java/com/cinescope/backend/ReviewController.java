@@ -27,18 +27,6 @@ public class ReviewController {
         return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/reviews/{reviewUid}")
-    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid, @RequestParam String imdbId) {
-        boolean deleted = reviewService.deleteReview(reviewUid, imdbId);
-
-        if (deleted) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("message", "Review not found with UID: " + reviewUid));
-        }
-    }
-
     @PutMapping("/{reviewUid}")
     public ResponseEntity<Review> updateReview(
             @PathVariable String reviewUid,
@@ -55,6 +43,18 @@ public class ReviewController {
             return new ResponseEntity<>(updatedReview, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{reviewUid}")
+    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid, @RequestParam String imdbId) {
+        boolean deleted = reviewService.deleteReview(reviewUid, imdbId);
+
+        if (deleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Review not found with UID: " + reviewUid));
         }
     }
 }

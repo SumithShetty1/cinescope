@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,6 +32,7 @@ public class WatchListService {
 
         Query query = new Query(Criteria.where("email").is(email)
                 .and("movies.id").is(movie.get().getId())); // Query by reference ID
+
         return mongoTemplate.exists(query, WatchList.class);
     }
 
@@ -41,10 +41,10 @@ public class WatchListService {
         Movie movieToAdd = movieRepository.findMovieByImdbId(imdbId)
                 .orElseThrow(() -> new IllegalArgumentException("Movie not found"));
 
-        // Check if already in watchlist using consistent field (imdbId)
+        // Check if already in watchlist using consistent field
         Query existsQuery = new Query(
                 Criteria.where("email").is(email)
-                        .and("movies.imdbId").is(imdbId)
+                        .and("movies.id").is(movieToAdd.getId())
         );
 
         if (mongoTemplate.exists(existsQuery, WatchList.class)) {

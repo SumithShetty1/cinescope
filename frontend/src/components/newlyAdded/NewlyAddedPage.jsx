@@ -22,7 +22,7 @@ const NewlyAddedPage = () => {
         const fetchNewlyAddedMovies = async () => {
             try {
                 // Fetch all movies sorted by release date (newest first)
-                const response = await api.get("/api/v1/movies/new-releases/0");
+                const response = await api.get("/movies/new-releases/0");
                 setNewlyAddedMovies(response.data);
                 setFilteredMovies(response.data);
             } catch (error) {
