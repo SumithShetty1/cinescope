@@ -1,6 +1,7 @@
 package com.cinescope.backend;
 
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
+import com.descope.client.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +10,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+//Descope Imports
+import com.descope.client.DescopeClient;
+import com.descope.exception.DescopeException;
+import com.descope.model.jwt.Token;
+import com.descope.sdk.*;
+import com.descope.sdk.auth.AuthenticationService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
+
+//Descope Imports end
+
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {
+    private final DescopeClient descopeClient = new DescopeClient(
+            Config.builder()
+                    .projectId("P2Y513EdKoAGWqEQe5wP5oeK9Owa") // replace with your actual ID
+                    .build()
+    );
+
+    private final AuthenticationService authService = descopeClient.getAuthenticationServices().getAuthService();
+
+    private boolean isSessionValid(String sessionToken, String refreshToken) {
+        try {
+            authService.validateAndRefreshSessionWithTokens(sessionToken, refreshToken);
+            return true;
+        } catch (DescopeException e) {
+            return false;
+        }
+    }
+
     @Autowired
     private MovieService movieService;
 
@@ -50,8 +80,24 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getTopRatedMoviesByGenre(genre, actualLimit));
     }
 
+//    @PostMapping
+//    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+//        Movie savedMovie = movieService.addMovie(movie);
+//        return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
+//    }
+
     @PostMapping
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+    public ResponseEntity<?> addMovie(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestHeader("x-refresh-token") String refreshToken,
+            @RequestBody Movie movie) {
+
+        String sessionToken = authorizationHeader.replace("Bearer ", "");
+
+        if (!isSessionValid(sessionToken, refreshToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired session.");
+        }
+
         Movie savedMovie = movieService.addMovie(movie);
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
     }
