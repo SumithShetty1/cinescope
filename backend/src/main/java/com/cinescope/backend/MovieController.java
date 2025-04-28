@@ -3,6 +3,7 @@ package com.cinescope.backend;
 //import org.bson.types.ObjectId;
 import com.descope.client.Config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,13 @@ import com.descope.sdk.auth.AuthenticationService;
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {
+
+    @Value("${descope.project.id}")
+    private String projectId;
+
     private final DescopeClient descopeClient = new DescopeClient(
             Config.builder()
-                    .projectId("P2Y513EdKoAGWqEQe5wP5oeK9Owa") // replace with your actual ID
+                    .projectId(projectId) // replace with your actual ID
                     .build());
 
     private final AuthenticationService authService = descopeClient.getAuthenticationServices().getAuthService();
