@@ -8,18 +8,30 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/reviews")
 public class ReviewController {
+    AuthService authService = new AuthService();
+
     @Autowired
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Map<String, Object> payload) {
+    public ResponseEntity<Review> createReview(@RequestBody Map<String, Object> payload,
+                                               @RequestHeader("Authorization") String authorizationHeader,
+                                               @RequestHeader("x-refresh-token") String refreshToken) {
+        String sessionToken = authorizationHeader.replace("Bearer ", "");
+
+        // Check if session is valid
+        if (!authService.isSessionValid(sessionToken, refreshToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         String body = (String) payload.get("reviewBody");
         String reviewer = (String) payload.get("reviewer");
         String email = (String) payload.get("email");
-        Double rating = Double.parseDouble(payload.get("rating").toString());
+        double rating = Double.parseDouble(payload.get("rating").toString());
         Instant lastModifiedAt = Instant.parse((String) payload.get("lastModifiedAt"));
         String imdbId = (String) payload.get("imdbId");
 
@@ -30,10 +42,15 @@ public class ReviewController {
     @PutMapping("/{reviewUid}")
     public ResponseEntity<Review> updateReview(
             @PathVariable String reviewUid,
-            @RequestBody Map<String, Object> payload) {
-
+            @RequestBody Map<String, Object> payload,
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestHeader("x-refresh-token") String refreshToken) {
+        String sessionToken = authorizationHeader.replace("Bearer ", "");
+        if (!authService.isSessionValid(sessionToken, refreshToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         String body = (String) payload.get("reviewBody");
-        Double rating = Double.parseDouble(payload.get("rating").toString());
+        double rating = Double.parseDouble(payload.get("rating").toString());
         Instant lastModifiedAt = Instant.parse((String) payload.get("lastModifiedAt"));
         String imdbId = (String) payload.get("imdbId");
 
@@ -47,7 +64,14 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{reviewUid}")
-    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid, @RequestParam String imdbId) {
+    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid, @RequestParam String imdbId,
+                                          @RequestHeader("Authorization") String authorizationHeader,
+                                          @RequestHeader("x-refresh-token") String refreshToken) {
+        String sessionToken = authorizationHeader.replace("Bearer ", "");
+        if (!authService.isSessionValid(sessionToken, refreshToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         boolean deleted = reviewService.deleteReview(reviewUid, imdbId);
 
         if (deleted) {

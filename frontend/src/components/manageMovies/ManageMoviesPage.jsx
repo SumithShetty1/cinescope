@@ -14,6 +14,7 @@ import ToastContainer from "react-bootstrap/ToastContainer";
 import { getSessionToken, getRefreshToken } from "@descope/react-sdk";
 
 const ManageMoviesPage = () => {
+    const sessionToken = getSessionToken();
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -91,10 +92,20 @@ const ManageMoviesPage = () => {
 
         try {
             if (isEditing) {
-                await api.put(`/movies/${formData.imdbId}`, formData);
+                await api.put(`/movies/${formData.imdbId}`, formData, {
+                    headers: {
+                        Authorization: `Bearer ${sessionToken}`,
+                        "x-refresh-token": getRefreshToken(),
+                    },
+                });
                 showToast("Movie updated successfully", "success");
             } else {
-                await api.post("/movies", formData);
+                await api.post("/movies", formData, {
+                    headers: {
+                        Authorization: `Bearer ${sessionToken}`,
+                        "x-refresh-token": getRefreshToken(),
+                    },
+                });
                 showToast("Movie created successfully", "success");
             }
             setFormData({
@@ -135,7 +146,12 @@ const ManageMoviesPage = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/movies/${id}`);
+            await api.delete(`/movies/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`,
+                    "x-refresh-token": getRefreshToken(),
+                },
+            });
             fetchMovies();
             showToast("Movie deleted successfully", "success");
         } catch (err) {
