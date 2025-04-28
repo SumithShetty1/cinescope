@@ -11,17 +11,20 @@ const WatchList = () => {
   const [watchListMovies, setWatchListMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [hasWatchlist, setHasWatchlist] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated && user?.email) {
       const fetchWatchlist = async () => {
         try {
-          const response = await api.get(`/api/v1/watchlists/${user.email}`);
+          const response = await api.get(`/watchlist/${user.email}`);
 
           if (response.data?.movies?.length > 0) {
             setWatchListMovies(response.data.movies.slice(0, 16));
+            setHasWatchlist(true);
           } else {
             setWatchListMovies([]);
+            setHasWatchlist(false);
           }
         } catch (err) {
           console.error("Error fetching watchlist:", err);
@@ -36,10 +39,6 @@ const WatchList = () => {
     }
   }, [isAuthenticated, user?.email]);
 
-  if (!isAuthenticated || isLoading) {
-    return null; // Don't show section if not authenticated or loading
-  }
-
   if (error) {
     return (
       <div className="watchlist-section">
@@ -49,6 +48,10 @@ const WatchList = () => {
         </div>
       </div>
     );
+  }
+
+  if (!isAuthenticated || isLoading || !hasWatchlist) {
+    return null; // Don't show section if not authenticated or loading
   }
 
   if (watchListMovies.length === 0) {

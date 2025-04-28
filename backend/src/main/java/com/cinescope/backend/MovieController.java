@@ -28,8 +28,7 @@ public class MovieController {
     private final DescopeClient descopeClient = new DescopeClient(
             Config.builder()
                     .projectId("P2Y513EdKoAGWqEQe5wP5oeK9Owa") // replace with your actual ID
-                    .build()
-    );
+                    .build());
 
     private final AuthenticationService authService = descopeClient.getAuthenticationServices().getAuthService();
 
@@ -80,11 +79,11 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getTopRatedMoviesByGenre(genre, actualLimit));
     }
 
-//    @PostMapping
-//    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
-//        Movie savedMovie = movieService.addMovie(movie);
-//        return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
-//    }
+    // @PostMapping
+    // public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+    // Movie savedMovie = movieService.addMovie(movie);
+    // return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
+    // }
 
     @PostMapping
     public ResponseEntity<?> addMovie(
@@ -102,6 +101,13 @@ public class MovieController {
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{imdbId}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable String imdbId, @RequestBody Movie updatedMovie) {
+        Optional<Movie> movieOpt = movieService.updateMovie(imdbId, updatedMovie);
+        return movieOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
     @DeleteMapping("/{imdbId}")
     public ResponseEntity<String> deleteMovie(@PathVariable String imdbId) {
         boolean deleted = movieService.deleteMovieByImdbId(imdbId);
@@ -110,12 +116,5 @@ public class MovieController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found");
         }
-    }
-
-    @PutMapping("/{imdbId}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable String imdbId, @RequestBody Movie updatedMovie) {
-        Optional<Movie> movieOpt = movieService.updateMovie(imdbId, updatedMovie);
-        return movieOpt.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

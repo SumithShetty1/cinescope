@@ -3,10 +3,7 @@ package com.cinescope.backend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Map;
@@ -23,10 +20,41 @@ public class ReviewController {
         String reviewer = (String) payload.get("reviewer");
         String email = (String) payload.get("email");
         Double rating = Double.parseDouble(payload.get("rating").toString());
+        Instant lastModifiedAt = Instant.parse((String) payload.get("lastModifiedAt"));
         String imdbId = (String) payload.get("imdbId");
-        Instant timestamp = Instant.parse((String) payload.get("timestamp"));
 
-        Review review = reviewService.createReview(body, reviewer, email, rating, imdbId, timestamp);
+        Review review = reviewService.createReview(body, reviewer, email, rating, lastModifiedAt, imdbId);
         return new ResponseEntity<>(review, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{reviewUid}")
+    public ResponseEntity<Review> updateReview(
+            @PathVariable String reviewUid,
+            @RequestBody Map<String, Object> payload) {
+
+        String body = (String) payload.get("reviewBody");
+        Double rating = Double.parseDouble(payload.get("rating").toString());
+        Instant lastModifiedAt = Instant.parse((String) payload.get("lastModifiedAt"));
+        String imdbId = (String) payload.get("imdbId");
+
+        Review updatedReview = reviewService.updateReview(reviewUid, body, rating, lastModifiedAt, imdbId);
+
+        if (updatedReview != null) {
+            return new ResponseEntity<>(updatedReview, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{reviewUid}")
+    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid, @RequestParam String imdbId) {
+        boolean deleted = reviewService.deleteReview(reviewUid, imdbId);
+
+        if (deleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Review not found with UID: " + reviewUid));
+        }
     }
 }

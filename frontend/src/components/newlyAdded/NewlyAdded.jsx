@@ -12,7 +12,7 @@ const NewlyAdded = () => {
   useEffect(() => {
     const fetchNewMovies = async () => {
       try {
-        const response = await api.get('/api/v1/movies/new-releases/16');
+        const response = await api.get('/movies/new-releases/16');
         setNewMovies(response.data);
       } catch (err) {
         console.error("Error fetching new movies:", err);

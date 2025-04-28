@@ -17,7 +17,7 @@ const Hero = () => {
     useEffect(() => {
         const fetchTopMovies = async () => {
             try {
-                const response = await api.get('/api/v1/movies/top-rated/10');
+                const response = await api.get('/movies/top-rated/10');
                 setTopMovies(response.data);
             } catch (err) {
                 console.error("Error fetching top movies:", err);

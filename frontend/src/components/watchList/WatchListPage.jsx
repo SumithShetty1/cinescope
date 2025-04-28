@@ -15,6 +15,7 @@ const WatchListPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [hasWatchlist, setHasWatchlist] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,18 +32,17 @@ const WatchListPage = () => {
         setIsLoading(true);
         setError('');
         try {
-            // 1. Get the user's watchlist with movie references
-            const watchlistResponse = await api.get(`/api/v1/watchlists/${user.email}`);
+            const watchlistResponse = await api.get(`/watchlist/${user.email}`);
             const watchlist = watchlistResponse.data;
             
             if (watchlist && watchlist.movies && watchlist.movies.length > 0) {
-                // 2. The @DocumentReference should have already resolved the movie documents
-                // So we can directly use the movie objects
                 setWatchlistMovies(watchlist.movies);
                 setFilteredMovies(watchlist.movies);
+                setHasWatchlist(true);
             } else {
                 setWatchlistMovies([]);
                 setFilteredMovies([]);
+                setHasWatchlist(false);
             }
         } catch (error) {
             console.error("Error fetching watchlist movies:", error);
@@ -141,7 +141,7 @@ const WatchListPage = () => {
                     ))
                 ) : (
                     <div className="watchlist-page-no-results">
-                        {watchlistMovies.length === 0 ? 
+                        {watchlistMovies.length === 0 && !hasWatchlist? 
                             "Your watchlist is empty" : 
                             "No movies found matching your search"}
                     </div>

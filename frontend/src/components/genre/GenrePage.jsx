@@ -23,7 +23,7 @@ const GenrePage = () => {
 
         const fetchGenreMovies = async () => {
             try {
-                const response = await api.get(`/api/v1/movies/genre/${genreName}/top-rated/0`);
+                const response = await api.get(`/movies/genre/${genreName}/top-rated/0`);
                 setGenreMovies(response.data);
                 setFilteredMovies(response.data);
             } catch (error) {

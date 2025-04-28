@@ -49,15 +49,6 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public boolean deleteMovieByImdbId(String imdbId) {
-        Optional<Movie> movieOpt = movieRepository.findMovieByImdbId(imdbId);
-        if (movieOpt.isPresent()) {
-            movieRepository.delete(movieOpt.get());
-            return true;
-        }
-        return false;
-    }
-
     public Optional<Movie> updateMovie(String imdbId, Movie updatedMovie) {
         Optional<Movie> existingOpt = movieRepository.findMovieByImdbId(imdbId);
 
@@ -80,5 +71,14 @@ public class MovieService {
         }
 
         return Optional.empty();
+    }
+
+    public boolean deleteMovieByImdbId(String imdbId) {
+        Optional<Movie> movieOpt = movieRepository.findMovieByImdbId(imdbId);
+        if (movieOpt.isPresent()) {
+            movieRepository.delete(movieOpt.get());
+            return true;
+        }
+        return false;
     }
 }
