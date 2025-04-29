@@ -1,4 +1,4 @@
-package com.cinescope.backend;
+package com.cinescope.backend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

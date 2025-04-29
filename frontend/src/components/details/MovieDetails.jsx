@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import api from "../../api/axiosConfig";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { getSessionToken, getRefreshToken } from "@descope/react-sdk";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faUser,
@@ -17,15 +16,6 @@ import ToastContainer from "react-bootstrap/ToastContainer";
 import "./MovieDetails.css";
 
 const MovieDetails = () => {
-    // Get the session token and refresh token
-    const sessionToken = getSessionToken();
-    const refreshToken = getRefreshToken();
-
-    // Create the headers object
-    const headers = {
-        Authorization: `Bearer ${sessionToken}`,
-        "x-refresh-token": refreshToken,
-    };
     const revText = useRef();
     const { movieId } = useParams();
     const { isAuthenticated } = useSession();
@@ -72,9 +62,7 @@ const MovieDetails = () => {
             return;
         }
         try {
-            const response = await api.get(
-                `/watchlist/check/${movieId}?email=${user.email}`
-            );
+            const response = await api.get(`/watchlist/check/${movieId}?email=${user.email}`);
             setIsInWatchlist(response.data.isInWatchlist);
         } catch (err) {
             console.error("Failed to check watchlist:", err);
@@ -104,17 +92,10 @@ const MovieDetails = () => {
         setWatchlistLoading(true);
         try {
             if (isInWatchlist) {
-                await api.delete(
-                    `/watchlist/remove?email=${user.email}&imdbId=${movieId}`,
-                    { headers: headers }
-                );
+                await api.delete(`/watchlist/remove?email=${user.email}&imdbId=${movieId}`);
                 showToast("Removed from watchlist", "success");
             } else {
-                await api.post(
-                    `/watchlist/add?email=${user.email}&imdbId=${movieId}`,
-                    {},
-                    { headers: headers }
-                );
+                await api.post(`/watchlist/add?email=${user.email}&imdbId=${movieId}`);
                 setIsInWatchlist(true);
                 showToast("Added to watchlist", "success");
             }
@@ -154,9 +135,7 @@ const MovieDetails = () => {
             };
 
             if (editingReviewUid) {
-                await api.put(`/reviews/${editingReviewUid}`, reviewData, {
-                    headers: headers,
-                });
+                await api.put(`/reviews/${editingReviewUid}`, reviewData);
                 const updatedMovie = await api.get(`/movies/${movieId}`);
                 setMovie(updatedMovie.data);
                 const sortedReviews = [
@@ -169,9 +148,7 @@ const MovieDetails = () => {
                 setEditingReviewUid(null);
                 showToast("Review updated successfully", "success");
             } else {
-                await api.post("/reviews", reviewData, {
-                    headers: headers,
-                });
+                await api.post("/reviews", reviewData);
                 const updatedMovie = await api.get(`/movies/${movieId}`);
                 setMovie(updatedMovie.data);
                 const sortedReviews = [
@@ -199,9 +176,7 @@ const MovieDetails = () => {
 
     const deleteReview = async (reviewUid) => {
         try {
-            await api.delete(`/reviews/${reviewUid}?imdbId=${movieId}`, {
-                headers: headers,
-            });
+            await api.delete(`/reviews/${reviewUid}?imdbId=${movieId}`);
             const updatedMovie = await api.get(`/movies/${movieId}`);
             setMovie(updatedMovie.data);
             const sortedReviews = [...(updatedMovie.data.reviewIds || [])].sort(
@@ -290,19 +265,17 @@ const MovieDetails = () => {
                                     <FontAwesomeIcon
                                         key={i}
                                         icon={faStar}
-                                        className={`star ${
-                                            i < Math.round(movie?.rating || 0)
+                                        className={`star ${i < Math.round(movie?.rating || 0)
                                                 ? "filled"
                                                 : ""
-                                        }`}
+                                            }`}
                                     />
                                 ))}
                             </div>
                         </div>
                         <button
-                            className={`watchlist-button ${
-                                isInWatchlist ? "in-watchlist" : ""
-                            }`}
+                            className={`watchlist-button ${isInWatchlist ? "in-watchlist" : ""
+                                }`}
                             onClick={toggleWatchlist}
                             disabled={watchlistLoading}
                         >
@@ -311,8 +284,8 @@ const MovieDetails = () => {
                                 {watchlistLoading
                                     ? "Processing..."
                                     : isInWatchlist
-                                    ? "In Watchlist"
-                                    : "Add to Watchlist"}
+                                        ? "In Watchlist"
+                                        : "Add to Watchlist"}
                             </span>
                         </button>
                     </div>
@@ -391,11 +364,10 @@ const MovieDetails = () => {
                                                 <FontAwesomeIcon
                                                     key={star}
                                                     icon={faStar}
-                                                    className={`star ${
-                                                        star <= rating
+                                                    className={`star ${star <= rating
                                                             ? "filled"
                                                             : ""
-                                                    }`}
+                                                        }`}
                                                     onClick={() =>
                                                         handleRatingChange(star)
                                                     }
@@ -416,8 +388,8 @@ const MovieDetails = () => {
                                         {isLoading
                                             ? "Processing..."
                                             : editingReviewUid
-                                            ? "Update Review"
-                                            : "Submit Review"}
+                                                ? "Update Review"
+                                                : "Submit Review"}
                                     </button>
                                     {editingReviewUid && (
                                         <button
@@ -511,14 +483,13 @@ const MovieDetails = () => {
                                                 <FontAwesomeIcon
                                                     key={i}
                                                     icon={faStar}
-                                                    className={`star ${
-                                                        i <
-                                                        Math.round(
-                                                            review.rating
-                                                        )
+                                                    className={`star ${i <
+                                                            Math.round(
+                                                                review.rating
+                                                            )
                                                             ? "filled"
                                                             : ""
-                                                    }`}
+                                                        }`}
                                                 />
                                             ))}
                                         </div>

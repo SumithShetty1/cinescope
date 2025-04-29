@@ -1,8 +1,18 @@
-import { Descope } from "@descope/react-sdk";
+import { useSession, Descope } from "@descope/react-sdk";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const { isAuthenticated } = useSession();
+
+    // Redirect already-logged-in users
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/", { replace: true });
+        }
+    }, [isAuthenticated, navigate]);
+
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <Descope

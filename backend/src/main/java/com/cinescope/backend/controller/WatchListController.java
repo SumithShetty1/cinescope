@@ -1,5 +1,8 @@
-package com.cinescope.backend;
+package com.cinescope.backend.controller;
 
+import com.cinescope.backend.entity.WatchList;
+import com.cinescope.backend.auth.AuthService;
+import com.cinescope.backend.service.WatchListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/watchlist")
 public class WatchListController {
+
     @Autowired
     private WatchListService watchListService;
 
-    AuthService authService = new AuthService();
+    @Autowired
+    private AuthService authService;
 
     @GetMapping("/{email}")
     public ResponseEntity<WatchList> getWatchListByEmail(@PathVariable String email) {
@@ -40,6 +44,7 @@ public class WatchListController {
             @RequestHeader("x-refresh-token") String refreshToken) {
         try {
             String sessionToken = authorizationHeader.replace("Bearer ", "");
+
             if (!authService.isSessionValid(sessionToken, refreshToken)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
@@ -58,7 +63,9 @@ public class WatchListController {
             @RequestHeader("Authorization") String authorizationHeader,
             @RequestHeader("x-refresh-token") String refreshToken) {
         try {
+
             String sessionToken = authorizationHeader.replace("Bearer ", "");
+
             if (!authService.isSessionValid(sessionToken, refreshToken)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }

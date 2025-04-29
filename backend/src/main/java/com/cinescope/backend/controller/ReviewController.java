@@ -1,5 +1,8 @@
-package com.cinescope.backend;
+package com.cinescope.backend.controller;
 
+import com.cinescope.backend.entity.Review;
+import com.cinescope.backend.auth.AuthService;
+import com.cinescope.backend.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/reviews")
 public class ReviewController {
-    AuthService authService = new AuthService();
+
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private ReviewService reviewService;
@@ -23,7 +27,6 @@ public class ReviewController {
                                                @RequestHeader("x-refresh-token") String refreshToken) {
         String sessionToken = authorizationHeader.replace("Bearer ", "");
 
-        // Check if session is valid
         if (!authService.isSessionValid(sessionToken, refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -46,9 +49,11 @@ public class ReviewController {
             @RequestHeader("Authorization") String authorizationHeader,
             @RequestHeader("x-refresh-token") String refreshToken) {
         String sessionToken = authorizationHeader.replace("Bearer ", "");
+
         if (!authService.isSessionValid(sessionToken, refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+
         String body = (String) payload.get("reviewBody");
         double rating = Double.parseDouble(payload.get("rating").toString());
         Instant lastModifiedAt = Instant.parse((String) payload.get("lastModifiedAt"));
@@ -64,10 +69,12 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{reviewUid}")
-    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid, @RequestParam String imdbId,
+    public ResponseEntity<?> deleteReview(@PathVariable String reviewUid,
+                                          @RequestParam String imdbId,
                                           @RequestHeader("Authorization") String authorizationHeader,
                                           @RequestHeader("x-refresh-token") String refreshToken) {
         String sessionToken = authorizationHeader.replace("Bearer ", "");
+
         if (!authService.isSessionValid(sessionToken, refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

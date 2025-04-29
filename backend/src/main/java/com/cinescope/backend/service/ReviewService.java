@@ -1,5 +1,9 @@
-package com.cinescope.backend;
+package com.cinescope.backend.service;
 
+import com.cinescope.backend.entity.Movie;
+import com.cinescope.backend.repository.MovieRepository;
+import com.cinescope.backend.entity.Review;
+import com.cinescope.backend.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

@@ -1,80 +1,46 @@
-package com.cinescope.backend;
+package com.cinescope.backend.controller;
 
-//import org.bson.types.ObjectId;
-import com.descope.client.Config;
+import com.cinescope.backend.entity.Movie;
+import com.cinescope.backend.auth.AuthService;
+import com.cinescope.backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-//Descope Imports
-import com.descope.client.DescopeClient;
-import com.descope.exception.DescopeException;
-import com.descope.model.jwt.Token;
-import com.descope.sdk.auth.AuthenticationService;
-
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {
 
-    @Value("${descope.project.id}")
-    private String projectId;
-
-    private final DescopeClient descopeClient = new DescopeClient(
-            Config.builder()
-                    .projectId(projectId) // replace with your actual ID
-                    .build());
-
-    private final AuthenticationService authService = descopeClient.getAuthenticationServices().getAuthService();
-    Token verifiedToken;
-    private boolean isSessionValid(String sessionToken, String refreshToken) {
-        try {
-            verifiedToken=authService.validateAndRefreshSessionWithTokens(sessionToken, refreshToken);
-            return true;
-        } catch (DescopeException e) {
-            return false;
-        }
-    }
-
-    public boolean isAdmin(Token sessionToken) {
-        try {
-            return authService.validateRoles(sessionToken, Collections.singletonList("admin"));
-        } catch (DescopeException e) {
-            // You can log the exception if you want
-            System.err.println("Error validating admin role: " + e.getMessage());
-            return false; // If error occurs, treat as not admin
-        }
-    }
-
     @Autowired
     private MovieService movieService;
 
+    @Autowired
+    private AuthService authService;
+
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
-        return new ResponseEntity<List<Movie>>(movieService.allMovies(), HttpStatus.OK);
+        return new ResponseEntity<>(movieService.allMovies(), HttpStatus.OK);
     }
 
     @GetMapping("/{imdbId}")
     public ResponseEntity<Optional<Movie>> getSingleMovies(@PathVariable String imdbId) {
-        return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(imdbId), HttpStatus.OK);
+        return new ResponseEntity<>(movieService.singleMovie(imdbId), HttpStatus.OK);
     }
 
     @GetMapping("/top-rated/{limit}")
     public ResponseEntity<List<Movie>> getTopRatedMovies(@PathVariable(required = false) Integer limit) {
         int actualLimit = (limit != null) ? limit : 16;
-        return new ResponseEntity<List<Movie>>(movieService.getTopRatedMovies(actualLimit), HttpStatus.OK);
+        return new ResponseEntity<>(movieService.getTopRatedMovies(actualLimit), HttpStatus.OK);
     }
 
     @GetMapping("/new-releases/{limit}")
     public ResponseEntity<List<Movie>> getNewReleases(@PathVariable(required = false) Integer limit) {
         int actualLimit = (limit != null) ? limit : 16;
-        return new ResponseEntity<List<Movie>>(movieService.getNewReleases(actualLimit), HttpStatus.OK);
+        return new ResponseEntity<>(movieService.getNewReleases(actualLimit), HttpStatus.OK);
     }
 
     @GetMapping("/genre/{genre}")
@@ -90,12 +56,6 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getTopRatedMoviesByGenre(genre, actualLimit));
     }
 
-    // @PostMapping
-    // public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
-    // Movie savedMovie = movieService.addMovie(movie);
-    // return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
-    // }
-
     @PostMapping
     public ResponseEntity<?> addMovie(
             @RequestHeader("Authorization") String authorizationHeader,
@@ -104,10 +64,10 @@ public class MovieController {
 
         String sessionToken = authorizationHeader.replace("Bearer ", "");
 
-        if (!isSessionValid(sessionToken, refreshToken)) {
+        if (!authService.isSessionValid(sessionToken, refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired session.");
         }
-        if (!isAdmin(verifiedToken)) {
+        if (!authService.isAdmin()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
@@ -122,10 +82,10 @@ public class MovieController {
                                              @RequestHeader("x-refresh-token") String refreshToken) {
         String sessionToken = authorizationHeader.replace("Bearer ", "");
 
-        if (!isSessionValid(sessionToken, refreshToken)) {
+        if (!authService.isSessionValid(sessionToken, refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        if (!isAdmin(verifiedToken)) {
+        if (!authService.isAdmin()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
@@ -140,11 +100,12 @@ public class MovieController {
                                               @RequestHeader("x-refresh-token") String refreshToken) {
 
         String sessionToken = authorizationHeader.replace("Bearer ", "");
-        if (!isSessionValid(sessionToken, refreshToken)) {
+
+        if (!authService.isSessionValid(sessionToken, refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        if (!isAdmin(verifiedToken)) {
+        if (!authService.isAdmin()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 

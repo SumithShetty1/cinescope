@@ -1,5 +1,7 @@
-package com.cinescope.backend;
+package com.cinescope.backend.service;
 
+import com.cinescope.backend.entity.Movie;
+import com.cinescope.backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

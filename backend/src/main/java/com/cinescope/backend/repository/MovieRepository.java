@@ -1,5 +1,6 @@
-package com.cinescope.backend;
+package com.cinescope.backend.repository;
 
+import com.cinescope.backend.entity.Movie;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

@@ -15,9 +15,10 @@ import HighRatedPage from "./components/highRated/HighRatedPage";
 import WatchListPage from "./components/watchList/WatchListPage";
 import NewlyAddedPage from "./components/newlyAdded/NewlyAddedPage";
 import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
+import PrivateRoute from "./components/auth/PrivateRoute";
 
 function App() {
-    
+
     return (
         <div className="App">
             <Header />
@@ -26,7 +27,14 @@ function App() {
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/manage" element={<ManageMoviesPage />} />
+                    <Route
+                        path="/manage"
+                        element={
+                            <PrivateRoute requiredRole="admin">
+                                <ManageMoviesPage />
+                            </PrivateRoute>
+                        }
+                    />
                     <Route path="/top-rated" element={<HighRatedPage />} />
                     <Route path="/newly-added" element={<NewlyAddedPage />} />
                     <Route path="/watchlist" element={<WatchListPage />} />

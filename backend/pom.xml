@@ -62,10 +62,11 @@
 			<artifactId>spring-dotenv</artifactId>
 			<version>4.0.0</version>
 		</dependency>
+
 		<dependency>
 			<artifactId>java-sdk</artifactId>
 			<groupId>com.descope</groupId>
-			<version>1.0.25</version>
+			<version>[1.0.0,)</version>
 		</dependency>
 	</dependencies>
 

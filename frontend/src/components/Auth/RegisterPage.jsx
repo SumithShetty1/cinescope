@@ -1,8 +1,16 @@
-import { Descope } from "@descope/react-sdk";
+import { useSession, Descope } from "@descope/react-sdk";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
+    const { isAuthenticated } = useSession();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/", { replace: true });
+        }
+    }, [isAuthenticated, navigate]);
 
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">

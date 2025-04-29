@@ -2,19 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./ManageMoviesPage.css";
 import api from "../../api/axiosConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faTrash,
-    faEdit,
-    faPlus,
-    faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEdit, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
-import { getSessionToken, getRefreshToken } from "@descope/react-sdk";
 
 const ManageMoviesPage = () => {
-    const sessionToken = getSessionToken();
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -92,20 +85,10 @@ const ManageMoviesPage = () => {
 
         try {
             if (isEditing) {
-                await api.put(`/movies/${formData.imdbId}`, formData, {
-                    headers: {
-                        Authorization: `Bearer ${sessionToken}`,
-                        "x-refresh-token": getRefreshToken(),
-                    },
-                });
+                await api.put(`/movies/${formData.imdbId}`, formData);
                 showToast("Movie updated successfully", "success");
             } else {
-                await api.post("/movies", formData, {
-                    headers: {
-                        Authorization: `Bearer ${sessionToken}`,
-                        "x-refresh-token": getRefreshToken(),
-                    },
-                });
+                await api.post("/movies", formData);
                 showToast("Movie created successfully", "success");
             }
             setFormData({
@@ -146,12 +129,7 @@ const ManageMoviesPage = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/movies/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${sessionToken}`,
-                    "x-refresh-token": getRefreshToken(),
-                },
-            });
+            await api.delete(`/movies/${id}`);
             fetchMovies();
             showToast("Movie deleted successfully", "success");
         } catch (err) {
