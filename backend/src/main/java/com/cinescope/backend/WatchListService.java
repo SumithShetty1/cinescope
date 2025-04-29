@@ -8,10 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 
 @Service
 public class WatchListService {
@@ -28,7 +25,8 @@ public class WatchListService {
 
     public boolean isMovieInWatchlist(String email, String imdbId) {
         Optional<Movie> movie = movieRepository.findMovieByImdbId(imdbId);
-        if (movie.isEmpty()) return false;
+        if (movie.isEmpty())
+            return false;
 
         Query query = new Query(Criteria.where("email").is(email)
                 .and("movies.id").is(movie.get().getId())); // Query by reference ID
@@ -44,8 +42,7 @@ public class WatchListService {
         // Check if already in watchlist using consistent field
         Query existsQuery = new Query(
                 Criteria.where("email").is(email)
-                        .and("movies.id").is(movieToAdd.getId())
-        );
+                        .and("movies.id").is(movieToAdd.getId()));
 
         if (mongoTemplate.exists(existsQuery, WatchList.class)) {
             throw new IllegalArgumentException("Movie already in watchlist");
@@ -62,8 +59,7 @@ public class WatchListService {
                 FindAndModifyOptions.options()
                         .returnNew(true)
                         .upsert(true),
-                WatchList.class
-        );
+                WatchList.class);
 
         return updated;
     }
@@ -81,8 +77,7 @@ public class WatchListService {
                 query,
                 update,
                 FindAndModifyOptions.options().returnNew(true),
-                WatchList.class
-        );
+                WatchList.class);
 
         if (updated == null) {
             throw new IllegalArgumentException("Watchlist not found");

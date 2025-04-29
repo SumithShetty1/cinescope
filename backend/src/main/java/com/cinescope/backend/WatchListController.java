@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/watchlist")
 public class WatchListController {
     @Autowired
     private WatchListService watchListService;
+
+    AuthService authService = new AuthService();
 
     @GetMapping("/{email}")
     public ResponseEntity<WatchList> getWatchListByEmail(@PathVariable String email) {
@@ -32,8 +35,15 @@ public class WatchListController {
     @PostMapping("/add")
     public ResponseEntity<WatchList> addToWatchlist(
             @RequestParam String email,
-            @RequestParam String imdbId) {
+            @RequestParam String imdbId,
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestHeader("x-refresh-token") String refreshToken) {
         try {
+            String sessionToken = authorizationHeader.replace("Bearer ", "");
+            if (!authService.isSessionValid(sessionToken, refreshToken)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
             WatchList updatedWatchlist = watchListService.addToWatchlist(email, imdbId);
             return new ResponseEntity<>(updatedWatchlist, HttpStatus.OK);
         } catch (Exception e) {
@@ -44,8 +54,15 @@ public class WatchListController {
     @DeleteMapping("/remove")
     public ResponseEntity<WatchList> removeFromWatchlist(
             @RequestParam String email,
-            @RequestParam String imdbId) {
+            @RequestParam String imdbId,
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestHeader("x-refresh-token") String refreshToken) {
         try {
+            String sessionToken = authorizationHeader.replace("Bearer ", "");
+            if (!authService.isSessionValid(sessionToken, refreshToken)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
             WatchList updatedWatchlist = watchListService.removeFromWatchlist(email, imdbId);
             return new ResponseEntity<>(updatedWatchlist, HttpStatus.OK);
         } catch (Exception e) {
