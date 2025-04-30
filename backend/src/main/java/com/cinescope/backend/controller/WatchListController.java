@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Controller for managing user's watchlist operations.
+ */
 @RestController
 @RequestMapping("/api/v1/watchlist")
 public class WatchListController {
@@ -21,6 +24,7 @@ public class WatchListController {
     @Autowired
     private AuthService authService;
 
+    // Get the complete watchlist for a user by email
     @GetMapping("/{email}")
     public ResponseEntity<WatchList> getWatchListByEmail(@PathVariable String email) {
         Optional<WatchList> watchList = watchListService.getWatchListByEmail(email);
@@ -28,6 +32,7 @@ public class WatchListController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    // Check if a specific movie is in the user's watchlist
     @GetMapping("/check/{imdbId}")
     public ResponseEntity<Map<String, Boolean>> checkMovieInWatchlist(
             @PathVariable String imdbId,
@@ -36,6 +41,7 @@ public class WatchListController {
         return ResponseEntity.ok(Map.of("isInWatchlist", isInWatchlist));
     }
 
+    // Add a movie to the user's watchlist (auth required)
     @PostMapping("/add")
     public ResponseEntity<WatchList> addToWatchlist(
             @RequestParam String email,
@@ -56,6 +62,7 @@ public class WatchListController {
         }
     }
 
+    // Remove a movie from the user's watchlist (auth required)
     @DeleteMapping("/remove")
     public ResponseEntity<WatchList> removeFromWatchlist(
             @RequestParam String email,

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository interface for WatchList entity with custom query method.
+ */
 @Repository
 public interface WatchListRepository extends MongoRepository<WatchList, ObjectId> {
     Optional<WatchList> findWatchListByEmail(String email);

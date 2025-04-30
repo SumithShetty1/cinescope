@@ -10,6 +10,9 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
+/**
+ * Represents a user's movie watchlist stored in the 'watchlists' collection in MongoDB.
+ */
 @Document(collection = "watchlists")
 @Data
 @AllArgsConstructor
@@ -21,6 +24,7 @@ public class WatchList {
     @DocumentReference(lazy = true)
     private List<Movie> movies;
 
+    // Custom constructor for creating a watchlist without setting an ID
     public WatchList(String email, List<Movie> movies) {
         this.email = email;
         this.movies = movies;

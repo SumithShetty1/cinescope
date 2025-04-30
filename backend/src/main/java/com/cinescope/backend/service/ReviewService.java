@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.Optional;
 
-
+/**
+ * Service for handling review creation, update, deletion, and rating recalculation.
+ */
 @Service
 public class ReviewService {
     @Autowired
@@ -24,6 +26,7 @@ public class ReviewService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    // Creates a new review, links it to a movie, and updates the movie rating
     public Review createReview(String body, String reviewer, String email, double rating, Instant lastModifiedAt, String imdbId) {
         Review review = reviewRepository.insert(new Review(body, reviewer, email, rating, lastModifiedAt));
 
@@ -38,20 +41,20 @@ public class ReviewService {
         return review;
     }
 
+    // Updates an existing review and recalculates movie rating
     public Review updateReview(String reviewUid, String newBody, double newRating, Instant newLastModifiedAt, String imdbId) {
         Optional<Review> optionalReview = reviewRepository.findByReviewUid(reviewUid);
 
         if (optionalReview.isPresent()) {
             Review review = optionalReview.get();
 
-            // Update the review fields
             review.setBody(newBody);
             review.setRating(newRating);
             review.setLastModifiedAt(newLastModifiedAt);
 
-            // Save the updated review
             Review updatedReview = reviewRepository.save(review);
 
+            // Recalculate and update movie rating
             updateMovieRating(imdbId);
 
             return updatedReview;
@@ -60,6 +63,7 @@ public class ReviewService {
         return null;
     }
 
+    // Deletes a review, removes it from the movie, and updates the movie rating
     public boolean deleteReview(String reviewUid, String imdbId) {
         Optional<Review> optionalReview = reviewRepository.findByReviewUid(reviewUid);
 
@@ -87,6 +91,7 @@ public class ReviewService {
         return false;
     }
 
+    // Recalculates and updates a movie's average rating based on its reviews
     private void updateMovieRating(String imdbId) {
         // Get the movie with all its reviews
         Movie movie = mongoTemplate.findOne(

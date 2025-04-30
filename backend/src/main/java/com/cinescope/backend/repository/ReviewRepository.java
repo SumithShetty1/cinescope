@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository interface for Review entity with custom query method.
+ */
 @Repository
 public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
     Optional<Review> findByReviewUid(String reviewUid);

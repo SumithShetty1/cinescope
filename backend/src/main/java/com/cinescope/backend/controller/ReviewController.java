@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Controller for handling review-related API endpoints.
+ */
 @RestController
 @RequestMapping("/api/v1/reviews")
 public class ReviewController {
@@ -21,6 +24,7 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
+    // Create a new review
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Map<String, Object> payload,
                                                @RequestHeader("Authorization") String authorizationHeader,
@@ -42,6 +46,7 @@ public class ReviewController {
         return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 
+    // Update an existing review by UID
     @PutMapping("/{reviewUid}")
     public ResponseEntity<Review> updateReview(
             @PathVariable String reviewUid,
@@ -68,6 +73,7 @@ public class ReviewController {
         }
     }
 
+    // Delete a review by UID and associated IMDb ID
     @DeleteMapping("/{reviewUid}")
     public ResponseEntity<?> deleteReview(@PathVariable String reviewUid,
                                           @RequestParam String imdbId,

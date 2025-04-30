@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+/**
+ * Service for handling authentication and session validation using Descope.
+ */
 @Service
 public class AuthService {
 
     private final AuthenticationService authService;
     private Token verifiedToken;
 
+    // Initializes Descope client and authentication service using the project ID
     public AuthService(@Value("${descope.project.id}") String projectId) {
         DescopeClient descopeClient = new DescopeClient(
                 Config.builder().projectId(projectId).build()
@@ -23,6 +27,7 @@ public class AuthService {
         this.authService = descopeClient.getAuthenticationServices().getAuthService();
     }
 
+    // Validates or refreshes the session using session and refresh tokens
     public boolean isSessionValid(String sessionToken, String refreshToken) {
         try {
             verifiedToken = authService.validateAndRefreshSessionWithTokens(sessionToken, refreshToken);
@@ -32,6 +37,7 @@ public class AuthService {
         }
     }
 
+    // Checks if the user has an "admin" role
     public boolean isAdmin() {
         try {
             return authService.validateRoles(verifiedToken, Collections.singletonList("admin"));
@@ -41,6 +47,7 @@ public class AuthService {
         }
     }
 
+    // Returns the verified JWT token
     public Token getVerifiedToken() {
         return verifiedToken;
     }

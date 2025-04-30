@@ -10,6 +10,9 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
+/**
+ * Represents a movie document stored in the 'movies' collection in MongoDB.
+ */
 @Document(collection = "movies")
 @Data
 @AllArgsConstructor
