@@ -1,22 +1,23 @@
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
-import GenrePage from "./components/genre/GenrePage";
+import HighRatedPage from "./components/home/pages/highRated/HighRatedPage";
+import NewlyAddedPage from "./components/home/pages/newlyAdded/NewlyAddedPage";
+import WatchListPage from "./components/home/pages/watchList/WatchListPage";
+import GenrePage from "./components/home/pages/genre/GenrePage"
 import Trailer from "./components/trailer/Trailer";
 import MovieDetails from "./components/details/MovieDetails";
-import NotFound from "./components/notFound/NotFound";
 import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
-import HighRatedPage from "./components/highRated/HighRatedPage";
-import WatchListPage from "./components/watchList/WatchListPage";
-import NewlyAddedPage from "./components/newlyAdded/NewlyAddedPage";
-import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
 import PrivateRoute from "./components/auth/PrivateRoute";
+import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
+import NotFound from "./components/notFound/NotFound";
 
+// Root component of the application that sets up global layout and routing
 function App() {
 
     return (

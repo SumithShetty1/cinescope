@@ -1,0 +1,25 @@
+.review-movie-details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: white;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+}
+
+.review-movie-content {
+    display: flex;
+    gap: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .review-movie-content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .review-movie-details-container {
+        padding: 1rem;
+    }
+}

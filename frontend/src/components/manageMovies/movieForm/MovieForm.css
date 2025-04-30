@@ -1,0 +1,95 @@
+.manage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.manage-form-columns {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.manage-form-section {
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    flex: 1;
+    min-width: 0;
+}
+
+.manage-section-title {
+    color: gold;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: 1px solid gold;
+    padding-bottom: 0.5rem;
+}
+
+.manage-form-group {
+    margin-bottom: 1.2rem;
+}
+
+.manage-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ddd;
+    font-size: 0.9rem;
+}
+
+.manage-input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.manage-input:focus {
+    outline: none;
+    border-color: gold;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.manage-form-actions {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.manage-submit-button {
+    padding: 0.7rem 2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* Date picker styling */
+.manage-input[type="date"] {
+    color-scheme: white;
+}
+
+.manage-input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+@media (max-width: 1200px) {
+    .manage-form-columns {
+        flex-wrap: wrap;
+    }
+    
+    .manage-form-section {
+        min-width: calc(50% - 0.75rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .manage-form-section {
+        min-width: 100%;
+    }
+}

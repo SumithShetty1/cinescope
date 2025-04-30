@@ -2,6 +2,7 @@ import { useSession, Descope } from "@descope/react-sdk";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+// LoginPage handles user authentication using Descope and redirects authenticated users to the home page
 const LoginPage = () => {
     const navigate = useNavigate();
     const { isAuthenticated } = useSession();
@@ -19,7 +20,8 @@ const LoginPage = () => {
                 flowId="sign-up-or-in"
                 theme="dark"
                 onSuccess={(e) => {
-                    console.log("Logged in:", e.detail.user);
+                    // console.log("Logged in:", e.detail.user);
+
                     // redirect to home or dashboard here
                     navigate("/");
                 }}

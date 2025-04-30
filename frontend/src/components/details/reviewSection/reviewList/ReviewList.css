@@ -1,0 +1,11 @@
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.no-reviews {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}

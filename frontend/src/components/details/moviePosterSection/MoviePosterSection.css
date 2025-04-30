@@ -1,0 +1,92 @@
+.review-movie-poster-column {
+    flex: 0 0 300px;
+}
+
+.review-movie-poster {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.rating-section {
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.rating, .user-rating {
+    margin-bottom: 1.5rem;
+}
+
+.rating h4, .user-rating h4 {
+    color: #aaa;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.rating-value {
+    font-size: 1.5rem;
+}
+
+.rating-value span:first-child {
+    font-weight: bold;
+    color: gold;
+}
+
+.star-rating {
+    display: flex;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    align-items: center;
+}
+
+.star {
+    color: #444;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.watchlist-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: rgba(255, 215, 0, 0.1);
+    color: gold;
+    border: 1px solid gold;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.2s;
+}
+
+.watchlist-button:hover:not(:disabled) {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.watchlist-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.watchlist-button.in-watchlist {
+    background-color: #ffc107;
+    color: white;
+    border-color: white;
+}
+
+.watchlist-button.in-watchlist:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}

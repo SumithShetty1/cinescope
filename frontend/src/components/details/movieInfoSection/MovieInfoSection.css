@@ -1,0 +1,49 @@
+.review-trailer-section {
+    margin-bottom: 2.5rem;
+}
+
+.review-react-player-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.review-genres-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.genre-tag {
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.description-section {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.crew-section {
+    margin-bottom: 2rem;
+}
+
+.crew-item {
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.crew-role {
+    min-width: 100px;
+    font-weight: bold;
+}
+
+.crew-name {
+    color: #ddd;
+}

@@ -1,0 +1,101 @@
+.review-item {
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.user-icon {
+    background-color: #333;
+    padding: 0.6rem;
+    border-radius: 50%;
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.review-date {
+    color: #777;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.2rem;
+}
+
+.review-actions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.edit-button, .delete-button {
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+    padding: 0.3rem;
+}
+
+.edit-button:hover {
+    color: gold;
+}
+
+.delete-button:hover {
+    color: #ff3333;
+}
+
+.review-rating {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-value {
+    font-size: 0.9rem;
+    color: gold;
+    margin-left: 0.5rem;
+}
+
+.review-text {
+    line-height: 1.6;
+    color: #ddd;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 480px) {
+    .user-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .review-actions {
+        align-self: flex-end;
+    }
+}

@@ -1,0 +1,120 @@
+.manage-movies-list {
+    margin-top: 2rem;
+}
+
+.manage-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.manage-list-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.manage-search-container {
+    position: relative;
+    width: 250px;
+}
+
+.manage-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.manage-search-input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2rem;
+    border-radius: 20px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+}
+
+.manage-search-input:focus {
+    outline: none;
+    border-color: gold;
+}
+
+.manage-movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.manage-movie-card {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.manage-movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1);
+}
+
+.manage-poster {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-bottom: 1px solid #333;
+}
+
+.manage-movie-info {
+    padding: 1rem;
+}
+
+.manage-movie-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.manage-movie-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.manage-action-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .manage-movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .manage-movie-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .manage-action-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
