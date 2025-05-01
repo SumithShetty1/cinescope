@@ -35,7 +35,7 @@ This project demonstrates the integration of modern web technologies with compre
 git clone https://github.com/SumithShetty1/cinescope.git
 ```
 
-## 2. Frontend Setup (VS Code)
+### 2. Frontend Setup (VS Code)
 1. **Open Project in VS Code**:
    - Launch VS Code
    - Select `File` → `Open Folder`
@@ -55,7 +55,7 @@ git clone https://github.com/SumithShetty1/cinescope.git
     - The development server will start automatically
     - Open your browser and visit: http://localhost:3000
 
-## 3. Backend Setup (IntelliJ IDEA)
+### 3. Backend Setup (IntelliJ IDEA)
 
 1. **Open Project:**
     - Launch IntelliJ IDEA
@@ -84,14 +84,14 @@ git clone https://github.com/SumithShetty1/cinescope.git
         ```
     - Backend will run at: [http://localhost:8080](http://localhost:8080)
 
-## 4. Environment Configuration
+### 4. Environment Configuration
 
-### Frontend
+#### Frontend
 Create `.env` in `/frontend`:
 ```env
 VITE_DESCOPE_PROJECT_ID=your-project-id
 ```
-### Backend
+#### Backend
 Create .env in `/backend/src/main/resources`:
 ```env
 MONGO_DATABASE=your-db-name
@@ -102,13 +102,13 @@ DESCOPE_PROJECT_ID=your-descope-id
 ALLOWED_ORIGINS=http://localhost:3000
 ```
 
-## 3. First-Time Setup Notes
+## First-Time Setup Notes
 - Allow 2-3 minutes for Maven dependencies to download
 - If backend fails:
     - Verify Java 21 SDK (File → Project Structure)
     - Reimport Maven projects (Maven panel → Refresh button)
 - Frontend auto-reloads on file changes
 
-## 4. Access the Application
+## Access the Application
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8080/api/v1
