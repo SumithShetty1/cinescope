@@ -11,7 +11,7 @@ import WatchListPage from "./components/home/pages/watchList/WatchListPage";
 import GenrePage from "./components/home/pages/genre/GenrePage"
 import Trailer from "./components/trailer/Trailer";
 import MovieDetails from "./components/details/MovieDetails";
-import LoginPage from "./components/auth/LoginPage.jsx";
+import LoginPage from "./src/components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import ManageMoviesPage from "./components/manageMovies/ManageMoviesPage";
