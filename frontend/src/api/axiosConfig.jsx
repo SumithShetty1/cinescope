@@ -3,7 +3,7 @@ import { getSessionToken, getRefreshToken } from '@descope/react-sdk';
 
 // Create an Axios instance with a base URL pointing to the backend API
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 // Attach authentication tokens to every outgoing request using Axios interceptor
