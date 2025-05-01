@@ -89,6 +89,7 @@ git clone https://github.com/SumithShetty1/cinescope.git
 #### Frontend
 Create `.env` in `/frontend`:
 ```env
+VITE_API_BASE_URL=http://localhost:8080/api/v1
 VITE_DESCOPE_PROJECT_ID=your-project-id
 ```
 #### Backend
