@@ -18,6 +18,8 @@ CineScope is a modern web application designed for movie enthusiasts to discover
 - **Database**: MongoDB (Cloud-hosted via MongoDB Atlas)
 - **API**: RESTful APIs
 - **Build Tools**: Vite, Maven
+- **Containerization**: Docker (multi-stage build)
+- **Deployment**: Vercel (Frontend), Render (Docker-based Backend Deployment)
 
 This project demonstrates the integration of modern web technologies with comprehensive movie management solutions, offering a flexible and engaging platform for film enthusiasts to discover, review, and organize their favorite movies.
 
