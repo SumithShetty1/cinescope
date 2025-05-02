@@ -9,6 +9,7 @@ import "./MovieForm.css";
 const MovieForm = ({
     formData,
     isEditing,
+    isLoading,
     handleInputChange,
     handleArrayChange,
     addArrayField,
@@ -251,8 +252,9 @@ const MovieForm = ({
                     variant={isEditing ? "warning" : "success"}
                     type="submit"
                     className="manage-submit-button"
+                    disabled={isLoading}
                 >
-                    {isEditing ? "Update Movie" : "Add Movie"}
+                    {isLoading ? "Processing..." : isEditing ? "Update Movie" : "Add Movie"}
                 </Button>
             </div>
         </form>

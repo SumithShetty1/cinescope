@@ -81,12 +81,13 @@
 }
 
 .watchlist-button.in-watchlist {
-    background-color: #ffc107;
+    background-color: gold;
     color: white;
     border-color: white;
+    font-weight: bold;
 }
 
 .watchlist-button.in-watchlist:hover {
-    background-color: #e0a800;
+    background-color: rgb(255, 220, 20);
     transform: translateY(-2px);
 }

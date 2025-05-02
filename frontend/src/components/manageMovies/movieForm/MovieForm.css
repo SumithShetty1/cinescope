@@ -69,6 +69,11 @@
     margin: 0 auto;
 }
 
+.manage-submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 /* Date picker styling */
 .manage-input[type="date"] {
     color-scheme: white;
