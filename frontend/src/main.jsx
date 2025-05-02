@@ -14,7 +14,10 @@ createRoot(document.getElementById("root")).render(
     <StrictMode>
 
         {/* Provide Descope authentication context to the entire app */}
-        <AuthProvider projectId={projectId}>
+        <AuthProvider
+            projectId={projectId}
+            redirectUrl={window.location.origin + '/'}
+        >
             <BrowserRouter>
 
                 {/* Define routing with a catch-all path that loads App component */}
