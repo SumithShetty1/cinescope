@@ -3,6 +3,7 @@ package com.cinescope.backend.service;
 import com.cinescope.backend.entity.Movie;
 import com.cinescope.backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class MovieService {
         if (limit <= 0) {
             return movieRepository.findAllByOrderByRatingDesc();
         }
-        return movieRepository.findTop16ByOrderByRatingDesc();
+        return movieRepository.findTopNRatedMovies(PageRequest.of(0, limit));
     }
 
     // Get newly released movies with an optional limit
@@ -47,7 +48,7 @@ public class MovieService {
         if (limit <= 0) {
             return movieRepository.findAllByOrderByReleaseDateDesc();
         }
-        return movieRepository.findTop16ByOrderByReleaseDateDesc();
+        return movieRepository.findNewlyReleasedMovies(PageRequest.of(0, limit));
     }
 
     // Get movies matching a specific genre (case-insensitive)
