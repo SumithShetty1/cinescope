@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { useDescope, useSession, useUser } from "@descope/react-sdk";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import SearchBar from "./searchBar/SearchBar";
 
 // Header component responsible for displaying the navigation menu and user authentication options
 const Header = () => {
@@ -86,6 +87,9 @@ const Header = () => {
                                 </NavLink>
                             )}
                         </Nav>
+
+                        {/* SearchBar component */}
+                        <SearchBar />
 
                         {/* Display user profile and logout buttons if authenticated, else display login and register buttons */}
                         <>

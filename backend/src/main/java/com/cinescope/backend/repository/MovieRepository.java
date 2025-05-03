@@ -26,4 +26,6 @@ public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
 
     @Query("{ 'genres': { $regex: ?0, $options: 'i' } }")
     List<Movie> findByGenreIgnoreCaseOrderByRatingDesc(String genre);
+
+    List<Movie> findByTitleContainingIgnoreCase(String title);
 }

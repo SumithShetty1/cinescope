@@ -3,6 +3,8 @@ package com.cinescope.backend.controller;
 import com.cinescope.backend.entity.Movie;
 import com.cinescope.backend.auth.AuthService;
 import com.cinescope.backend.service.MovieService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {
-
     @Autowired
     private MovieService movieService;
 
@@ -32,22 +33,24 @@ public class MovieController {
 
     // Get a single movie by IMDb ID
     @GetMapping("/{imdbId}")
-    public ResponseEntity<Optional<Movie>> getSingleMovies(@PathVariable String imdbId) {
-        return new ResponseEntity<>(movieService.singleMovie(imdbId), HttpStatus.OK);
+    public ResponseEntity<Movie> getSingleMovies(@PathVariable String imdbId) {
+        return movieService.singleMovie(imdbId)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Get top-rated movies, limited to a given number (default 16)
     @GetMapping("/top-rated/{limit}")
     public ResponseEntity<List<Movie>> getTopRatedMovies(@PathVariable(required = false) Integer limit) {
         int actualLimit = (limit != null) ? limit : 16;
-        return new ResponseEntity<>(movieService.getTopRatedMovies(actualLimit), HttpStatus.OK);
+        return ResponseEntity.ok(movieService.getTopRatedMovies(actualLimit));
     }
 
     // Get newest released movies, limited to a given number (default 16)
     @GetMapping("/new-releases/{limit}")
     public ResponseEntity<List<Movie>> getNewReleases(@PathVariable(required = false) Integer limit) {
         int actualLimit = (limit != null) ? limit : 16;
-        return new ResponseEntity<>(movieService.getNewReleases(actualLimit), HttpStatus.OK);
+        return ResponseEntity.ok(movieService.getNewReleases(actualLimit));
     }
 
     // Get movies by genre
@@ -63,6 +66,16 @@ public class MovieController {
             @PathVariable(required = false) Integer limit) {
         int actualLimit = (limit != null) ? limit : 0;
         return ResponseEntity.ok(movieService.getTopRatedMoviesByGenre(genre, actualLimit));
+    }
+
+    // Returns a list of movies matching the search query, sorted by relevance
+    @GetMapping("/search")
+    public ResponseEntity<List<Movie>> searchMovies(
+            @RequestParam String query,
+            @RequestParam(required = false, defaultValue = "4") int limit) {
+
+        List<Movie> movies = movieService.searchMovies(query, limit);
+        return ResponseEntity.ok(movies);
     }
 
     // Add a new movie (admin only)

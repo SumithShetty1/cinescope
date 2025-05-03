@@ -5,10 +5,11 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
-import HighRatedPage from "./components/home/pages/highRated/HighRatedPage";
-import NewlyAddedPage from "./components/home/pages/newlyAdded/NewlyAddedPage";
-import WatchListPage from "./components/home/pages/watchList/WatchListPage";
-import GenrePage from "./components/home/pages/genre/GenrePage"
+import HighRatedPage from "./components/pages/highRated/HighRatedPage";
+import NewlyAddedPage from "./components/pages/newlyAdded/NewlyAddedPage";
+import WatchListPage from "./components/pages/watchList/WatchListPage";
+import GenrePage from "./components/pages/genre/GenrePage"
+import SearchPage from "./components/pages/search/SearchPage";
 import Trailer from "./components/trailer/Trailer";
 import MovieDetails from "./components/details/MovieDetails";
 import LoginPage from "./components/auth/LoginPage";
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/newly-added" element={<NewlyAddedPage />} />
                     <Route path="/watchlist" element={<WatchListPage />} />
                     <Route path="/genre/:genreName" element={<GenrePage />} />
+                    <Route path="/search" element={<SearchPage />} />
                     <Route path="/trailer/:ytTrailerId" element={<Trailer />} />
                     <Route path="/details/:movieId" element={<MovieDetails />} />
                     <Route path="*" element={<NotFound />} />

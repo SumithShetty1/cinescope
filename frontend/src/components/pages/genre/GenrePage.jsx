@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './GenrePage.css';
 import { useParams } from 'react-router-dom';
-import api from '../../../../api/axiosConfig';
+import api from '../../../api/axiosConfig';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './NewlyAddedPage.css';
-import api from '../../../../api/axiosConfig';
+import api from '../../../api/axiosConfig';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
