@@ -20,7 +20,11 @@ const Hero = () => {
         const fetchTopMovies = async () => {
             try {
                 const response = await api.get('/movies/top-rated/10');
-                setTopMovies(response.data);
+                const moviesWithBackdrops = response.data.map(movie => ({
+                    ...movie,
+                    selectedBackdrop: movie.backdrops[Math.floor(Math.random() * movie.backdrops.length)]
+                }));
+                setTopMovies(moviesWithBackdrops);
             } catch (err) {
                 console.error("Error fetching top movies:", err);
                 setError('Failed to load featured movies');
@@ -76,7 +80,9 @@ const Hero = () => {
                         <div className='movie-card-container'>
 
                             {/* Custom background using inline CSS variable */}
-                            <div className="movie-card" style={{ "--img": `url(${movie.backdrops[0]})` }}>
+                            <div className="movie-card" style={{
+                                "--img": `url(${movie.selectedBackdrop})`
+                            }}>
                                 <div className="movie-detail">
                                     <div
                                         className="movie-poster"
