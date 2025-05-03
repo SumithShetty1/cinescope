@@ -1,0 +1,675 @@
+[{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda403"
+  },
+  "imdbId": "tt3915174",
+  "title": "Puss in Boots: The Last Wish",
+  "description": "When Puss in Boots discovers that his passion for adventure has taken its toll and he has burned through eight of his nine lives, he launches an epic journey to restore them by finding the mythical Last Wish.",
+  "duration": "1h 42m",
+  "directors": [
+    "Joel Crawford",
+    "Januel Mercado"
+  ],
+  "writers": [
+    "Paul Fisher",
+    "Tommy Swerdlow",
+    "Tom Wheeler"
+  ],
+  "stars": [
+    "Antonio Banderas",
+    "Salma Hayek",
+    "Harvey Guillén"
+  ],
+  "releaseDate": "2022-12-21",
+  "trailerLink": "https://www.youtube.com/watch?v=tHb7WlgyaUc",
+  "poster": "https://image.tmdb.org/t/p/w500/1NqwE6LP9IEdOZ57NCT51ftHtWT.jpg",
+  "genres": [
+    "Animation",
+    "Action",
+    "Adventure",
+    "Comedy",
+    "Family"
+  ],
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/r9PkFnRUIthgBp2JZZzD380MWZy.jpg",
+    "https://image.tmdb.org/t/p/original/faXT8V80JRhnArTAeYXz0Eutpv9.jpg",
+    "https://image.tmdb.org/t/p/original/pdrlEaknhta2wvE2dcD8XDEbAI4.jpg",
+    "https://image.tmdb.org/t/p/original/tGwO4xcBjhXC0p5qlkw37TrH6S6.jpg",
+    "https://image.tmdb.org/t/p/original/cP8YNG3XUeBmO8Jk7Skzq3vwHy1.jpg",
+    "https://image.tmdb.org/t/p/original/qLE8yuieTDN93WNJRmFSAEJChOg.jpg",
+    "https://image.tmdb.org/t/p/original/vNuHqmOJRQXY0PBd887DklSDlBP.jpg",
+    "https://image.tmdb.org/t/p/original/uUCc62M0I3lpZy0SiydbBmUIpNi.jpg",
+    "https://image.tmdb.org/t/p/original/2wPJIFrBhzzAP8oHDOlShMkERH6.jpg",
+    "https://image.tmdb.org/t/p/original/fnfirCEDIkxZnQEtEMMSgllm0KZ.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda408"
+  },
+  "imdbId": "tt0499549",
+  "title": "Avatar",
+  "description": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+  "duration": "2h 42m",
+  "directors": [
+    "James Cameron"
+  ],
+  "writers": [
+    "James Cameron"
+  ],
+  "stars": [
+    "Sam Worthington",
+    "Zoe Saldaña",
+    "Sigourney Weaver"
+  ],
+  "releaseDate": "2009-12-15",
+  "trailerLink": "https://www.youtube.com/watch?v=5PSNL1qE6VY",
+  "poster": "https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg",
+  "genres": [
+    "Fantasy",
+    "Action",
+    "Science Fiction",
+    "Adventure"
+  ],
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/o0s4XsEDfDlvit5pDRKjzXR4pp2.jpg",
+    "https://image.tmdb.org/t/p/original/8I37NtDffNV7AZlDa7uDvvqhovU.jpg",
+    "https://image.tmdb.org/t/p/original/2YLOjUiczXEgVZFDSIeH3iWB3Ub.jpg",
+    "https://image.tmdb.org/t/p/original/Yc9q6QuWrMp9nuDm5R8ExNqbEq.jpg",
+    "https://image.tmdb.org/t/p/original/jlQJDD0L5ZojjlS0KYnApdO0n19.jpg",
+    "https://image.tmdb.org/t/p/original/sfw4m2tOgQRzhF6VXxaXGfd1vX.jpg",
+    "https://image.tmdb.org/t/p/original/7ABsaBkO1jA2psC8Hy4IDhkID4h.jpg",
+    "https://image.tmdb.org/t/p/original/xMMrBziwJqrgjerqpNeQvwuwiUp.jpg",
+    "https://image.tmdb.org/t/p/original/chauy3iJaZtrMbTr72rgNmOZwo3.jpg",
+    "https://image.tmdb.org/t/p/original/mYJkJ7YxJsUNI1nAOOUOpRN2auC.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda404"
+  },
+  "imdbId": "tt1630029",
+  "title": "Avatar: The Way of Water",
+  "description": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
+  "duration": "3h 12m",
+  "directors": [
+    "James Cameron"
+  ],
+  "writers": [
+    "James Cameron",
+    "Rick Jaffa",
+    "Amanda Silver"
+  ],
+  "stars": [
+    "Sam Worthington",
+    "Zoe Saldaña",
+    "Sigourney Weaver"
+  ],
+  "releaseDate": "2022-12-16",
+  "trailerLink": "https://www.youtube.com/watch?v=d9MyW72ELq0",
+  "poster": "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+  "genres": [
+    "Science Fiction",
+    "Action",
+    "Adventure"
+  ],
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg",
+    "https://image.tmdb.org/t/p/original/evaFLqtswezLosllRZtJNMiO1UR.jpg",
+    "https://image.tmdb.org/t/p/original/198vrF8k7mfQ4FjDJsBmdQcaiyq.jpg",
+    "https://image.tmdb.org/t/p/original/zaapQ1zjKe2BGhhowh5pM251Gpl.jpg",
+    "https://image.tmdb.org/t/p/original/tQ91wWQJ2WRNDXwxuO7GCXX5VPC.jpg",
+    "https://image.tmdb.org/t/p/original/5gPQKfFJnl8d1edbkOzKONo4mnr.jpg",
+    "https://image.tmdb.org/t/p/original/2fS9cpar9rzxixwnRptg4bGmIym.jpg",
+    "https://image.tmdb.org/t/p/original/fkGR1ltNbvERk3topo4dP3gWsvR.jpg",
+    "https://image.tmdb.org/t/p/original/rb9IHprKNoSKqatP2vr25unUDSu.jpg",
+    "https://image.tmdb.org/t/p/original/37ZswIuRQcRBN7kHij5MBjzRMRt.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda40a"
+  },
+  "imdbId": "tt9114286",
+  "title": "Black Panther: Wakanda Forever",
+  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa.",
+  "duration": "2h 41m",
+  "directors": [
+    "Ryan Coogler"
+  ],
+  "writers": [
+    "Ryan Coogler",
+    "Joe Robert Cole",
+    "Stan Lee"
+  ],
+  "stars": [
+    "Letitia Wright",
+    "Lupita Nyong'o",
+    "Danai Gurira"
+  ],
+  "releaseDate": "2022-11-11",
+  "trailerLink": "https://www.youtube.com/watch?v=_Z3QKkl1WyM",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Science Fiction"
+  ],
+  "poster": "https://image.tmdb.org/t/p/w500/cryEN3sWlgB2wTzcUNVtDGI8bkM.jpg",
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/yYrvN5WFeGYjJnRzhY0QXuo4Isw.jpg",
+    "https://image.tmdb.org/t/p/original/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg",
+    "https://image.tmdb.org/t/p/original/cs3LpA38BS2XDPfUzdgMB537XOo.jpg",
+    "https://image.tmdb.org/t/p/original/6SGMzCsaU094Mt32IHGkIYtIl06.jpg",
+    "https://image.tmdb.org/t/p/original/bty0TwJGsxMqYRptgyzn28Cxq5y.jpg",
+    "https://image.tmdb.org/t/p/original/h2jp3CSdTPc22mUqps9I8vXDPaN.jpg",
+    "https://image.tmdb.org/t/p/original/fSfWloWi5rmqbmC7GhO0HY2TMZW.jpg",
+    "https://image.tmdb.org/t/p/original/vZujZnmkYB5nGUC5d5llK9DbGLk.jpg",
+    "https://image.tmdb.org/t/p/original/8sMmAmN2x7mBiNKEX2o0aOTozEB.jpg",
+    "https://image.tmdb.org/t/p/original/geI3Mk7nehX1kvyIY3K5ajaiNfI.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": []
+},
+{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda406"
+  },
+  "imdbId": "tt11116912",
+  "title": "Troll",
+  "description": "Deep in the Dovre mountain, something gigantic wakes up after a thousand years in captivity. The creature destroys everything in its path and quickly approaches Oslo.",
+  "duration": "1h 41m",
+  "directors": [
+    "Roar Uthaug"
+  ],
+  "writers": [
+    "Espen Aukan",
+    "Roar Uthaug"
+  ],
+  "stars": [
+    "Ine Marie Wilmann",
+    "Kim Falck",
+    "Mads Sjøgård Pettersen"
+  ],
+  "releaseDate": "2022-12-01",
+  "trailerLink": "https://www.youtube.com/watch?v=AiohkY_XQYQ",
+  "genres": [
+    "Fantasy",
+    "Action",
+    "Adventure"
+  ],
+  "poster": "https://image.tmdb.org/t/p/w500/9z4jRr43JdtU66P0iy8h18OyLql.jpg",
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/53BC9F2tpZnsGno2cLhzvGprDYS.jpg",
+    "https://image.tmdb.org/t/p/original/e9Qb2kmBnMXHCmNMI8NX1JbWhh1.jpg",
+    "https://image.tmdb.org/t/p/original/2WjOOOGUu6dp4r8VqR5n48DY7JG.jpg",
+    "https://image.tmdb.org/t/p/original/duIsyybgrC4S8kcCIVaxNOttV15.jpg",
+    "https://image.tmdb.org/t/p/original/3RS8runn9AfrYDzRVPWuGPmvXQf.jpg",
+    "https://image.tmdb.org/t/p/original/8wLRn2VvBlCu6cqYS4ypipnwosr.jpg",
+    "https://image.tmdb.org/t/p/original/zDqVVkmfvj47FBUE5lwE4rWnITu.jpg",
+    "https://image.tmdb.org/t/p/original/682Ui5DwZDdbIPzKAEOR7cJlMXa.jpg",
+    "https://image.tmdb.org/t/p/original/6jdlppcnGi3XuJamfs4Vl7HyxB.jpg",
+    "https://image.tmdb.org/t/p/original/uIq83ogs7QBEWi1aqmUrdDIH61m.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": []
+},
+{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda407"
+  },
+  "imdbId": "tt6443346",
+  "title": "Black Adam",
+  "description": "When Puss in Boots discovers that his passion for adventure has taken its toll and he has burned through eight of his nine lives, he launches an epic journey to restore them by finding the mythical Last Wish.",
+  "duration": "2h 5m",
+  "directors": [
+    "Jaume Collet-Serra"
+  ],
+  "writers": [
+    "Adam Sztykiel",
+    "Rory Haines",
+    "Sohrab Noshirvani"
+  ],
+  "stars": [
+    "Dwayne Johnson",
+    "Aldis Hodge",
+    "Pierce Brosnan"
+  ],
+  "releaseDate": "2022-10-19",
+  "trailerLink": "https://www.youtube.com/watch?v=JaV7mmc9HGw",
+  "poster": "https://image.tmdb.org/t/p/w500/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
+  "genres": [
+    "Fantasy",
+    "Action",
+    "Science Fiction"
+  ],
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+    "https://image.tmdb.org/t/p/original/9hNtTwY8P5v2MKnUeb7iuREI7Yb.jpg",
+    "https://image.tmdb.org/t/p/original/zplntIhzXyBiXFYWReETxh0uyFF.jpg",
+    "https://image.tmdb.org/t/p/original/yxkhM18dYwsRRffLnd9lz2d4i0v.jpg",
+    "https://image.tmdb.org/t/p/original/bgaBKREAfUtZgvd6zoV6RQRcIUt.jpg",
+    "https://image.tmdb.org/t/p/original/uqYxoj4hqwocwfBs2xxGyQT88Yk.jpg",
+    "https://image.tmdb.org/t/p/original/qBx97wytqlyPqXATHqRgIVFxJRU.jpg",
+    "https://image.tmdb.org/t/p/original/d6MhreFdMHONqX3iZlJGCF8UkIt.jpg",
+    "https://image.tmdb.org/t/p/original/9inNotReApz0n50WvWbrt0n1cbL.jpg",
+    "https://image.tmdb.org/t/p/original/pSOuqtJmdh7aI1yiK7M8e0PmbPC.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.Movie"
+},
+{
+  "_id": {
+    "$oid": "67fa88316bedee9a3adda40b"
+  },
+  "imdbId": "tt10298840",
+  "title": "Strange World",
+  "description": "The legendary Clades are a family of explorers whose differences threaten to topple their latest and most crucial mission.",
+  "duration": "1h 42m",
+  "directors": [
+    "Don Hall",
+    "Qui Nguyen"
+  ],
+  "writers": [
+    "Qui Nguyen"
+  ],
+  "stars": [
+    "Jake Gyllenhaal",
+    "Jaboukie Young-White",
+    "Gabrielle Union"
+  ],
+  "releaseDate": "2022-11-23",
+  "trailerLink": "https://www.youtube.com/watch?v=bKh2G73gCCs",
+  "genres": [
+    "Family",
+    "Adventure",
+    "Science Fiction",
+    "Animation"
+  ],
+  "poster": "https://image.tmdb.org/t/p/w500/kgJ8bX3zDQDM2Idkleis28XSVnu.jpg",
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/5wDBVictj4wUYZ31gR5WzCM9dLD.jpg",
+    "https://image.tmdb.org/t/p/original/zNIlXd7CAz0hHAInbs2nsFRc0xQ.jpg",
+    "https://image.tmdb.org/t/p/original/1rukJHAP5p6DNHe75Oo1D0m3SnR.jpg",
+    "https://image.tmdb.org/t/p/original/aKbe411WyjTZy1OZUVIdNDYVf21.jpg",
+    "https://image.tmdb.org/t/p/original/9RKvxz0IryD2ofLYyGpnE7HeWlR.jpg",
+    "https://image.tmdb.org/t/p/original/kFURsDklj7QGMMkGJVwDBaJJn05.jpg",
+    "https://image.tmdb.org/t/p/original/v6oBDkd7ogXzTQxIU0H5SXq0hOL.jpg",
+    "https://image.tmdb.org/t/p/original/fBshLiEJcjdfrU3qQBIINcePSsm.jpg",
+    "https://image.tmdb.org/t/p/original/3oie0kID8SNCjkqN6Raweg5dJa.jpg",
+    "https://image.tmdb.org/t/p/original/zgFldVKON1Nxp8ui7HVABGKDQKM.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": []
+},
+{
+  "_id": {
+    "$oid": "681639fc4908e75f41f2c835"
+  },
+  "imdbId": "tt0848228",
+  "title": "The Avengers",
+  "description": "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+  "duration": "2h 23m",
+  "directors": [
+    "Joss Whedon"
+  ],
+  "writers": [
+    "Joss Whedon",
+    "Zak Penn"
+  ],
+  "stars": [
+    "Robert Downey Jr.",
+    "Chris Evans",
+    "Scarlett Johansson"
+  ],
+  "releaseDate": "2012-04-11",
+  "trailerLink": "https://www.youtube.com/watch?v=eOrNdBpGMv8",
+  "poster": "https://image.tmdb.org/t/p/original/yHdPTs239Cqce1s6y9figbeolR1.jpg",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Fantasy",
+    "Drama"
+  ],
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg",
+    "https://image.tmdb.org/t/p/original/gHLs7Fy3DzLmLsD4lmfqL55KGcl.jpg",
+    "https://image.tmdb.org/t/p/original/nNmJRkg8wWnRmzQDe2FwKbPIsJV.jpg",
+    "https://image.tmdb.org/t/p/original/pGFQCp12a8andfPlpnmXz44IIvY.jpg",
+    "https://image.tmdb.org/t/p/original/cEWjJID8r7dG1KPhCuNw7K4Sb1J.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "68163d0b4908e75f41f2c836"
+  },
+  "imdbId": "tt1877830",
+  "title": "The Batman",
+  "description": "When a sadistic serial killer begins murdering key political figures in Gotham, the Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
+  "duration": "2h 56m",
+  "directors": [
+    "Matt Reeves"
+  ],
+  "writers": [
+    "Matt Reeves",
+    "Peter Craig",
+    "Bob Kane"
+  ],
+  "stars": [
+    "Robert Pattinson",
+    "Zoë Kravitz",
+    "Jeffrey Wright"
+  ],
+  "releaseDate": "2022-03-01",
+  "trailerLink": "https://www.youtube.com/watch?v=mqqft2x_Aa4&t=1s",
+  "poster": "https://www.themoviedb.org/t/p/w1280/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+  "genres": [
+    "Crime",
+    "Mystery",
+    "Thriller"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/eUORREWq2ThkkxyiCESCu3sVdGg.jpg",
+    "https://image.tmdb.org/t/p/original/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
+    "https://image.tmdb.org/t/p/original/IYUD7rAIXzBM91TT3Z5fILUS7n.jpg",
+    "https://image.tmdb.org/t/p/original/e66tM5YOawXLxhDAfWkR7sxpb3h.jpg",
+    "https://image.tmdb.org/t/p/original/tRS6jvPM9qPrrnx2KRp3ew96Yot.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "68163fb94908e75f41f2c837"
+  },
+  "imdbId": "tt4154756",
+  "title": "Avengers: Infinity War",
+  "description": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+  "duration": "2h 29m",
+  "directors": [
+    "Anthony Russo",
+    "Joe Russo"
+  ],
+  "writers": [
+    "Christopher Markus",
+    "Stephen McFeely",
+    "Stan Lee"
+  ],
+  "stars": [
+    "Robert Downey Jr.",
+    "Chris Hemsworth",
+    "Mark Ruffalo"
+  ],
+  "releaseDate": "2018-04-23",
+  "trailerLink": "https://www.youtube.com/watch?v=6ZfuNTqbHE8",
+  "poster": "https://www.themoviedb.org/t/p/w1280/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+  "genres": [
+    "Adventure",
+    "Action",
+    "Science Fiction"
+  ],
+  "backdrops": [
+    "https://image.tmdb.org/t/p/original/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
+    "https://image.tmdb.org/t/p/original/sbpTzyKkBedre1CjExJMNawEbHB.jpg",
+    "https://image.tmdb.org/t/p/original/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
+    "https://image.tmdb.org/t/p/original/k3xGG77CAiB0Wr2Y1H3ApihKTkk.jpg",
+    "https://image.tmdb.org/t/p/original/itSPvOwrQB41h0rGR8YHwquffuf.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "681642c24908e75f41f2c838"
+  },
+  "imdbId": "tt4154796",
+  "title": "Avengers: Endgame",
+  "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+  "duration": "3h 1m",
+  "directors": [
+    "Anthony Russo",
+    "Joe Russo"
+  ],
+  "writers": [
+    " Christopher Markus",
+    "Stephen McFeely",
+    "Stan Lee"
+  ],
+  "stars": [
+    " Robert Downey Jr.",
+    "Chris Evans",
+    "Mark Ruffalo"
+  ],
+  "releaseDate": "2019-04-18",
+  "trailerLink": "https://www.youtube.com/watch?v=6ZfuNTqbHE8",
+  "poster": "https://www.themoviedb.org/t/p/w1280/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+  "genres": [
+    "Adventure",
+    "Science Fiction",
+    "Action"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+    "https://image.tmdb.org/t/p/original/91iy9F1JOG1dvM6M6JNYgvScZpK.jpg",
+    "https://image.tmdb.org/t/p/original/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg",
+    "https://image.tmdb.org/t/p/original/eFzIlCERjyrp2z2YpZo8yaETGWx.jpg",
+    "https://image.tmdb.org/t/p/original/xuYDe1Ntxp9OOvz4aEypxmilgvr.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "6816452d4908e75f41f2c839"
+  },
+  "imdbId": "tt9362722",
+  "title": "Spider-Man: Across the Spider-Verse",
+  "description": "Traveling across the multiverse, Miles Morales meets a new team of Spider-People, made up of heroes from different dimensions. But when the heroes clash over how to deal with a new threat, Miles finds himself at a crossroads.",
+  "duration": "2h 20m",
+  "directors": [
+    "Joaquim Dos Santos",
+    "Kemp Powers",
+    "Justin K. Thompson"
+  ],
+  "writers": [
+    "Phil Lord",
+    "Christopher Miller",
+    "Dave Callaham"
+  ],
+  "stars": [
+    "Shameik Moore",
+    "Hailee Steinfeld",
+    "Brian Tyree Henry"
+  ],
+  "releaseDate": "2023-10-31",
+  "trailerLink": "https://youtu.be/cqGjhVJWtEg?si=BhXVKd3ELdkV3heQ",
+  "poster": "https://www.themoviedb.org/t/p/w1280/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+  "genres": [
+    "Animation",
+    "Action",
+    "Adventure",
+    "Science Fiction"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
+    "https://image.tmdb.org/t/p/original/bpvjzk0QXbJPV4wVwrHuYiq1TbP.jpg",
+    "https://image.tmdb.org/t/p/original/9wsyNsux778zw0cp8p6sWqlvEcQ.jpg",
+    "https://image.tmdb.org/t/p/original/2XHBh0CGaNqzpe6jdmBVPZ2mx75.jpg",
+    "https://image.tmdb.org/t/p/original/tDvwPYof0fAU5sa4eZuKEzMNASW.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "681661ab6fd22a7e96f29e57"
+  },
+  "imdbId": "tt2395427",
+  "title": "Avengers: Age of Ultron",
+  "description": "When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it's up to Earth's mightiest heroes to stop the villainous Ultron from enacting his terrible plan.",
+  "duration": "2h 21m",
+  "directors": [
+    "Joss Whedon"
+  ],
+  "writers": [
+    "Joss Whedon",
+    "Stan Lee",
+    "Jack Kirby"
+  ],
+  "stars": [
+    "Robert Downey Jr.",
+    "Chris Evans",
+    "Mark Ruffalo"
+  ],
+  "releaseDate": "2015-04-13",
+  "trailerLink": "https://www.youtube.com/watch?v=tmeOjFno6Do",
+  "poster": "https://www.themoviedb.org/t/p/w1280/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Science Fiction"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/6YwkGolwdOMNpbTOmLjoehlVWs5.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/xnqust9Li4oxfhXD5kcPi3UC8i4.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/9t6drsYN58jO9ZSRu8Gs5f2XgzQ.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/inUrPGh50IoGovCtRhTSL3s2AAh.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/lRYjF9uUHXJ8MTnepGDQS8eaVRG.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "681663f46fd22a7e96f29e58"
+  },
+  "imdbId": "tt3501632",
+  "title": "Thor: Ragnarok",
+  "description": "Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela.",
+  "duration": "2h 10m",
+  "directors": [
+    "Taika Waititi"
+  ],
+  "writers": [
+    "Eric Pearson",
+    "Craig Kyle",
+    "Christopher L. Yost"
+  ],
+  "stars": [
+    "Chris Hemsworth",
+    "Tom Hiddleston",
+    "Cate Blanchett"
+  ],
+  "releaseDate": "2017-10-10",
+  "trailerLink": "https://www.youtube.com/watch?v=ue80QwXMRHg",
+  "poster": "https://www.themoviedb.org/t/p/w1280/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Science Fiction"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/6G2fLCVm9fiLyHvBrccq6GSe2ih.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/vLmHH8jAy8Jq8uBsLucd3592WGh.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/6YozDnrA2fXdIbB5nWDFHtB5ZY6.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/rJ2QIl5pSymXBxvelxa83upQLvn.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/5wNUJs23rT5rTBacNyf5h83AynM.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "68166879a216115144573d3a"
+  },
+  "imdbId": "tt5311514",
+  "title": "Your Name.",
+  "description": "Two teenagers share a profound, magical connection upon discovering they are swapping bodies. Things manage to become even more complicated when the boy and girl decide to meet in person.",
+  "duration": "1h 46m",
+  "directors": [
+    "Makoto Shinkai"
+  ],
+  "writers": [
+    "Makoto Shinkai"
+  ],
+  "stars": [
+    "Ryûnosuke Kamiki",
+    "Mone Kamishiraishi",
+    "Ryo Narita"
+  ],
+  "releaseDate": "2016-08-26",
+  "trailerLink": "https://www.youtube.com/watch?v=xU47nhruN-Q",
+  "poster": "https://www.themoviedb.org/t/p/w1280/8GJsy7w7frGquw1cy9jasOGNNI1.jpg",
+  "genres": [
+    "Animation",
+    "Romance",
+    "Drama"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/vC1pMebkRu3GWvlD6VzrwHE7oa0.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/rjs5IfIv6Psl2YCSHKcluhTQGjJ.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/wTFN4jB35Htt2jRUSShONhE7Z51.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/6ugms2mkEcuO0nBOWKDG746G88q.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/dIWwZW7dJJtqC6CgWzYkNVKIUm8.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "68166ac8a216115144573d3b"
+  },
+  "imdbId": "tt16428256",
+  "title": "Suzume",
+  "description": "A modern action adventure road story where a 17-year-old girl named Suzume helps a mysterious young man close doors from the other side that are releasing disasters all over in Japan.",
+  "duration": "2h 2m",
+  "directors": [
+    "Makoto Shinkai"
+  ],
+  "writers": [
+    "Makoto Shinkai"
+  ],
+  "stars": [
+    "Nanoka Hara",
+    "Hokuto Matsumura",
+    "Eri Fukatsu"
+  ],
+  "releaseDate": "2022-11-11",
+  "trailerLink": "https://www.youtube.com/watch?v=g0JMPkn7Wuo",
+  "poster": "https://www.themoviedb.org/t/p/w1280/oNbCAM3UVJamxRFd5hUt686aqb2.jpg",
+  "genres": [
+    "Animation",
+    "Drama",
+    "Adventure",
+    "Fantasy"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/4tdV5AeojEdbvn6VpeQrbuDlmzs.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/ceYZCBfwbBwSpGJ6PapNVw5jqLG.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/xU8Wwsut0MCWs5Kz5C4mNwXGtGw.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/281o7JPcVO6IOkczd0az52aoxvU.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/RMEXlMnlQt1llQ4Gv2IQHKcG4V.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+}]
