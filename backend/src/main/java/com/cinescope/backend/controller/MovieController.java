@@ -59,15 +59,6 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMoviesByGenre(genre));
     }
 
-    // Get top-rated movies by genre, optionally limited
-    @GetMapping("/genre/{genre}/top-rated/{limit}")
-    public ResponseEntity<List<Movie>> getTopRatedMoviesByGenre(
-            @PathVariable String genre,
-            @PathVariable(required = false) Integer limit) {
-        int actualLimit = (limit != null) ? limit : 0;
-        return ResponseEntity.ok(movieService.getTopRatedMoviesByGenre(genre, actualLimit));
-    }
-
     // Returns a list of movies matching the search query, sorted by relevance
     @GetMapping("/search")
     public ResponseEntity<List<Movie>> searchMovies(

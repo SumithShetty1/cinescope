@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,17 +58,10 @@ public class MovieService {
             throw new IllegalArgumentException("Genre cannot be empty");
         }
 
-        return movieRepository.findByGenreIgnoreCase(genre);
-    }
-
-    // Get top-rated movies by genre with an optional limit
-    public List<Movie> getTopRatedMoviesByGenre(String genre, int limit) {
-        if (!StringUtils.hasText(genre)) {
-            throw new IllegalArgumentException("Genre cannot be empty");
-        }
-
-        List<Movie> movies = movieRepository.findByGenreIgnoreCaseOrderByRatingDesc(genre);
-        return limit > 0 ? movies.stream().limit(limit).collect(Collectors.toList()) : movies;
+        List<Movie> all = movieRepository.findByGenreIgnoreCase(genre);
+        return all.stream()
+                .sorted(Comparator.comparingDouble(Movie::getRating).reversed())
+                .collect(Collectors.toList());
     }
 
     // Searches for movies by title with case-insensitive matching and returns sorted results
