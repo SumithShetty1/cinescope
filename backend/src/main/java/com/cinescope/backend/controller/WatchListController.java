@@ -30,7 +30,7 @@ public class WatchListController {
     @GetMapping("/{email}/{limit}")
     public ResponseEntity<WatchList> getWatchListByEmail(
             @PathVariable String email,
-            @PathVariable(required = false) Integer limit) {
+            @PathVariable Integer limit) {
 
         int actualLimit = (limit != null) ? limit : 16;
         Optional<WatchList> watchList = watchListService.getWatchListByEmail(email, actualLimit);

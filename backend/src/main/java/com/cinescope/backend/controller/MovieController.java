@@ -3,8 +3,6 @@ package com.cinescope.backend.controller;
 import com.cinescope.backend.entity.Movie;
 import com.cinescope.backend.auth.AuthService;
 import com.cinescope.backend.service.MovieService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,14 +39,14 @@ public class MovieController {
 
     // Get top-rated movies, limited to a given number (default 16)
     @GetMapping("/top-rated/{limit}")
-    public ResponseEntity<List<Movie>> getTopRatedMovies(@PathVariable(required = false) Integer limit) {
+    public ResponseEntity<List<Movie>> getTopRatedMovies(@PathVariable Integer limit) {
         int actualLimit = (limit != null) ? limit : 16;
         return ResponseEntity.ok(movieService.getTopRatedMovies(actualLimit));
     }
 
     // Get newest released movies, limited to a given number (default 16)
     @GetMapping("/new-releases/{limit}")
-    public ResponseEntity<List<Movie>> getNewReleases(@PathVariable(required = false) Integer limit) {
+    public ResponseEntity<List<Movie>> getNewReleases(@PathVariable Integer limit) {
         int actualLimit = (limit != null) ? limit : 16;
         return ResponseEntity.ok(movieService.getNewReleases(actualLimit));
     }
