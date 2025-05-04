@@ -65,8 +65,18 @@ const Header = () => {
                     <Navbar.Brand onClick={home} style={{ color: "gold", cursor: "pointer" }}>
                         <FontAwesomeIcon icon={faVideoCamera} /> CineScope
                     </Navbar.Brand>
+
+                    {/* Search Bar */}
+                    <div className="mobile-search-bar ms-auto me-2">    {/* Visible only on tablet */}
+                        <SearchBar />
+                    </div>
+
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
+                        {/* Search Bar - Visible only below 530px */}
+                        <div className="w-100 mb-2 d-lg-none mobile-search-only">
+                            <SearchBar />
+                        </div>
 
                         {/* Navigation links */}
                         <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
@@ -88,8 +98,10 @@ const Header = () => {
                             )}
                         </Nav>
 
-                        {/* SearchBar component */}
-                        <SearchBar />
+                        {/* Search Bar - Visible on desktop */}
+                        <div className="d-none d-lg-block me-3"> {/* Hidden on mobile */}
+                            <SearchBar />
+                        </div>
 
                         {/* Display user profile and logout buttons if authenticated, else display login and register buttons */}
                         <>

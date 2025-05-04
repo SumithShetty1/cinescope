@@ -48,8 +48,15 @@ const WatchListPage = () => {
                 setHasWatchlist(false);
             }
         } catch (error) {
-            console.error("Error fetching watchlist movies:", error);
-            setError('Failed to load watchlist');
+            // Handle 404 specifically (no watchlist exists)
+            if (err.response?.status === 404) {
+                setWatchListMovies([]);
+                setHasWatchlist(false);
+            } else {
+                // Only log and show errors for non-404 cases
+                console.error("Error fetching watchlist:", err);
+                setError('Failed to load watchlist');
+            }
         } finally {
             setIsLoading(false);
         }
