@@ -1,7 +1,7 @@
 # CineScope - Movie Review Web Application
 
 ## Project Overview
-CineScope is a modern web application designed for movie enthusiasts to discover, review, and manage their favorite films. Built with React for the frontend and Spring Boot for the backend, CineScope provides a seamless platform for users to explore movies, watch trailers, and maintain personalized watchlists. The application features secure authentication and delivers a rich, interactive user experience.
+CineScope is a web application designed for movie enthusiasts to discover, review, and manage their favorite films. Built with React for the frontend and Spring Boot for the backend, CineScope provides a seamless platform for users to explore movies, watch trailers, and maintain personalized watchlists. The application features secure authentication and delivers a rich, interactive user experience.
 
 ## Key Features
 - **Movie Discovery**: Browse an extensive collection of movies with detailed information
