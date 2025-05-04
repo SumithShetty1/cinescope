@@ -672,4 +672,82 @@
   "rating": 0,
   "reviewIds": [],
   "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "6816fb6d6f84f12d90dcf3e8"
+  },
+  "imdbId": "tt9426210",
+  "title": "Weathering with You",
+  "description": "Set during a period of exceptionally rainy weather, high-school boy Hodaka Morishima runs away from his troubled rural home to Tokyo and befriends an orphan girl who can manipulate the weather.",
+  "duration": "1h 52m",
+  "directors": [
+    "Makoto Shinkai"
+  ],
+  "writers": [
+    "Makoto Shinkai"
+  ],
+  "stars": [
+    "Kotaro Daigo",
+    "Nana Mori",
+    "Tsubasa Honda"
+  ],
+  "releaseDate": "2019-07-19",
+  "trailerLink": "https://www.youtube.com/watch?v=Q6iK6DjV_iE",
+  "poster": "https://www.themoviedb.org/t/p/w1280/qgrk7r1fV4IjuoeiGS5HOhXNdLJ.jpg",
+  "genres": [
+    "Animation",
+    "Drama",
+    "Fantasy",
+    "Romance"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/ize3ZieqSy0TCWljmVoEiy8fSFS.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/uoWyHkGQindLosblL7fAnkVaZlj.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/jFK8BOPL6ZeWyjMVWX8ajsTTinp.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/hcnPXKjHeJtLpYjjVwUAX9MsFcJ.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/9wav4lUFPyLEzkOoJiJBSjI8fMm.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
+},
+{
+  "_id": {
+    "$oid": "6817000b6f84f12d90dcf3e9"
+  },
+  "imdbId": "tt1677720",
+  "title": "Ready Player One",
+  "description": "When the creator of a virtual reality called the OASIS dies, he makes a posthumous challenge to all OASIS users to find his Easter Egg, which will give the finder his fortune and control of his world.",
+  "duration": "2h 20m",
+  "directors": [
+    "Steven Spielberg"
+  ],
+  "writers": [
+    "Zak Penn",
+    "Ernest Cline"
+  ],
+  "stars": [
+    "Tye Sheridan",
+    "Olivia Cooke",
+    "Ben Mendelsohn"
+  ],
+  "releaseDate": "2018-03-11",
+  "trailerLink": "https://www.youtube.com/watch?v=cSp1dM2Vj48",
+  "poster": "https://www.themoviedb.org/t/p/w1280/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg",
+  "genres": [
+    "Adventure",
+    "Action",
+    "Science Fiction"
+  ],
+  "backdrops": [
+    "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/5a7lMDn3nAj2ByO0X1fg6BhUphR.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/q7fXcrDPJcf6t3rzutaNwTzuKP1.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/hsgNTMRn3xGRHx3MYfeRYZgiau7.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/dbrLfmFNFEJWv8rLnjpgCKlXWSy.jpg",
+    "https://media.themoviedb.org/t/p/w1000_and_h563_face/neIJEudQ0PbAIK2DnY37cf6wvyj.jpg"
+  ],
+  "rating": 0,
+  "reviewIds": [],
+  "_class": "com.cinescope.backend.entity.Movie"
 }]

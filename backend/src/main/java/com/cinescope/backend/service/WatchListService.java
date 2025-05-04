@@ -5,6 +5,7 @@ import com.cinescope.backend.repository.MovieRepository;
 import com.cinescope.backend.entity.WatchList;
 import com.cinescope.backend.repository.WatchListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -27,8 +28,11 @@ public class WatchListService {
     private MongoTemplate mongoTemplate;
 
     // Retrieves a user's watchlist by email
-    public Optional<WatchList> getWatchListByEmail(String email) {
-        return watchListRepository.findWatchListByEmail(email);
+    public Optional<WatchList> getWatchListByEmail(String email, int limit) {
+        if (limit <= 0) {
+            return watchListRepository.findWatchListByEmail(email);
+        }
+        return watchListRepository.findWatchListByEmailWithLimit(email, limit);
     }
 
     // Checks if a specific movie is in the user's watchlist

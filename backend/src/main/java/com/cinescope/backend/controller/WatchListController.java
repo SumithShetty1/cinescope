@@ -1,5 +1,6 @@
 package com.cinescope.backend.controller;
 
+import com.cinescope.backend.entity.Movie;
 import com.cinescope.backend.entity.WatchList;
 import com.cinescope.backend.auth.AuthService;
 import com.cinescope.backend.service.WatchListService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,9 +27,14 @@ public class WatchListController {
     private AuthService authService;
 
     // Get the complete watchlist for a user by email
-    @GetMapping("/{email}")
-    public ResponseEntity<WatchList> getWatchListByEmail(@PathVariable String email) {
-        Optional<WatchList> watchList = watchListService.getWatchListByEmail(email);
+    @GetMapping("/{email}/{limit}")
+    public ResponseEntity<WatchList> getWatchListByEmail(
+            @PathVariable String email,
+            @PathVariable(required = false) Integer limit) {
+
+        int actualLimit = (limit != null) ? limit : 16;
+        Optional<WatchList> watchList = watchListService.getWatchListByEmail(email, actualLimit);
+
         return watchList.map(w -> new ResponseEntity<>(w, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
