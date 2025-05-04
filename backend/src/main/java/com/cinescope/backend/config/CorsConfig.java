@@ -23,10 +23,11 @@ public class CorsConfig {
             // Configures CORS to allow specific origins, methods, and headers
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
+                registry.addMapping("/api/**")
                         .allowedOrigins(allowedOrigins)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                         .allowedHeaders("*")
+                        .exposedHeaders("Authorization", "x-refresh-token")
                         .allowCredentials(true);
             }
         };
