@@ -35,7 +35,7 @@ const WatchListPage = () => {
         setIsLoading(true);
         setError('');
         try {
-            const watchlistResponse = await api.get(`/watchlist/${user.email}`);
+            const watchlistResponse = await api.get(`/watchlist/${user.email}/0`);
             const watchlist = watchlistResponse.data;
 
             if (watchlist && watchlist.movies && watchlist.movies.length > 0) {
