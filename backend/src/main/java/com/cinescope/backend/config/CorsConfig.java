@@ -28,7 +28,7 @@ public class CorsConfig {
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                         .allowedHeaders("*")
                         .exposedHeaders("Authorization", "x-refresh-token")
-                        .allowCredentials(true);
+                        .allowCredentials(true)
                         .maxAge(3600);
             }
         };
