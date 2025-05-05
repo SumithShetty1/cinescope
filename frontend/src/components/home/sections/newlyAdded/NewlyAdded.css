@@ -103,7 +103,7 @@
     }
     
     .newly-added-movies {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         padding: 1rem;
         gap: 1rem;
     }
@@ -140,7 +140,7 @@
     }
     
     .newly-added-movies {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         padding: 0.5rem;
         gap: 0.8rem;
     }
@@ -159,7 +159,7 @@
 
 @media (max-width: 360px) {
     .newly-added-movies {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
         gap: 0.6rem;
     }
     
