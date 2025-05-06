@@ -72,7 +72,7 @@ const NewlyAdded = () => {
             <div className="poster-container">
               <img src={movie.poster} alt={movie.title} />
               <div className="movie-rating">
-                {movie?.rating || 'N/A'}
+                {movie?.rating ? `★ ${movie.rating}` : 'N/A'}
               </div>
             </div>
             <p>{movie.title}</p>

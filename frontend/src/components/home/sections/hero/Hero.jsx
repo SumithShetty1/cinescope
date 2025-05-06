@@ -91,7 +91,7 @@ const Hero = () => {
                                     >
                                         <img src={movie.poster} alt="" />
                                         <div className="movie-rating">
-                                            {movie?.rating || 'N/A'}
+                                            {movie?.rating ? `★ ${movie.rating}` : 'N/A'}
                                         </div>
                                     </div>
 

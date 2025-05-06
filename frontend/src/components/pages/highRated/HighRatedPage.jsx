@@ -101,7 +101,7 @@ const HighRatedPage = () => {
                             <div className="poster-container">
                                 <img src={movie.poster} alt={movie.title} />
                                 <div className="movie-rating">
-                                    {movie?.rating || 'N/A'}
+                                    {movie?.rating ? `★ ${movie.rating}` : 'N/A'}
                                 </div>
                             </div>
                             <p className="high-rated-page-movie-title">{movie.title}</p>

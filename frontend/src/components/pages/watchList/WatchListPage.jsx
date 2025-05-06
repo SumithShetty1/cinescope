@@ -151,7 +151,7 @@ const WatchListPage = () => {
                             <div className="poster-container">
                                 <img src={movie.poster} alt={movie.title} />
                                 <div className="movie-rating">
-                                    {movie.imdbRating || movie.rating || 'N/A'}
+                                    {movie?.rating ? `★ ${movie.rating}` : 'N/A'}
                                 </div>
                             </div>
                             <p className="watchlist-page-movie-title">{movie.title}</p>

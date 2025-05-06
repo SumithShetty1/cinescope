@@ -50,7 +50,7 @@ const HighRated = () => {
   // Render the top-rated movies after data is successfully fetched
   return (
     <div className="high-rated-section">
-      
+
       {/* Header section with title and a button to view more movies */}
       <div className="high-rated-header">
         <h2>Top Rated Movies</h2>
@@ -72,7 +72,7 @@ const HighRated = () => {
             <div className="poster-container">
               <img src={movie.poster} alt={movie.title} />
               <div className="movie-rating">
-                {movie?.rating || 'N/A'}
+                {movie?.rating ? `★ ${movie.rating}` : 'N/A'}
               </div>
             </div>
             <p>{movie.title}</p>

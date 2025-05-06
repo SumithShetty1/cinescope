@@ -60,7 +60,7 @@ const SearchPage = () => {
                             <div className="result-info">
                                 <h3 className="result-title">{movie.title}</h3>
                                 <p className="result-year">{movie.releaseDate?.split('-')[0]}</p>
-                                <p className="result-rating">Rating: {movie.rating || 'N/A'}</p>
+                                <p className="result-rating">Rating: {movie?.rating ? `★ ${movie.rating}` : 'N/A'}</p>
                                 <p className="result-description">{movie.description?.substring(0, 150)}...</p>
                             </div>
                         </div>
