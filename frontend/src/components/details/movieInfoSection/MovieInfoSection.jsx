@@ -10,6 +10,7 @@ const MovieInfoSection = ({ movie }) => {
                     <ReactPlayer
                         controls
                         playing
+                        muted
                         url={movie.trailerLink}
                         width="100%"
                         height="450px"
