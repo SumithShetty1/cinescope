@@ -115,3 +115,6 @@ ALLOWED_ORIGINS=http://localhost:3000
 ## Access the Application
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8080/api/v1
+
+## Disclaimer
+This project is a personal/portfolio project created for educational and demonstration purposes. It is not affiliated with or endorsed by any existing company or product that may share a similar name.
